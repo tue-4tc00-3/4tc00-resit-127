@@ -1,0 +1,35 @@
+import "dh_plant.cif";
+svgfile "dh.svg";
+
+//Start button
+svgin  id "s_Dstartbutton"       event u_start;
+svgout id "s_Dstartbutton"       attr "fill" value if s_Dstartbutton:        "darkgreen" else "green" end;
+svgout id "a_Dstartled"          attr "fill" value if a_Dstartled:           "yellow" else "lightgrey" end;
+//Reset button
+svgin  id "s_Dresetbutton"       event u_reset;
+svgout id "s_Dstopbutton"        attr "fill" value if s_Dstopbutton:         "maroon" else "#500" end;
+svgout id "a_Dresetled"          attr "fill" value if a_Dresetled:           "yellow" else "lightgrey" end;
+//Stop button
+svgin  id "s_Dstopbutton"        event u_stop;
+svgout id "s_Dresetbutton"       attr "fill" value if s_Dresetbutton:        "black" else "#4d4d4d" end;
+
+
+//Actuator lights
+svgout id "a_Dstartled_led"         attr "fill" value if a_Dstartled:            "lime" else "red" end;
+svgout id "a_Dresetled_led"         attr "fill" value if a_Dresetled:            "lime" else "red" end;
+svgout id "a_DledQ1_led"            attr "fill" value if a_DledQ1:               "lime" else "red" end;
+svgout id "a_DledQ2_led"            attr "fill" value if a_DledQ2:               "lime" else "red" end;
+
+svgout id "a_pusher1_led"           attr "fill" value if a_pusher1:              "lime" else "red" end;
+svgout id "a_pusher2_led"           attr "fill" value if a_pusher2:              "lime" else "red" end;
+svgout id "a_pusher3_led"           attr "fill" value if a_pusher3:              "lime" else "red" end;
+
+svgout id "a_x2distributing_led"    attr "fill" value if a_x2distributing:       "lime" else "red" end;
+svgout id "a_x2testing_led"         attr "fill" value if a_x2testing:            "lime" else "red" end;
+svgout id "a_zdown_led"             attr "fill" value if a_zdown:                "lime" else "red" end;
+svgout id "a_gripperclose_led"      attr "fill" value if a_gripperclose:         "lime" else "red" end;
+svgout id "a_transfer2pickpos_led"  attr "fill" value if a_transfer2pickpos:     "lime" else "red" end;
+svgout id "a_transfer2droppos_led"  attr "fill" value if a_transfer2droppos:     "lime" else "red" end;
+svgout id "a_vacuum_led"            attr "fill" value if a_vacuum:               "lime" else "red" end;
+svgout id "a_ejectpulse_led"        attr "fill" value if a_ejectpulse:           "lime" else "red" end;
+svgout id "a_handlingready_led"     attr "fill" value if a_handlingready:        "lime" else "red" end;

@@ -1,0 +1,18 @@
+import "dh_ctrl_io.cif";
+
+//Example of a very simple controller that turns on the startled when the start button is pressed
+automaton example_controller:
+    alg bool a_Dstartled = running;
+
+    event init, start, stop;
+    location wait_init:
+        initial;
+        edge init   when s_Dinitialized         goto wait_start;
+
+    location wait_start:
+        edge start  when s_Dstartbutton         goto running;
+
+    location running:
+        edge stop   when (not s_Dstopbutton)    goto wait_start;
+
+end

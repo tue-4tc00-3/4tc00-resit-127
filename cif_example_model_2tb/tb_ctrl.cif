@@ -1,0 +1,24 @@
+import "tb_ctrl_io.cif";
+
+automaton conveyer_control:
+    event init,start,sens_product,stop_conv;
+    cont t der -1;
+
+    //definition of the actuators that are used in this part of the workstation
+    alg bool a_conveyer = conveyer_on;
+    alg bool a_Tstartled = wait_product or conveyer_on;
+
+    location wait_init:
+        initial;
+        edge init           when s_Tinitialized         goto wait_start_button;
+
+    location wait_start_button:
+        edge start          when s_Tstartbutton         goto wait_product;
+
+    location wait_product:
+        edge sens_product   when s_product    do t:=3   goto conveyer_on;
+
+    location conveyer_on:
+        edge stop_conv      when t<=0                   goto wait_product;
+
+end

@@ -1,0 +1,71 @@
+import "dh_plant.cif";
+
+// INPUTS
+input bool a_Dstartled;
+input bool a_Dresetled;
+input bool a_DledQ1;
+input bool a_DledQ2;
+
+input bool a_pusher1;
+input bool a_pusher2;
+input bool a_pusher3;
+
+input bool a_Hstartled;
+input bool a_Hresetled;
+input bool a_HledQ1;
+input bool a_HledQ2;
+
+input bool a_x2distributing;
+input bool a_x2testing;
+input bool a_zdown;
+input bool a_gripperclose;
+input bool a_transfer2pickpos;
+input bool a_transfer2droppos;
+input bool a_vacuum;
+input bool a_ejectpulse;
+input bool a_handlingready;
+
+
+// OUTPUTS
+alg bool s_Dstartbutton = operator.s_Dstartbutton;
+alg bool s_Dstopbutton  = not(operator.s_Dstopbutton); // inverted
+alg bool s_Dautoswitch  = false;
+alg bool s_Dresetbutton = operator.s_Dresetbutton;
+
+alg bool s_pusher1_in   = false;
+alg bool s_pusher1_out  = false;
+alg bool s_stack1filled = false;
+alg bool s_product1     = false;
+alg bool s_pusher2_in   = false;
+alg bool s_pusher2_out  = false;
+alg bool s_stack2filled = false;
+alg bool s_product2     = false;
+alg bool s_pusher3_in   = false;
+alg bool s_pusher3_out  = false;
+alg bool s_stack3filled = false;
+alg bool s_product3     = false;
+alg bool s_handlingbusy = false;
+
+alg bool s_Dinitialized = true;
+
+alg bool s_Hstartbutton      = false;
+alg bool s_Hstopbutton       = true; // inverted
+alg bool s_Hautoswitch       = false;
+alg bool s_Hresetbutton      = false;
+
+alg bool s_xpos_at1          = false;
+alg bool s_xpos_at2          = false;
+alg bool s_xpos_at3          = false;
+alg bool s_xpos_atdrop       = false;
+alg bool s_zpos_atup         = false;
+alg bool s_zpos_atdown       = false;
+alg bool s_gripper           = false;
+
+alg bool s_transfer_atpickup  = false;
+alg bool s_transfer_atdrop    = false;
+alg bool s_transfer_athalfway = false;
+alg bool s_vacuum             = false;
+alg bool s_product4           = false;
+alg bool s_testingbusy        = false;
+
+alg bool s_Hinitialized       = true;

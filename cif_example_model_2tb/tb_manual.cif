@@ -1,0 +1,90 @@
+svgfile "tb.svg";
+
+// Used for actuators that can be clicked in the SVG visualization
+automaton def Button(alg string name):
+    uncontrollable u_press;
+    location off:
+        initial;
+        edge u_press goto on;   // toggle button state after each press
+
+    location on:
+         edge u_press goto off; // toggle button state after each press
+
+    svgin  id name + "_M"    event u_press;
+    svgout id name + "_M"    attr "fill" value if on:     "blue" else "grey" end;
+end
+
+
+    // control panel
+    alg bool a_Tstartled        = button_Tstartled.on;
+    alg bool a_Tresetled        = button_Tresetled.on;
+    alg bool a_TledQ1           = button_TledQ1.on;
+    alg bool a_TledQ2           = button_TledQ2.on;
+
+    // testing actuators
+    alg bool a_elevator_up      = (elev_modes.off and button_elevator_up.on) or (elev_modes.up);
+    alg bool a_elevator_down    = (elev_modes.off and button_elevator_down.on) or (elev_modes.down);
+    alg bool a_pusher           = button_pusher.on;
+    alg bool a_airslide         = button_airslide.on;
+    alg bool a_testingready     = button_testingready.on;
+
+    // control panel
+    alg bool a_Bstartled      = false;
+    alg bool a_Bresetled      = false;
+    alg bool a_BledQ1         = false;
+    alg bool a_BledQ2         = false;
+
+    // buffering actuators
+    alg bool a_separator        = button_separator.on;
+    alg bool a_conveyer         = button_conveyer.on;
+    alg bool a_bufferingready   = button_bufferingready.on;
+
+    button_Tstartled:       Button("a_Tstartled");
+    button_Tresetled:       Button("a_Tresetled");
+    button_TledQ1:          Button("a_TledQ1");
+    button_TledQ2:          Button("a_TledQ2");
+
+    button_elevator_up:     Button("a_elevator_up");
+    button_elevator_down:   Button("a_elevator_down");
+    button_pusher:          Button("a_pusher");
+    button_airslide:        Button("a_airslide");
+    button_testingready:    Button("a_testingready");
+
+    button_separator:       Button("a_separator");
+    button_conveyer:        Button("a_conveyer");
+    button_bufferingready:  Button("a_bufferingready");
+
+
+uncontrollable u_mode_elevup, u_mode_elevdown, u_mode_elevhold;
+
+svgin id "mode_elevup_M"   event u_mode_elevup;
+svgin id "mode_elevdown_M" event u_mode_elevdown;
+svgin id "mode_elevhold_M" event u_mode_elevhold;
+
+svgout id "mode_elevup_M"   attr "fill" value if elev_modes.up:       "blue" else "grey" end;
+svgout id "mode_elevdown_M" attr "fill" value if elev_modes.down:     "blue" else "grey" end;
+svgout id "mode_elevhold_M" attr "fill" value if elev_modes.hold:     "blue" else "grey" end;
+
+automaton elev_modes:
+    location off:
+        initial;
+        edge u_mode_elevup    goto up;
+        edge u_mode_elevdown  goto down;
+        edge u_mode_elevhold  goto hold;
+        edge button_elevator_up.u_press, button_elevator_down.u_press;
+
+     location up:
+        edge u_mode_elevup, button_elevator_up.u_press, button_elevator_down.u_press   goto off;
+        edge u_mode_elevdown  goto down;
+        edge u_mode_elevhold  goto hold;
+
+     location down:
+        edge u_mode_elevup    goto up;
+        edge u_mode_elevdown, button_elevator_up.u_press, button_elevator_down.u_press  goto off;
+        edge u_mode_elevhold  goto hold;
+
+     location hold:
+        edge u_mode_elevup    goto up;
+        edge u_mode_elevdown  goto down;
+        edge u_mode_elevhold, button_elevator_up.u_press, button_elevator_down.u_press  goto off;
+end

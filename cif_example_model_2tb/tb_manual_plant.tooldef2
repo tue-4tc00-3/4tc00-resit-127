@@ -1,0 +1,21 @@
+from "lib:cif3" import *;
+
+//merge files
+cif3merge(
+    "tb_manual.cif",
+    "tb_plant_svg.cif",
+);
+
+//run merged file
+cif3sim(
+    "merged.cif",
+    "-i svg",
+    "--stateviz=1",
+    "-a last",
+    "--speed=1",
+    "-o -state-target",
+    "-a random",
+    "--distributions-seed=7",
+    "--solver-root-maxchk=0.01",
+   //"--option-dialog=yes",
+);

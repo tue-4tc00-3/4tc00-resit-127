@@ -1,0 +1,29 @@
+import "dh_plant_io.cif";
+
+// Definition of the events that can be triggered by the user
+uncontrollable u_start, u_reset, u_stop;
+
+// Buttons that can be pressed by the operator
+group operator:
+    alg bool s_Dstartbutton = start_button.on;
+    alg bool s_Dresetbutton = reset_button.on;
+    alg bool s_Dstopbutton  = stop_button.on;
+
+    start_button: UI_button(u_start);
+    reset_button: UI_button(u_reset);
+    stop_button:  UI_button(u_stop);
+end
+
+// Model of a User pressing a button
+automaton def UI_button(uncontrollable u_press):
+    event release;
+    cont t der 1;
+
+    location off:
+        initial;
+        edge u_press            do t := 0 goto on;  // press button
+
+    location on:
+        edge release when 0.5 <= t        goto off; // release after 0.5 seconds
+        edge u_press;
+end

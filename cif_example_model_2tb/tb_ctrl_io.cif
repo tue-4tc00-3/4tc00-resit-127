@@ -1,0 +1,63 @@
+import "tb_ctrl.cif";
+
+// INPUTS
+
+// testing UI button sensors and inputs
+input bool s_Tstartbutton;     // 0
+input bool s_Tstopbutton;      // 1
+input bool s_Tautoswitch;      // 2
+input bool s_Tresetbutton;     // 3
+
+// testing sensors
+input bool s_elevator_up;      // 8
+input bool s_elevator_down;    // 9
+input bool s_pusher;           // 10
+input bool s_optical;          // 11
+input bool s_capacitive;       // 12
+input bool s_reflective;       // 13
+input bool s_productheight;    // 14
+input bool s_bufferingbusy;    // 15
+
+input bool s_Tinitialized;     // 16
+
+// buffering UI button sensors and inputs
+input bool s_Bstartbutton;     // 17
+input bool s_Bstopbutton;      // 18
+input bool s_Bautoswitch;      // 19
+input bool s_Bresetbutton;     // 20
+
+// buffering sensors
+input bool s_product;          // 25
+input bool s_atseparator;      // 26
+input bool s_atexit;           // 27
+input bool s_separator_opened; // 28
+input bool s_separator_closed; // 29
+input bool s_processingbusy;   // 30
+
+input bool s_Binitialized;     // 31
+
+// OUTPUTS
+
+// testing UI LEDs and outputs
+alg bool a_Tstartled      = conveyer_control.a_Tstartled;
+alg bool a_Tresetled      = false;
+alg bool a_TledQ1         = false;
+alg bool a_TledQ2         = false;
+
+// testing actuators
+alg bool a_elevator_up    = false;
+alg bool a_elevator_down  = false;
+alg bool a_pusher         = false;
+alg bool a_airslide       = false;
+alg bool a_testingready   = false;
+
+// buffering UI LEDs and outputs
+alg bool a_Bstartled      = false;
+alg bool a_Bresetled      = false;
+alg bool a_BledQ1         = false;
+alg bool a_BledQ2         = false;
+
+// buffering actuators
+alg bool a_separator      = false;
+alg bool a_conveyer       = conveyer_control.a_conveyer;
+alg bool a_bufferingready = false;

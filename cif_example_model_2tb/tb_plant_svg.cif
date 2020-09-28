@@ -1,0 +1,78 @@
+import "tb_plant.cif";
+
+svgfile "tb.svg";
+
+//Start button
+svgin  id "s_Tstartbutton"       event u_start;
+svgout id "s_Tstartbutton"       attr "fill" value if s_Tstartbutton:        "darkgreen" else "green" end;
+svgout id "a_Tstartled"           attr "fill" value if a_Tstartled:           "yellow" else "grey" end;
+//Reset button
+svgin  id "s_Tresetbutton"       event u_reset;
+svgout id "s_Tstopbutton"        attr "fill" value if s_Tstopbutton:         "maroon" else "#500" end;
+//Stop button
+svgin  id "s_Tstopbutton"        event u_stop;
+svgout id "s_Tresetbutton"       attr "fill" value if s_Tresetbutton:        "black" else "#4d4d4d" end;
+
+
+//generating a new product
+svgin id "prod_grey_correct"  event u_prod_grey_correct;
+svgin id "prod_red_correct"   event u_prod_red_correct;
+svgin id "prod_black_correct" event u_prod_black_correct;
+
+// Definition of the color of the different products
+func string color(product prod):
+    return    if prod[color] = NONE: "white"
+            elif prod[color] = RED:  "red"
+            elif prod[color] = GREY: "grey"
+            else                     "black" // prod[color]=BLACK
+             end;
+end
+
+//products
+svgout id "prod0_conv" attr "display" value if ws.conveyer.prod0 = NO_PROD: "none" else "inline" end;
+svgout id "prod1_conv" attr "display" value if ws.conveyer.prod1 = NO_PROD: "none" else "inline" end;
+svgout id "prod2_conv" attr "display" value if ws.conveyer.prod2 = NO_PROD: "none" else "inline" end;
+
+svgout id "prod0_conv" attr "fill"     value color(ws.conveyer.prod0);
+svgout id "prod1_conv" attr "fill"     value color(ws.conveyer.prod1);
+svgout id "prod2_conv" attr "fill"     value color(ws.conveyer.prod2);
+
+svgout id "prod0_conv" attr "transform" value fmt("translate (%s,0)", ws.conveyer.x0 * KSVG);
+svgout id "prod1_conv" attr "transform" value fmt("translate (%s,0)", ws.conveyer.x1 * KSVG);
+svgout id "prod2_conv" attr "transform" value fmt("translate (%s,0)", ws.conveyer.x2 * KSVG);
+
+svgin  id "prod0_conv"          event delete_prod;
+
+svgout id "a_conveyer"          attr "fill" value if a_conveyer:            "lime" else "red" end;
+
+svgout id "s_product"           attr "fill" value if s_product:             "lime" else "red" end;
+svgout id "s_atseparator"       attr "fill" value if s_atseparator:         "lime" else "red" end;
+
+//actuator led's
+svgout id "a_Tstartled_led"         attr "fill" value if a_Tstartled:       "lime" else "red" end;
+svgout id "a_Tresetled_led"         attr "fill" value if a_Tresetled:       "lime" else "red" end;
+svgout id "a_TledQ1_led"            attr "fill" value if a_TledQ1:          "lime" else "red" end;
+svgout id "a_TledQ2_led"            attr "fill" value if a_TledQ2:          "lime" else "red" end;
+
+svgout id "a_elevator_up_led"       attr "fill" value if a_elevator_up:     "lime" else "red" end;
+svgout id "a_elevator_down_led"     attr "fill" value if a_elevator_down:   "lime" else "red" end;
+svgout id "a_pusher_led"            attr "fill" value if a_pusher:          "lime" else "red" end;
+svgout id "a_airslide_led"          attr "fill" value if a_airslide:        "lime" else "red" end;
+svgout id "a_testingready_led"      attr "fill" value if a_testingready:    "lime" else "red" end;
+
+svgout id "a_separator_led"         attr "fill" value if a_separator:       "lime" else "red" end;
+svgout id "a_conveyer_led"          attr "fill" value if a_conveyer:        "lime" else "red" end;
+svgout id "a_bufferingready_led"    attr "fill" value if a_bufferingready:  "lime" else "red" end;
+
+// Input mode for products
+group def input_button(alg int nr):
+    svgout id "input-mode-" + <string>nr    attr "fill" value if select_input.mode = nr: "blue" else "lightgrey" end;
+end
+input_mode_1    : input_button(1);
+input_mode_2    : input_button(2);
+input_mode_3    : input_button(3);
+
+svgin  id "input-mode-1"        event u_input_1;
+svgin  id "input-mode-2"        event u_input_2;
+svgin  id "input-mode-3"        event u_input_3;
+

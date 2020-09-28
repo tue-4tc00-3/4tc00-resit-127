@@ -1,0 +1,67 @@
+import "tb_plant.cif";
+
+// TESTING station input declarations
+// UI LEDs
+input bool a_Tstartled;
+input bool a_Tresetled;
+input bool a_TledQ1;
+input bool a_TledQ2;
+
+// machine actuators
+input bool a_elevator_up;
+input bool a_elevator_down;
+input bool a_pusher;
+input bool a_airslide;
+input bool a_testingready;
+
+// BUFFERING station input declarations
+// UI LEDs
+input bool a_Bstartled;
+input bool a_Bresetled;
+input bool a_BledQ1;
+input bool a_BledQ2;
+
+// machine actuators
+input bool a_separator;
+input bool a_conveyer;
+input bool a_bufferingready;
+
+
+// TESTING station algebraic output variables
+// UI button sensors
+alg bool s_Tstartbutton     = operator.s_Tstartbutton;
+alg bool s_Tstopbutton      = true; // inverted
+alg bool s_Tautoswitch      = false;
+alg bool s_Tresetbutton     = false;
+
+// machine sensors
+alg bool s_elevator_up      = false;
+alg bool s_elevator_down    = false;
+alg bool s_pusher           = false;
+alg bool s_optical          = false;
+alg bool s_capacitive       = false;
+alg bool s_reflective       = false;
+alg bool s_productheight    = false;
+alg bool s_bufferingbusy    = false;
+
+// virtual initialization sensor
+alg bool s_Tinitialized     = true;
+
+// BUFFERING station algebraic output variables
+// UI button sensors
+alg bool s_Bstartbutton     = false;
+alg bool s_Bstopbutton      = true; // inverted
+alg bool s_Bautoswitch      = false;
+alg bool s_Bresetbutton     = false;
+
+// machine sensors
+alg bool s_product          = ws.conveyer.s_product;
+alg bool s_atseparator      = ws.conveyer.s_atseparator;
+alg bool s_atexit           = false;
+alg bool s_separator_opened = false;
+alg bool s_separator_closed = false;
+alg bool s_processingbusy   = false;
+
+
+// virtual initialization sensor
+alg bool s_Binitialized     = true;

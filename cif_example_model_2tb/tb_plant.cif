@@ -1,0 +1,170 @@
+import "tb_plant_io.cif";
+
+//Constant that relates the model dimensions to the dimensions in the SVG file
+const real KSVG = 102/10;
+
+// Definition of the events that can be triggered by the user
+uncontrollable u_start, u_reset, u_stop;
+uncontrollable product u_prod_grey_correct, u_prod_red_correct, u_prod_black_correct;
+event delete_prod;
+
+// Buttons that can be pressed by the operator
+group operator:
+    alg bool s_Tstartbutton = start_button.on;
+    alg bool s_Tresetbutton = reset_button.on;
+    alg bool s_Tstopbutton  = stop_button.on;
+
+    start_button: UI_button(u_start);
+    reset_button: UI_button(u_reset);
+    stop_button:  UI_button(u_stop);
+end
+
+// Model of a User pressing a button
+automaton def UI_button(uncontrollable u_press):
+    event release;
+    cont t der 1;
+
+    location off:
+        initial;
+        edge u_press            do t := 0 goto on;  // press button
+
+    location on:
+        edge release when 0.5 <= t        goto off; // release after 0.5 seconds
+        edge u_press;
+end
+
+
+// Definition of the different input modes
+uncontrollable u_input_1, u_input_2, u_input_3;
+
+// Setting input mode that needs to run
+alg bool mode_random_color          = select_input.mode = 1;
+alg bool mode_random_time_color     = select_input.mode = 2;
+alg bool mode_userinput_only        = select_input.mode = 3;
+automaton select_input:
+    disc int mode = 3;
+    location selection:             // random color and immediate arrival time
+        initial;
+        edge u_input_1                          do mode:= 1;
+        edge u_input_2                          do mode:= 2;
+        edge u_input_3                          do mode:= 3;
+end
+
+// Used for additional buttons that can be pressed in the visualization
+automaton def Button(uncontrollable u_press):
+    location off:
+        initial;
+        edge u_press goto on;   // toggle button state after each press
+
+    location on:
+        edge u_press goto off;  // toggle button state after each press
+end
+
+// Random creation of products with different colors
+event product gen_random;
+automaton gen_random_prod:
+        disc dist int  d1 = uniform(1, 4);     // Uniform distribution on integer interval [1..4)
+        disc dist real d2 = uniform(3.0, 7.0); // Uniform distribution on real interval
+        disc int n;
+        cont t der -1;
+
+        event to_send;
+
+        location start:
+            initial;
+            edge to_send
+                when mode_random_color or mode_random_time_color
+                do (n, d1) := sample d1,(t, d2) := sample d2    goto send;
+
+        location send:
+            edge gen_random ! if n = 1: (RED,   10)
+                            elif n = 2: (GREY,  10)
+                            else        (BLACK, 10)   //n=3
+                             end
+                when (t <= 0 and mode_random_time_color)
+                     or mode_random_color               goto start;
+end
+
+
+
+// Definition of the products that can be used
+enum prod_color  = NONE, RED, GREY, BLACK;
+type prod_height = real;
+type product     = tuple(prod_color color; prod_height height);
+type product_with_position = tuple(product prod; real pos);
+const product NO_PROD = (NONE, 0);  // no product
+
+
+// Model of physical behavior of WorkStation
+group ws:
+
+    // generating new products
+    automaton userinput_products:
+        location:
+            initial;
+            edge u_prod_grey_correct    ! (GREY, 10);
+            edge u_prod_red_correct     ! (RED, 10);
+            edge u_prod_black_correct   ! (BLACK, 10);
+    end
+
+    // Definition of positions and lengths in the workstation
+    // KSVG is the nr of mm in the SVG visualization that corresponds to 1 unit in the CIF model
+    const real prod_LENGTH       = 9/KSVG;     //length of one product
+    const real s_prod_POSITION   = 5/KSVG;       //location of the sensor s_producct
+    const real s_atsep_POSITION  = 52/KSVG;      //location of the sensor s_atseparator
+    const real sep_in_POSITION   = 59.3/KSVG;    //location of the product when against the separator
+
+    // Definition of speeds in the workstation
+    const real conv_SPEED        = 2.6;          //speed of the conveyer
+
+    //Behaviour of the conveyer and its sensors
+    automaton conveyer:
+        // sensors in this section of the workstation
+        alg bool s_atseparator  = s_atsep_POSITION <= x0 and s_atsep_POSITION + prod_LENGTH >=x0;
+        alg bool s_product      = s_prod_POSITION <= x0 and s_prod_POSITION + prod_LENGTH >=x0
+                               or s_prod_POSITION <= x1 and s_prod_POSITION + prod_LENGTH >=x1
+                               or s_prod_POSITION <= x2 and s_prod_POSITION + prod_LENGTH >=x2;
+
+        // definition of products in this section
+        disc product prod0, prod1, prod2;
+        cont x0, x1, x2;        // all initialized to 0, by default
+
+        // speed of the different products in this section
+        equation
+            x0' = if(prod0 = NO_PROD)
+                or(not a_conveyer)
+                or(x0>= sep_in_POSITION)
+                    : 0 else conv_SPEED end,
+
+            x1' = if (prod1 = NO_PROD)
+                or (not a_conveyer)
+                or (x1 + prod_LENGTH >= x0)
+                    : 0 else conv_SPEED end,
+
+            x2' = if (prod2 = NO_PROD)
+                or (not a_conveyer)
+                or (x2 + prod_LENGTH >= x1)
+                    : 0 else conv_SPEED end;
+
+        disc int nr_products;
+
+        location:
+            initial;
+            edge u_prod_grey_correct?, u_prod_red_correct?, u_prod_black_correct?, gen_random?
+                when nr_products = 0  do prod0 := ?, x0 := 1, nr_products := nr_products+1;
+
+            edge u_prod_grey_correct?, u_prod_red_correct?, u_prod_black_correct?, gen_random?
+                when nr_products = 1  do prod1 := ?, x1 := 1, nr_products := nr_products+1;
+
+            edge u_prod_grey_correct?, u_prod_red_correct?, u_prod_black_correct?, gen_random?
+                when nr_products = 2  do prod2 := ?, x2 := 1, nr_products := nr_products+1;
+
+            edge u_prod_grey_correct?, u_prod_red_correct?, u_prod_black_correct?
+                when nr_products = 3;
+
+            edge delete_prod do prod0:=prod1, prod1:=prod2, prod2:=NO_PROD,
+                                   x0:=x1,       x1:=x2,       x2:=0,
+                                nr_products:=nr_products -1;
+    end
+
+end // end group ws

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="UNITY" Id="{6e5da24b-5088-4a45-954b-416ba68dcb3c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM UNITY
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Mapping program - DO NOT CHANGE
+
+//// \\\\ DISTRIBUTING //// \\\\
+
+/// ACTUATORS
+// a_pusher1
+GVLs.Actuator[0].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_pusher1;
+// a_pusher2
+GVLs.Actuator[1].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_pusher2;
+// a_pusher3
+GVLs.Actuator[2].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_pusher3;
+
+/// SENSORS
+// s_pusher1_in
+INPUTS.ivar_s_pusher1_in 	:= GVLs.INDICATORLIGHT[0].iActive;
+// s_pusher1_out
+INPUTS.ivar_s_pusher1_out 	:= GVLs.INDICATORLIGHT[1].iActive;
+// s_stack1filled
+INPUTS.ivar_s_stack1filled 	:= GVLs.INDICATORLIGHT[2].iActive;
+// s_product1
+INPUTS.ivar_s_product1 		:= GVLs.INDICATORLIGHT[3].iActive;
+// s_pusher2_in
+INPUTS.ivar_s_pusher2_in 	:= GVLs.INDICATORLIGHT[4].iActive;
+// s_pusher2_out
+INPUTS.ivar_s_pusher2_out 	:= GVLs.INDICATORLIGHT[5].iActive;
+// s_stack2filled
+INPUTS.ivar_s_stack2filled 	:= GVLs.INDICATORLIGHT[6].iActive;
+// s_product2
+INPUTS.ivar_s_product2 		:= GVLs.INDICATORLIGHT[7].iActive;
+// s_pusher3_in
+INPUTS.ivar_s_pusher3_in 	:= GVLs.INDICATORLIGHT[8].iActive;
+// s_pusher3_out
+INPUTS.ivar_s_pusher3_out 	:= GVLs.INDICATORLIGHT[9].iActive;
+// s_stack3filled
+INPUTS.ivar_s_stack3filled 	:= GVLs.INDICATORLIGHT[10].iActive;
+// s_product3
+INPUTS.ivar_s_product3 		:= GVLs.INDICATORLIGHT[11].iActive;
+// s_handlingbusy
+INPUTS.ivar_s_handlingbusy 	:= GVLs.INDICATORLIGHT[12].iActive;
+
+/// CONTROL PANEL
+// s_Dstartbutton
+INPUTS.ivar_s_Dstartbutton	:= GVLs.INDICATORLIGHT[13].iActive;
+// s_Dstopbutton
+INPUTS.ivar_s_Dstopbutton	:= NOT GVLs.INDICATORLIGHT[14].iActive;
+// s_Dautoswitch
+INPUTS.ivar_s_Dautoswitch	:= GVLs.INDICATORLIGHT[15].iActive;
+// s_Dresetbutton
+INPUTS.ivar_s_Dresetbutton	:= GVLs.INDICATORLIGHT[16].iActive;
+// s_Din4
+INPUTS.ivar_s_Din4			:= GVLs.INDICATORLIGHT[17].iActive;
+// s_Din5
+INPUTS.ivar_s_Din5			:= GVLs.INDICATORLIGHT[18].iActive;
+// s_Din6
+INPUTS.ivar_s_Din6			:= GVLs.INDICATORLIGHT[19].iActive;
+// s_Din7
+INPUTS.ivar_s_Din7			:= GVLs.INDICATORLIGHT[20].iActive;
+// a_Dstartled
+GVLS.INDICATORLIGHT[21].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dstartled;
+// a_Dresetled
+GVLS.INDICATORLIGHT[22].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dresetled;
+// a_DledQ1
+GVLS.INDICATORLIGHT[23].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_DledQ1;
+// a_DledQ2
+GVLS.INDICATORLIGHT[24].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_DledQ2;
+// a_Dout4
+GVLS.INDICATORLIGHT[25].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dout4;
+// a_Dout5
+GVLS.INDICATORLIGHT[26].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dout5;
+// a_Dout6
+GVLS.INDICATORLIGHT[27].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dout6;
+// a_Dout7
+GVLS.INDICATORLIGHT[28].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Dout7;
+
+//// \\\\ HANDLING \\\\ ////
+
+/// ACTUATORS
+// a_x2distributing
+GVLs.Actuator[3].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_x2distributing;
+// a_x2testing
+GVLs.Actuator[4].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_x2testing;
+// a_zdown
+GVLs.Actuator[5].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_zdown;
+// a_gripperclose
+GVLs.Actuator[6].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_gripperclose;
+// a_transfer2pickpos
+GVLs.Actuator[7].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_transfer2pickpos;
+// transfer2droppos
+GVLs.Actuator[8].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_transfer2droppos;
+// a_vacuum
+GVLs.Actuator[9].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_vacuum;
+// a_ejectpulse
+GVLs.Actuator[10].oToggle	:= MAIN.state0.dvar_M_HardwareMap_out_a_ejectpulse;
+// a_handlingready
+GVLs.Actuator[11].oToggle 	:= MAIN.state0.dvar_M_HardwareMap_out_a_handlingready;
+
+/// SENSORS
+// s_xpos_at1
+INPUTS.ivar_s_xpos_at1 				:= GVLs.INDICATORLIGHT[29].iActive;
+// s_xpos_at2
+INPUTS.ivar_s_xpos_at2 				:= GVLs.INDICATORLIGHT[30].iActive;
+// s_xpos_at3
+INPUTS.ivar_s_xpos_at3 				:= GVLs.INDICATORLIGHT[31].iActive;
+// s_xpos_atdrop
+INPUTS.ivar_s_xpos_atdrop 			:= GVLs.INDICATORLIGHT[32].iActive;
+// s_zpos_atup
+INPUTS.ivar_s_zpos_atup				:= GVLs.INDICATORLIGHT[33].iActive;
+// s_zpos_atdown
+INPUTS.ivar_s_zpos_atdown			:= GVLs.INDICATORLIGHT[34].iActive;
+// s_gripper
+INPUTS.ivar_s_gripper 				:= GVLs.INDICATORLIGHT[35].iActive;
+// s_transfer_atpickup
+INPUTS.ivar_s_transfer_atpickup 	:= GVLs.INDICATORLIGHT[36].iActive;
+// s_transfer_atdrop
+INPUTS.ivar_s_transfer_atdrop 		:= GVLs.INDICATORLIGHT[37].iActive;
+// s_transfer_athalfway
+INPUTS.ivar_s_transfer_athalfway 	:= GVLs.INDICATORLIGHT[38].iActive;
+// s_vacuum
+INPUTS.ivar_s_vacuum 				:= GVLs.INDICATORLIGHT[39].iActive;
+// s_product4
+INPUTS.ivar_s_product4 				:= GVLs.INDICATORLIGHT[40].iActive;
+// s_testingbusy
+INPUTS.ivar_s_testingbusy 			:= GVLs.INDICATORLIGHT[41].iActive;
+
+/// CONTROL PANEL
+// s_Hstartbutton
+INPUTS.ivar_s_Hstartbutton	:= GVLs.INDICATORLIGHT[42].iActive;
+// s_Hstopbutton
+INPUTS.ivar_s_Hstopbutton	:= NOT GVLs.INDICATORLIGHT[43].iActive;
+// s_Hautoswitch
+INPUTS.ivar_s_Hautoswitch	:= GVLs.INDICATORLIGHT[44].iActive;
+// s_Hresetbutton
+INPUTS.ivar_s_Hresetbutton	:= GVLs.INDICATORLIGHT[45].iActive;
+// s_Hin4
+INPUTS.ivar_s_Hin4			:= GVLs.INDICATORLIGHT[46].iActive;
+// s_Hin5
+INPUTS.ivar_s_Hin5			:= GVLs.INDICATORLIGHT[47].iActive;
+// s_Hin6
+INPUTS.ivar_s_Hin6			:= GVLs.INDICATORLIGHT[48].iActive;
+// s_Hin7
+INPUTS.ivar_s_Hin7			:= GVLs.INDICATORLIGHT[49].iActive;
+// a_Hstartled
+GVLS.INDICATORLIGHT[50].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hstartled;
+// a_Hresetled
+GVLS.INDICATORLIGHT[51].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hresetled;
+// a_HledQ1
+GVLS.INDICATORLIGHT[52].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_HledQ1;
+// a_HledQ2
+GVLS.INDICATORLIGHT[53].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_HledQ2;
+// a_Hout4
+GVLS.INDICATORLIGHT[54].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hout4;
+// a_Hout5
+GVLS.INDICATORLIGHT[55].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hout5;
+// a_Hout6
+GVLS.INDICATORLIGHT[56].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hout6;
+// a_Hout7
+GVLS.INDICATORLIGHT[57].oActive	:= MAIN.state0.dvar_M_HardwareMap_out_a_Hout7;]]></ST>
+    </Implementation>
+    <LineIds Name="UNITY">
+      <LineId Id="103" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="47" Count="6" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="55" Count="6" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="99" Count="1" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="106" Count="1" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="113" Count="2" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="116" Count="3" />
+      <LineId Id="123" Count="2" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="25" Count="2" />
+      <LineId Id="136" Count="1" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="141" Count="2" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="144" Count="1" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="147" Count="1" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="150" Count="1" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="252" Count="31" />
+      <LineId Id="189" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

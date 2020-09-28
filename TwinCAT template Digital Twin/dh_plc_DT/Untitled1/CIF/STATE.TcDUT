@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="STATE" Id="{adaa2123-5dac-4f8e-9ba1-f42c3c1541bd}">
+    <Declaration><![CDATA[TYPE STATE :
+STRUCT
+	curTime: LREAL;
+	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_DledQ1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_DledQ2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout4 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout5 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout6 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout7 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher3 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hstartled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hresetled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_HledQ1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_HledQ2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout4 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout5 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout6 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout7 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_x2distributing AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_x2testing AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_zdown AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_gripperclose AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_transfer2pickpos AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_transfer2droppos AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_vacuum AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_ejectpulse AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_handlingready AT %Q*: BOOL;
+	dvar_M_HardwareMap_init_err_sen_idx AT %Q*: DINT;
+	dvar_M_HardwareMap_init_err_led_idx AT %Q*: DINT;
+	cvar_M_HardwareMap_t AT %Q*: LREAL;
+	dvar_M_HardwareMap AT %Q*: enum_E;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
