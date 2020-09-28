@@ -53,10 +53,10 @@ alg bool s_Hstopbutton       = true; // inverted
 alg bool s_Hautoswitch       = false;
 alg bool s_Hresetbutton      = false;
 
-alg bool s_xpos_at1          = false;
-alg bool s_xpos_at2          = false;
-alg bool s_xpos_at3          = false;
-alg bool s_xpos_atdrop       = false;
+alg bool s_xpos_at1          = gripperarm.s_xpos_at1;
+alg bool s_xpos_at2          = gripperarm.s_xpos_at2;
+alg bool s_xpos_at3          = gripperarm.s_xpos_at3;
+alg bool s_xpos_atdrop       = gripperarm.s_xpos_atdrop;
 alg bool s_zpos_atup         = false;
 alg bool s_zpos_atdown       = false;
 alg bool s_gripper           = false;

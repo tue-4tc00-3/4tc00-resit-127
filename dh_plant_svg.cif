@@ -33,3 +33,7 @@ svgout id "a_transfer2droppos_led"  attr "fill" value if a_transfer2droppos:    
 svgout id "a_vacuum_led"            attr "fill" value if a_vacuum:               "lime" else "red" end;
 svgout id "a_ejectpulse_led"        attr "fill" value if a_ejectpulse:           "lime" else "red" end;
 svgout id "a_handlingready_led"     attr "fill" value if a_handlingready:        "lime" else "red" end;
+
+svgout id "crane_arm_base"          attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+
+svgout id "s_xpos_at3"              attr "fill" value if s_xpos_at3:             "lime" else "red" end;
