@@ -44,6 +44,11 @@ svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) 
 svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
 svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
 
+// Move block with crane
+svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z)
+                                                           else fmt("translate(0,0)") end;
+
+
 // Sense the position of the crane
 svgout id "s_xpos_at1"              attr "fill" value if s_xpos_at1:             "lime" else "red" end;
 svgout id "s_xpos_at2"              attr "fill" value if s_xpos_at2:             "lime" else "red" end;
@@ -52,8 +57,16 @@ svgout id "s_xpos_atdrop"           attr "fill" value if s_xpos_atdrop:         
 svgout id "s_zpos_atup"             attr "fill" value if s_zpos_atup:            "lime" else "red" end;
 svgout id "s_zpos_atdown"           attr "fill" value if s_zpos_atdown:          "lime" else "red" end;
 
+// Sense the transfer
+svgout id "s_transfer_atpickup"           attr "fill" value if s_transfer_atpickup:          "lime" else "red" end;
+svgout id "s_transfer_athalfway"          attr "fill" value if s_transfer_athalfway:          "lime" else "red" end;
+svgout id "s_transfer_atdrop"             attr "fill" value if s_transfer_atdrop:          "lime" else "red" end;
+
 // Show gripper correctly
-svgout id "crane_left_claw_out"           attr "fill" value if s_gripper:          "lime" else "red" end;
+svgout id "crane_right_claw_out"           attr "fill" value if not s_gripper:   "black" else "white" end;
+svgout id "crane_left_claw_out"            attr "fill" value if not s_gripper:   "black" else "white" end;
+svgout id "crane_right_claw_in"            attr "fill" value if s_gripper:       "black" else "white" end;
+svgout id "crane_left_claw_in"             attr "fill" value if s_gripper:       "black" else "white" end;
 
 
 
