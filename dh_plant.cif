@@ -29,6 +29,8 @@ end
 
 automaton gripperarm:
 cont x = 0;
+cont z = 0;
+event pickup;
 
 // Sense the position of the crane
 alg bool s_xpos_at1 =       if gripperarm.x >= -136.9245 - 0.1 and gripperarm.x <= -136.9245 + 0.1: true
@@ -39,6 +41,12 @@ alg bool s_xpos_at3 =       if gripperarm.x >= -44.5625 - 0.1 and gripperarm.x <
                             else false end;
 alg bool s_xpos_atdrop =    if gripperarm.x >= - 0.1 and gripperarm.x <= 0.1: true
                             else false end;
+alg bool s_zpos_atup =      if gripperarm.z >= - 0.2 and gripperarm.z <= 0.2: true
+                            else false end;
+alg bool s_zpos_atdown =    if gripperarm.z >= 66.0 - 0.3 and gripperarm.z <= 66.0 + 0.3: true
+                            else false end;
+
+
 
 // Move the crane right to left and back
     location move:
@@ -46,6 +54,19 @@ alg bool s_xpos_atdrop =    if gripperarm.x >= - 0.1 and gripperarm.x <= 0.1: tr
     equation x' =   if a_x2distributing and not a_zdown and x >= -136.9245:    -6
                     elif not a_x2distributing and not a_zdown and x <= 0:    6
                     else 0 end;
+    equation z' =   0;
+    edge pickup when a_zdown goto zdown;
+
+// Move The crane up and down
+    location zdown:
+    equation x' =   0;
+    equation z' =   9;
+    edge when not a_zdown or s_zpos_atdown goto gripping;
+
+// Grip the block
+    location gripping:
+    equation x' =   0;
+    equation z' =   0;
 
 end
 

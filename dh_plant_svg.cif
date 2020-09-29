@@ -37,15 +37,24 @@ svgout id "a_handlingready_led"     attr "fill" value if a_handlingready:       
 // Moving the crane left end right
 svgout id "crane_arm_base"          attr "transform" value fmt("translate(%s,0)",gripperarm.x);
 svgout id "crane_arm_glider"        attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "a_zdown"                 attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_gripper_base"      attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "a_zdown"                 attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_gripper_base"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
 
 // Sense the position of the crane
 svgout id "s_xpos_at1"              attr "fill" value if s_xpos_at1:             "lime" else "red" end;
 svgout id "s_xpos_at2"              attr "fill" value if s_xpos_at2:             "lime" else "red" end;
 svgout id "s_xpos_at3"              attr "fill" value if s_xpos_at3:             "lime" else "red" end;
 svgout id "s_xpos_atdrop"           attr "fill" value if s_xpos_atdrop:          "lime" else "red" end;
+svgout id "s_zpos_atup"             attr "fill" value if s_zpos_atup:            "lime" else "red" end;
+svgout id "s_zpos_atdown"           attr "fill" value if s_zpos_atdown:          "lime" else "red" end;
+
+// Show gripper correctly
+svgout id "crane_left_claw_out"           attr "fill" value if s_gripper:          "lime" else "red" end;
+
+
+
+
