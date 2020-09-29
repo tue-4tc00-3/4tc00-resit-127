@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="projArray0" Id="{b654e354-da2c-4455-9c27-53dde1defc41}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION projArray0 : BOOL
+VAR_INPUT
+	arr: ARRAY[0..2] OF BOOL;
+	idx: DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[projArray0 := arr[normProjIdx(idx, 3)];]]></ST>
+    </Implementation>
+    <LineIds Name="projArray0">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

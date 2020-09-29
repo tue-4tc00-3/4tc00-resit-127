@@ -46,7 +46,7 @@ svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) 
 
 // Move block with crane
 svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z)
-                                                           else fmt("translate(0,0)") end;
+                                                           else fmt("translate(-44.1625,65.7)") end;
 
 
 // Sense the position of the crane

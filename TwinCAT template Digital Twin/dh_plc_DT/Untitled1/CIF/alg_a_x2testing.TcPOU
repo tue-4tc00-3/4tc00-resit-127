@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_x2testing" Id="{d14dfc15-374d-4670-8536-97ce4c90071e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_x2testing : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_x2testing := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_x2testing">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

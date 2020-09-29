@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_example_controller_godown" Id="{05fdcaf5-53be-4851-9989-adf691f5c64c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_example_controller_godown : ARRAY[0..2] OF BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_example_controller_godown := makeArray0(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_example_controller_godown">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

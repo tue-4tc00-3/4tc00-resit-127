@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_vacuum" Id="{e7a7e551-863c-40fd-ac9b-1ed508ecc888}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_vacuum : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_vacuum := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_vacuum">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

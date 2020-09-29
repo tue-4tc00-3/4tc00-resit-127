@@ -9,7 +9,7 @@ if isfile("generated_files/merged.cif"):: rmfile("generated_files/merged.cif");
 
 // Replace the three letters "abc" by the initials of your three group members/authors
 // in the string "p_ctrl_abc.cif", which should be the name of your
-// CIF controller model.
+// CIF controller model.0
 cif3merge("../dh_ctrl.cif", "dh_hw.cif", "-o generated_files/merged.cif");
 
 // Generated open XML based PLC code from the merged CIF model.

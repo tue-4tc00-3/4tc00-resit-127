@@ -4,15 +4,33 @@ import "dh_ctrl_io.cif";
 automaton example_controller:
     alg bool a_Dstartled = running;
 
-    event init, start, stop;
+
+    disc bool a_x2distributing;
+    disc bool a_zdown;
+    disc int count = 0;
+    alg list[3] bool godown = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+
+    event init, start, stop, onpos;
+
+    location init2:
+    initial;
+    edge when s_Dinitialized goto starting;
+
+    location starting:
+        edge when s_Dstartbutton goto wait_init;
+
     location wait_init:
-        initial;
-        edge init   when s_Dinitialized         goto wait_start;
+        edge init   do a_x2distributing := true goto wait_start;
 
     location wait_start:
-        edge start  when s_Dstartbutton         goto running;
+        //edge start  when godown[count mod 3] do a_x2distributing := false goto gopickup;
+        edge start when s_xpos_at2 do a_x2distributing := false goto gopickup;
 
     location running:
-        edge stop   when (not s_Dstopbutton)    goto wait_start;
+        edge stop   when s_zpos_atup do a_zdown := false    goto wait_start;
+
+    location gopickup:
+        edge onpos do count := count + 1, a_x2distributing := false, a_zdown := true goto running;
+
 
 end
