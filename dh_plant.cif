@@ -2,7 +2,6 @@ import "dh_plant_io.cif";
 
 // Definition of the events that can be triggered by the user
 uncontrollable u_start, u_reset, u_stop;
-// Hallo bitches
 // Buttons that can be pressed by the operator
 group operator:
     alg bool s_Dstartbutton = start_button.on;
@@ -31,19 +30,21 @@ end
 automaton gripperarm:
 cont x = 0;
 
-alg bool s_xpos_at1 =       if gripperarm.x = -136.9245: true
+// Sense the position of the crane
+alg bool s_xpos_at1 =       if gripperarm.x >= -136.9245 - 0.1 and gripperarm.x <= -136.9245 + 0.1: true
                             else false end;
-alg bool s_xpos_at2 =       if gripperarm.x = -90.2245: true
+alg bool s_xpos_at2 =       if gripperarm.x >= -90.2245 - 0.1 and gripperarm.x <= -90.2245 + 0.1: true
                             else false end;
-alg bool s_xpos_at3 =       if gripperarm.x >= -44.8625 and gripperarm.x <= -44.2625: true
+alg bool s_xpos_at3 =       if gripperarm.x >= -44.5625 - 0.1 and gripperarm.x <= -44.2625 + 0.1: true
                             else false end;
-alg bool s_xpos_atdrop =    if gripperarm.x = 0: true
+alg bool s_xpos_atdrop =    if gripperarm.x >= - 0.1 and gripperarm.x <= 0.1: true
                             else false end;
 
+// Move the crane right to left and back
     location move:
     initial;
-    equation x' =   if a_x2distributing and x >= -136.9245:    -4
-                    elif not a_x2distributing and x <= 0:    4
+    equation x' =   if a_x2distributing and not a_zdown and x >= -136.9245:    -6
+                    elif not a_x2distributing and not a_zdown and x <= 0:    6
                     else 0 end;
 
 end

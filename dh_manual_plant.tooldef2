@@ -1,12 +1,12 @@
 from "lib:cif3" import *;
 
-//merge files
+// Merge files
 cif3merge(
     "dh_manual.cif",
     "dh_plant_svg.cif",
 );
 
-//run merged file
+// Run merged file
 cif3sim(
     "merged.cif",
     "-i svg",

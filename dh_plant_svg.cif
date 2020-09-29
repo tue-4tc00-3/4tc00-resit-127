@@ -1,20 +1,20 @@
 import "dh_plant.cif";
 svgfile "dh.svg";
 
-//Start button
+// Start button
 svgin  id "s_Dstartbutton"       event u_start;
 svgout id "s_Dstartbutton"       attr "fill" value if s_Dstartbutton:        "darkgreen" else "green" end;
 svgout id "a_Dstartled"          attr "fill" value if a_Dstartled:           "yellow" else "lightgrey" end;
-//Reset button
+// Reset button
 svgin  id "s_Dresetbutton"       event u_reset;
 svgout id "s_Dstopbutton"        attr "fill" value if s_Dstopbutton:         "maroon" else "#500" end;
 svgout id "a_Dresetled"          attr "fill" value if a_Dresetled:           "yellow" else "lightgrey" end;
-//Stop button
+// Stop button
 svgin  id "s_Dstopbutton"        event u_stop;
 svgout id "s_Dresetbutton"       attr "fill" value if s_Dresetbutton:        "black" else "#4d4d4d" end;
 
 
-//Actuator lights
+// Actuator lights
 svgout id "a_Dstartled_led"         attr "fill" value if a_Dstartled:            "lime" else "red" end;
 svgout id "a_Dresetled_led"         attr "fill" value if a_Dresetled:            "lime" else "red" end;
 svgout id "a_DledQ1_led"            attr "fill" value if a_DledQ1:               "lime" else "red" end;
@@ -34,6 +34,18 @@ svgout id "a_vacuum_led"            attr "fill" value if a_vacuum:              
 svgout id "a_ejectpulse_led"        attr "fill" value if a_ejectpulse:           "lime" else "red" end;
 svgout id "a_handlingready_led"     attr "fill" value if a_handlingready:        "lime" else "red" end;
 
+// Moving the crane left end right
 svgout id "crane_arm_base"          attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_arm_glider"        attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "a_zdown"                 attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_gripper_base"      attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0)",gripperarm.x);
+svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0)",gripperarm.x);
 
+// Sense the position of the crane
+svgout id "s_xpos_at1"              attr "fill" value if s_xpos_at1:             "lime" else "red" end;
+svgout id "s_xpos_at2"              attr "fill" value if s_xpos_at2:             "lime" else "red" end;
 svgout id "s_xpos_at3"              attr "fill" value if s_xpos_at3:             "lime" else "red" end;
+svgout id "s_xpos_atdrop"           attr "fill" value if s_xpos_atdrop:          "lime" else "red" end;
