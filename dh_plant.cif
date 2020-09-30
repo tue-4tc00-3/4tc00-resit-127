@@ -32,7 +32,7 @@ cont x = 0;
 cont z = 0;
 event down, pick, drop, rise;
 
-disc bool gripping = true;
+disc bool gripping = false;
 
 // Sense the position of the crane
 alg bool s_xpos_at1 =       if gripperarm.x >= -136.9245 - 0.1 and gripperarm.x <= -136.9245 + 0.1: true
@@ -56,36 +56,24 @@ alg bool s_gripper =        gripping;
                     elif not a_x2distributing and x <= 0:    6
                     else 0 end;
     equation z' =   0;
-    edge down when a_zdown and (s_transfer_atpickup or s_transfer_atdrop) goto zdown;
+    edge down when a_zdown goto zdown;
 
 // Move The crane up and down
     location zdown:
     equation x' =   0;
     equation z' =   9;
-    edge pick when s_zpos_atdown goto grips;
+    edge pick when not a_zdown goto grips;
 
     location zup:
     equation x' =   0;
     equation z' =   -9;
     edge drop when s_zpos_atup goto move;
 
-
 // Grip the block
     location grips:
     equation x' =   0;
     equation z' =   0;
     edge rise do gripping := not gripping goto zup;
-end
-
-automaton transfer:
-
-alg bool s_transfer_atpickup =      s_xpos_at1 or s_xpos_at2 or s_xpos_at3;
-alg bool s_transfer_athalfway =     not s_xpos_at1 or not s_xpos_at2 or not s_xpos_at3 or not s_xpos_atdrop;
-alg bool s_transfer_atdrop =        s_xpos_atdrop;
-
-location hallo:
-initial;
-
 end
 
 

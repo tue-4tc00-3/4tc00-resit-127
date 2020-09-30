@@ -61,9 +61,9 @@ alg bool s_zpos_atup         = gripperarm.s_zpos_atup;
 alg bool s_zpos_atdown       = gripperarm.s_zpos_atdown;
 alg bool s_gripper           = gripperarm.s_gripper;
 
-alg bool s_transfer_atpickup  = transfer.s_transfer_atpickup;
-alg bool s_transfer_atdrop    = transfer.s_transfer_atdrop;
-alg bool s_transfer_athalfway = transfer.s_transfer_athalfway;
+alg bool s_transfer_atpickup  = false;
+alg bool s_transfer_atdrop    = false;
+alg bool s_transfer_athalfway = false;
 alg bool s_vacuum             = false;
 alg bool s_product4           = false;
 alg bool s_testingbusy        = false;

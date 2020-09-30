@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_gripperclose" Id="{1c0e0123-32d3-40fe-bab0-5645fe051c19}" SpecialFunc="None">
+  <POU Name="alg_a_gripperclose" Id="{c5c62aa8-dd8b-4cdc-bb0d-4eac34137db9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_gripperclose : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_gripperclose := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_gripperclose := state.dvar_M_example_controller_a_gripperclose;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_gripperclose">
       <LineId Id="2" Count="0" />

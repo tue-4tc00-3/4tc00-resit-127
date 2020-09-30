@@ -1,0 +1,3274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.10.30" creationDateTime="2020-09-30T13:14:05.8851775" />
+  <contentHeader name="Untitled1" modificationDateTime="2020-09-30T13:14:05.8881769">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="enum_E">
+        <baseType>
+          <enum>
+            <values>
+              <value name="elit_gopickup" />
+              <value name="elit_init0" />
+              <value name="elit_init1" />
+              <value name="elit_init2" />
+              <value name="elit_init3" />
+              <value name="elit_init4" />
+              <value name="elit_init5" />
+              <value name="elit_init6" />
+              <value name="elit_init7" />
+              <value name="elit_init8" />
+              <value name="elit_init9" />
+              <value name="elit_init_error" />
+              <value name="elit_init_ok" />
+              <value name="elit_init_sensor_check" />
+              <value name="elit_initialized" />
+              <value name="elit_running" />
+              <value name="elit_starting" />
+              <value name="elit_wait_init" />
+              <value name="elit_wait_start" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">TYPE enum_E :
+(
+	elit_gopickup,
+	elit_init0,
+	elit_init1,
+	elit_init2,
+	elit_init3,
+	elit_init4,
+	elit_init5,
+	elit_init6,
+	elit_init7,
+	elit_init8,
+	elit_init9,
+	elit_init_error,
+	elit_init_ok,
+	elit_init_sensor_check,
+	elit_initialized,
+	elit_running,
+	elit_starting,
+	elit_wait_init,
+	elit_wait_start
+);
+END_TYPE
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>7af3909d-7310-4693-ae65-80f6078eaa78</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+      <dataType name="STATE">
+        <baseType>
+          <struct>
+            <variable name="curTime">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="dvar_M_example_controller_a_x2distributing" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_example_controller_a_zdown" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_example_controller_count" address="%Q*">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="dvar_M_example_controller" address="%Q*">
+              <type>
+                <derived name="enum_E" />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dstartled" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dresetled" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_DledQ1" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_DledQ2" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dout4" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dout5" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dout6" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Dout7" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_pusher1" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_pusher2" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_pusher3" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hstartled" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hresetled" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_HledQ1" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_HledQ2" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hout4" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hout5" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hout6" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_Hout7" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_x2distributing" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_x2testing" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_zdown" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_gripperclose" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_transfer2pickpos" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_transfer2droppos" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_vacuum" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_ejectpulse" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_out_a_handlingready" address="%Q*">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_init_err_sen_idx" address="%Q*">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap_init_err_led_idx" address="%Q*">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="cvar_M_HardwareMap_t" address="%Q*">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="dvar_M_HardwareMap" address="%Q*">
+              <type>
+                <derived name="enum_E" />
+              </type>
+            </variable>
+          </struct>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">TYPE STATE :
+STRUCT
+	curTime: LREAL;
+	dvar_M_example_controller_a_x2distributing AT %Q*: BOOL;
+	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
+	dvar_M_example_controller_count AT %Q*: DINT;
+	dvar_M_example_controller AT %Q*: enum_E;
+	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_DledQ1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_DledQ2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout4 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout5 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout6 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Dout7 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_pusher3 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hstartled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hresetled AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_HledQ1 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_HledQ2 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout4 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout5 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout6 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_Hout7 AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_x2distributing AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_x2testing AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_zdown AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_gripperclose AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_transfer2pickpos AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_transfer2droppos AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_vacuum AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_ejectpulse AT %Q*: BOOL;
+	dvar_M_HardwareMap_out_a_handlingready AT %Q*: BOOL;
+	dvar_M_HardwareMap_init_err_sen_idx AT %Q*: DINT;
+	dvar_M_HardwareMap_init_err_led_idx AT %Q*: DINT;
+	cvar_M_HardwareMap_t AT %Q*: LREAL;
+	dvar_M_HardwareMap AT %Q*: enum_E;
+END_STRUCT
+END_TYPE
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>3158a330-d43b-4a34-b8e5-1e6027810142</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+    </dataTypes>
+    <pous>
+      <pou name="alg_a_DledQ1" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_DledQ1 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_DledQ1 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>1653b304-59db-4de6-b0c8-e9e74e1f10b3</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_DledQ2" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_DledQ2 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_DledQ2 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>2eee93aa-6e94-48d3-81fd-ff26c7d2a31e</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_Dresetled" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_Dresetled := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_Dresetled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>aab1ea77-348e-4709-851a-9e81db82c8ba</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_Dstartled" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_Dstartled := alg_M_example_controller_a_Dstartled(state);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_Dstartled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>0ece470d-8aaa-477f-8ed0-1c195c228476</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_ejectpulse" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_ejectpulse := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_ejectpulse : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>8c811a96-b1d6-4289-bf05-c42d366d5988</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_gripperclose" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_gripperclose := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_gripperclose : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e481800f-a3fe-4eeb-852d-8a0b0a331c96</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_handlingready" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_handlingready := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_handlingready : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>abfc6936-b822-4602-9b8a-450fcc898643</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_HledQ1" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_HledQ1 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_HledQ1 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>c77971c3-3ef3-4106-a16e-fd6d76e343be</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_HledQ2" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_HledQ2 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_HledQ2 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e1dce2a0-33cb-489b-910e-93d0f2e97f4b</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_Hresetled" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_Hresetled := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_Hresetled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>4dcbbbc0-8192-462f-8a6f-51c4c785ff8d</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_Hstartled" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_Hstartled := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_Hstartled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>c9b060fc-7765-4704-b3ee-525e58873aa9</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_pusher1" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_pusher1 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_pusher1 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>6486c2e2-8764-4c1e-abb6-f8e8e009c469</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_pusher2" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_pusher2 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_pusher2 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>05da43ce-f026-4a3d-ad73-ebff80f40f16</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_pusher3" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_pusher3 := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_pusher3 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>ffb2a005-cced-4eed-baa6-ca0468d66c42</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_transfer2droppos" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2droppos := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_transfer2droppos : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>6cab8be6-2743-4ae0-b929-927e1c457345</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_transfer2pickpos" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2pickpos := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_transfer2pickpos : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f83d32cb-313b-4fb9-b53f-e9cf4d8252b9</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_vacuum" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_vacuum := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_vacuum : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>bf680297-04bc-45a4-9554-3a13b416e5be</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_x2distributing" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_x2distributing := state.dvar_M_example_controller_a_x2distributing;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_x2distributing : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>7f53b37b-46a0-471a-a71e-2c8c8279b61f</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_x2testing" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_x2testing := FALSE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_x2testing : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>57a77d78-7984-453c-a9b2-7d664469bcda</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_a_zdown" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_zdown := state.dvar_M_example_controller_a_zdown;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_a_zdown : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>455d7ab5-6cbd-4355-805e-33187d21fd07</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_M_example_controller_a_Dstartled" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_M_example_controller_a_Dstartled := (state.dvar_M_example_controller) = (elit_running);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_M_example_controller_a_Dstartled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>787a670c-1346-40f1-ac2a-0a6c54cc5042</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_M_example_controller_godown" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="2" />
+              <baseType>
+                <BOOL />
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_M_example_controller_godown := makeArray0(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_M_example_controller_godown : ARRAY[0..2] OF BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>e2da6fed-7003-412a-bd09-d742bdba3337</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_s_Dinitialized" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_s_Dinitialized := (state.dvar_M_HardwareMap) = (elit_initialized);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_s_Dinitialized : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>16654f60-5b1c-44a4-a6f3-b2ffd97f0e13</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="alg_s_Hinitialized" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_s_Hinitialized := (state.dvar_M_HardwareMap) = (elit_initialized);</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION alg_s_Hinitialized : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>8274b497-1a5e-48f9-aeab-4cb03f759845</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="derivcvar_M_HardwareMap_t" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL />
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">derivcvar_M_HardwareMap_t := 1.0;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION derivcvar_M_HardwareMap_t : LREAL
+VAR_INPUT
+	state: STATE;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>45f07fb6-ebe8-4f0a-9506-ad30b889e1b7</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <outputVars>
+            <variable name="timerValue0">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+            <variable name="timerValue1">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="cnt">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="first">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE" />
+              </initialValue>
+            </variable>
+            <variable name="curTimerValue">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+            <variable name="state0">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+            <variable name="curTime">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="loopsKilled">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+          </localVars>
+          <tempVars>
+            <variable name="lastTimerValue">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+            <variable name="curDeltaTime">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+            <variable name="curDeltaSecs">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="state1">
+              <type>
+                <derived name="STATE" />
+              </type>
+            </variable>
+            <variable name="progress">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="loopCount">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="b1">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="b2">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </tempVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+// Handle 'time' and cycle time.
+cnt := cnt + 1;
+
+timer0(IN := curTimer = 0, PT := T#1D);
+timer1(IN := curTimer = 1, PT := T#1D);
+timerValue0 := timer0.ET;
+timerValue1 := timer1.ET;
+
+lastTimerValue := curTimerValue;
+IF curTimer = 0 THEN
+    curTimerValue := timerValue0;
+ELSE
+    curTimerValue := timerValue1;
+END_IF;
+curDeltaTime := curTimerValue - lastTimerValue;
+curDeltaSecs := TIME_TO_LREAL(curDeltaTime) / 1000;
+curTime := curTime + curDeltaSecs;
+
+IF cnt MOD 10 = 0 THEN
+    curTimer := 1 - curTimer;
+    curTimerValue := T#0S;
+    timer0(IN := curTimer = 0, PT := T#1D);
+    timer1(IN := curTimer = 1, PT := T#1D);
+    timerValue0 := timer0.ET;
+    timerValue1 := timer1.ET;
+END_IF;
+
+IF first THEN
+    first := FALSE;
+
+    // Initialize state variables for initial state.
+    state0.dvar_M_example_controller_a_x2distributing := FALSE;
+    state0.dvar_M_example_controller_a_zdown := FALSE;
+    state0.dvar_M_example_controller_count := 0;
+    state0.dvar_M_example_controller := elit_init2;
+    state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
+    state0.dvar_M_HardwareMap_out_a_DledQ1 := TRUE;
+    state0.dvar_M_HardwareMap_out_a_DledQ2 := TRUE;
+    state0.dvar_M_HardwareMap_out_a_Dout4 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Dout5 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Dout6 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Dout7 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_pusher1 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_pusher2 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_pusher3 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Hstartled := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Hresetled := FALSE;
+    state0.dvar_M_HardwareMap_out_a_HledQ1 := TRUE;
+    state0.dvar_M_HardwareMap_out_a_HledQ2 := TRUE;
+    state0.dvar_M_HardwareMap_out_a_Hout4 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Hout5 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Hout6 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_Hout7 := FALSE;
+    state0.dvar_M_HardwareMap_out_a_x2distributing := TRUE;
+    state0.dvar_M_HardwareMap_out_a_x2testing := TRUE;
+    state0.dvar_M_HardwareMap_out_a_zdown := FALSE;
+    state0.dvar_M_HardwareMap_out_a_gripperclose := FALSE;
+    state0.dvar_M_HardwareMap_out_a_transfer2pickpos := FALSE;
+    state0.dvar_M_HardwareMap_out_a_transfer2droppos := FALSE;
+    state0.dvar_M_HardwareMap_out_a_vacuum := FALSE;
+    state0.dvar_M_HardwareMap_out_a_ejectpulse := FALSE;
+    state0.dvar_M_HardwareMap_out_a_handlingready := FALSE;
+    state0.dvar_M_HardwareMap_init_err_sen_idx := -1;
+    state0.dvar_M_HardwareMap_init_err_led_idx := 0;
+    state0.cvar_M_HardwareMap_t := 0.0;
+    state0.dvar_M_HardwareMap := elit_init0;
+ELSE
+    // Update continuous variables for time delay.
+    state1.cvar_M_HardwareMap_t := state0.cvar_M_HardwareMap_t + curDeltaSecs * derivcvar_M_HardwareMap_t(state0);
+
+    state0.curTime := curTime;
+    state0.cvar_M_HardwareMap_t := state1.cvar_M_HardwareMap_t;
+END_IF;
+
+// Event loop.
+WHILE TRUE DO
+    progress := FALSE;
+
+    // Event "M.example_controller_init".
+    IF NOT progress THEN
+        IF (state0.dvar_M_example_controller) = (elit_wait_init) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2distributing := TRUE;
+            state1.dvar_M_example_controller := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.example_controller_onpos".
+    IF NOT progress THEN
+        IF (state0.dvar_M_example_controller) = (elit_gopickup) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_count := (state0.dvar_M_example_controller_count) + (1);
+            state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.dvar_M_example_controller_a_zdown := TRUE;
+            state1.dvar_M_example_controller := elit_running;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.example_controller_start".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_xpos_at2);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.dvar_M_example_controller := elit_gopickup;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.example_controller_stop".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_running);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_zdown := FALSE;
+            state1.dvar_M_example_controller := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_starting);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller := elit_wait_init;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init0);
+        b1 := b1 AND ((state0.cvar_M_HardwareMap_t) &gt;= (2.0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap := elit_init1;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_HardwareMap) = (elit_init1) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2testing := FALSE;
+            state1.dvar_M_HardwareMap := elit_init2;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init2);
+        IF b1 THEN
+            b2 := ivar_s_xpos_at1;
+            b2 := b2 OR (ivar_s_xpos_at2);
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2testing := TRUE;
+            state1.dvar_M_HardwareMap := elit_init3;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_HardwareMap) = (elit_init3) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := TRUE;
+            state1.dvar_M_HardwareMap := elit_init4;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init4);
+        b1 := b1 AND (ivar_s_transfer_atpickup);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := FALSE;
+            state1.dvar_M_HardwareMap := elit_init5;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_HardwareMap) = (elit_init5) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2droppos := TRUE;
+            state1.dvar_M_HardwareMap := elit_init6;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init6);
+        b1 := b1 AND (ivar_s_transfer_athalfway);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2droppos := FALSE;
+            state1.dvar_M_HardwareMap := elit_init7;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_HardwareMap) = (elit_init7) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2distributing := FALSE;
+            state1.dvar_M_HardwareMap := elit_init8;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init8);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2distributing := TRUE;
+            state1.cvar_M_HardwareMap_t := 0.0;
+            state1.dvar_M_HardwareMap := elit_init9;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init9);
+        b1 := b1 AND ((state0.cvar_M_HardwareMap_t) &gt;= (1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap := elit_init_sensor_check;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 0;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 1;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Dautoswitch);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 2;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Dresetbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 3;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Din4);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 4;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Din5);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 5;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Din6);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 6;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Din7);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 7;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_pusher1_in));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 8;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_pusher1_out);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 9;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_stack1filled));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 10;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_product1);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 11;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_pusher2_in));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 12;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_pusher2_out);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 13;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_stack2filled));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 14;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_product2);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 15;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_pusher3_in));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 16;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_pusher3_out);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 17;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_stack3filled));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 18;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_product3);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 19;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 22;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_Hstopbutton));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 23;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hautoswitch);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 24;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hresetbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 25;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hin4);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 26;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hin5);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 27;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hin6);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 28;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_Hin7);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 29;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_xpos_at1);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 33;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_xpos_at2);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 34;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_xpos_at3);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 35;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_xpos_atdrop));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 36;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_zpos_atup));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 37;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 38;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_gripper);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 39;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_transfer_atpickup);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 40;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_transfer_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 41;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_transfer_athalfway));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 42;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_vacuum);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 43;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (ivar_s_product4);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_init_err_sen_idx := 44;
+            state1.dvar_M_HardwareMap := elit_init_error;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_sensor_check);
+        b1 := b1 AND (NOT(ivar_s_Dstartbutton));
+        b1 := b1 AND (ivar_s_Dstopbutton);
+        b1 := b1 AND (NOT(ivar_s_Dautoswitch));
+        b1 := b1 AND (NOT(ivar_s_Dresetbutton));
+        b1 := b1 AND (NOT(ivar_s_Din4));
+        b1 := b1 AND (NOT(ivar_s_Din5));
+        b1 := b1 AND (NOT(ivar_s_Din6));
+        b1 := b1 AND (NOT(ivar_s_Din7));
+        b1 := b1 AND (ivar_s_pusher1_in);
+        b1 := b1 AND (NOT(ivar_s_pusher1_out));
+        b1 := b1 AND (ivar_s_stack1filled);
+        b1 := b1 AND (NOT(ivar_s_product1));
+        b1 := b1 AND (ivar_s_pusher2_in);
+        b1 := b1 AND (NOT(ivar_s_pusher2_out));
+        b1 := b1 AND (ivar_s_stack2filled);
+        b1 := b1 AND (NOT(ivar_s_product2));
+        b1 := b1 AND (ivar_s_pusher3_in);
+        b1 := b1 AND (NOT(ivar_s_pusher3_out));
+        b1 := b1 AND (ivar_s_stack3filled);
+        b1 := b1 AND (NOT(ivar_s_product3));
+        b1 := b1 AND (NOT(ivar_s_Hstartbutton));
+        b1 := b1 AND (ivar_s_Hstopbutton);
+        b1 := b1 AND (NOT(ivar_s_Hautoswitch));
+        b1 := b1 AND (NOT(ivar_s_Hresetbutton));
+        b1 := b1 AND (NOT(ivar_s_Hin4));
+        b1 := b1 AND (NOT(ivar_s_Hin5));
+        b1 := b1 AND (NOT(ivar_s_Hin6));
+        b1 := b1 AND (NOT(ivar_s_Hin7));
+        b1 := b1 AND (NOT(ivar_s_xpos_at1));
+        b1 := b1 AND (NOT(ivar_s_xpos_at2));
+        b1 := b1 AND (NOT(ivar_s_xpos_at3));
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        b1 := b1 AND (NOT(ivar_s_zpos_atdown));
+        b1 := b1 AND (NOT(ivar_s_gripper));
+        b1 := b1 AND (NOT(ivar_s_transfer_atpickup));
+        b1 := b1 AND (NOT(ivar_s_transfer_atdrop));
+        b1 := b1 AND (ivar_s_transfer_athalfway);
+        b1 := b1 AND (NOT(ivar_s_vacuum));
+        b1 := b1 AND (NOT(ivar_s_product4));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap := elit_init_ok;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_error);
+        b1 := b1 AND ((state0.cvar_M_HardwareMap_t) &gt;= (0.5));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_init_err_led_idx) = (0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.cvar_M_HardwareMap_t := 0.0;
+            state1.dvar_M_HardwareMap_init_err_led_idx := 1;
+            state1.dvar_M_HardwareMap_out_a_DledQ1 := TRUE;
+            state1.dvar_M_HardwareMap_out_a_DledQ2 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_HledQ1 := TRUE;
+            state1.dvar_M_HardwareMap_out_a_HledQ2 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_init_error);
+        b1 := b1 AND ((state0.cvar_M_HardwareMap_t) &gt;= (0.5));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_init_err_led_idx) = (1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.cvar_M_HardwareMap_t := 0.0;
+            state1.dvar_M_HardwareMap_init_err_led_idx := 0;
+            state1.dvar_M_HardwareMap_out_a_DledQ1 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_DledQ2 := TRUE;
+            state1.dvar_M_HardwareMap_out_a_HledQ1 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_HledQ2 := TRUE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_HardwareMap) = (elit_init_ok) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_DledQ1 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_DledQ2 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_HledQ1 := FALSE;
+            state1.dvar_M_HardwareMap_out_a_HledQ2 := FALSE;
+            state1.dvar_M_HardwareMap := elit_initialized;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dstartled) &lt;&gt; (alg_a_Dstartled(state0)));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dstartled := alg_a_Dstartled(state0);
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dresetled) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_DledQ1) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_DledQ1 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_DledQ2) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_DledQ2 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dout4) &lt;&gt; (ivar_a_Dout4));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dout4 := ivar_a_Dout4;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dout5) &lt;&gt; (ivar_a_Dout5));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dout5 := ivar_a_Dout5;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dout6) &lt;&gt; (ivar_a_Dout6));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dout6 := ivar_a_Dout6;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Dout7) &lt;&gt; (ivar_a_Dout7));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Dout7 := ivar_a_Dout7;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_pusher1) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_pusher1 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_pusher2) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_pusher2 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_pusher3) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_pusher3 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hstartled) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hstartled := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hresetled) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hresetled := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_HledQ1) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_HledQ1 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_HledQ2) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_HledQ2 := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hout4) &lt;&gt; (ivar_a_Hout4));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hout4 := ivar_a_Hout4;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hout5) &lt;&gt; (ivar_a_Hout5));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hout5 := ivar_a_Hout5;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hout6) &lt;&gt; (ivar_a_Hout6));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hout6 := ivar_a_Hout6;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_Hout7) &lt;&gt; (ivar_a_Hout7));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_Hout7 := ivar_a_Hout7;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_x2distributing) &lt;&gt; (alg_a_x2distributing(state0)));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2distributing := alg_a_x2distributing(state0);
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_x2testing) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_x2testing := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_zdown) &lt;&gt; (alg_a_zdown(state0)));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_zdown := alg_a_zdown(state0);
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_gripperclose) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_gripperclose := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2pickpos) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2droppos) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_transfer2droppos := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_vacuum) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_vacuum := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_ejectpulse) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_ejectpulse := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_handlingready) &lt;&gt; (FALSE));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_HardwareMap_out_a_handlingready := FALSE;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Done with events?
+    IF NOT progress THEN
+        EXIT;
+    END_IF;
+
+    // Protect against events that are always enabled.
+    loopCount := loopCount + 1;
+    IF loopCount &gt;= 100 THEN
+        loopsKilled := loopsKilled + 1;
+        EXIT;
+    END_IF;
+END_WHILE;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">PROGRAM MAIN
+VAR_OUTPUT
+	timerValue0: TIME;
+	timerValue1: TIME;
+END_VAR
+VAR
+	cnt: LINT;
+	first: BOOL := TRUE;
+	curTimerValue: TIME;
+	state0: STATE;
+	curTime: LREAL;
+	loopsKilled: LINT;
+END_VAR
+VAR_TEMP
+	lastTimerValue: TIME;
+	curDeltaTime: TIME;
+	curDeltaSecs: LREAL;
+	state1: STATE;
+	progress: BOOL;
+	loopCount: INT;
+	b1: BOOL;
+	b2: BOOL;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>75fc2c0a-b468-4991-aed0-c5510ded0472</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="makeArray0" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="2" />
+              <baseType>
+                <BOOL />
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="elem0">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="elem1">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="elem2">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="rslt">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2" />
+                  <baseType>
+                    <BOOL />
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+makeArray0 := rslt;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION makeArray0 : ARRAY[0..2] OF BOOL
+VAR_INPUT
+	elem0: BOOL;
+	elem1: BOOL;
+	elem2: BOOL;
+END_VAR
+VAR
+	rslt: ARRAY[0..2] OF BOOL;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>06710f70-6a32-48c8-8873-aa47db1f6fe5</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="normProjIdx" pouType="function">
+        <interface>
+          <returnType>
+            <DINT />
+          </returnType>
+          <inputVars>
+            <variable name="idx">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="size">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="tmp">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">tmp := idx;
+IF tmp &lt; 0 THEN
+    tmp := size + tmp;
+END_IF;
+normProjIdx := tmp;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION normProjIdx : DINT
+VAR_INPUT
+	idx: DINT;
+	size: DINT;
+END_VAR
+VAR
+	tmp: DINT;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>cf99c537-bb4d-4ca6-971c-bc73b0157ae6</ObjectId>
+          </data>
+        </addData>
+      </pou>
+      <pou name="projArray0" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL />
+          </returnType>
+          <inputVars>
+            <variable name="arr">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2" />
+                  <baseType>
+                    <BOOL />
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+            <variable name="idx">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">projArray0 := arr[normProjIdx(idx, 3)];</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION projArray0 : BOOL
+VAR_INPUT
+	arr: ARRAY[0..2] OF BOOL;
+	idx: DINT;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>b654e354-da2c-4455-9c27-53dde1defc41</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/globalvars" handleUnknown="implementation">
+      <globalVars name="INPUTS">
+        <variable name="ivar_s_Dstartbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Dstopbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Dresetbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Dautoswitch" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher1_in" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher1_out" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_stack1filled" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_product1" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher2_in" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher2_out" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_stack2filled" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_product2" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher3_in" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_pusher3_out" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_stack3filled" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_product3" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_handlingbusy" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hstartbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hstopbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hresetbutton" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hautoswitch" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_xpos_at1" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_xpos_at2" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_xpos_at3" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_xpos_atdrop" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_zpos_atup" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_zpos_atdown" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_gripper" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_transfer_atpickup" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_transfer_atdrop" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_transfer_athalfway" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_vacuum" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_product4" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_testingbusy" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Din4" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Din5" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Din6" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Din7" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hin4" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hin5" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hin6" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_s_Hin7" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Dout4" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Dout5" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Dout6" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Dout7" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Hout4" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Hout5" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Hout6" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <variable name="ivar_a_Hout7" address="%I*">
+          <type>
+            <BOOL />
+          </type>
+        </variable>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">VAR_GLOBAL
+	ivar_s_Dstartbutton AT %I*: BOOL;
+	ivar_s_Dstopbutton AT %I*: BOOL;
+	ivar_s_Dresetbutton AT %I*: BOOL;
+	ivar_s_Dautoswitch AT %I*: BOOL;
+	ivar_s_pusher1_in AT %I*: BOOL;
+	ivar_s_pusher1_out AT %I*: BOOL;
+	ivar_s_stack1filled AT %I*: BOOL;
+	ivar_s_product1 AT %I*: BOOL;
+	ivar_s_pusher2_in AT %I*: BOOL;
+	ivar_s_pusher2_out AT %I*: BOOL;
+	ivar_s_stack2filled AT %I*: BOOL;
+	ivar_s_product2 AT %I*: BOOL;
+	ivar_s_pusher3_in AT %I*: BOOL;
+	ivar_s_pusher3_out AT %I*: BOOL;
+	ivar_s_stack3filled AT %I*: BOOL;
+	ivar_s_product3 AT %I*: BOOL;
+	ivar_s_handlingbusy AT %I*: BOOL;
+	ivar_s_Hstartbutton AT %I*: BOOL;
+	ivar_s_Hstopbutton AT %I*: BOOL;
+	ivar_s_Hresetbutton AT %I*: BOOL;
+	ivar_s_Hautoswitch AT %I*: BOOL;
+	ivar_s_xpos_at1 AT %I*: BOOL;
+	ivar_s_xpos_at2 AT %I*: BOOL;
+	ivar_s_xpos_at3 AT %I*: BOOL;
+	ivar_s_xpos_atdrop AT %I*: BOOL;
+	ivar_s_zpos_atup AT %I*: BOOL;
+	ivar_s_zpos_atdown AT %I*: BOOL;
+	ivar_s_gripper AT %I*: BOOL;
+	ivar_s_transfer_atpickup AT %I*: BOOL;
+	ivar_s_transfer_atdrop AT %I*: BOOL;
+	ivar_s_transfer_athalfway AT %I*: BOOL;
+	ivar_s_vacuum AT %I*: BOOL;
+	ivar_s_product4 AT %I*: BOOL;
+	ivar_s_testingbusy AT %I*: BOOL;
+	ivar_s_Din4 AT %I*: BOOL;
+	ivar_s_Din5 AT %I*: BOOL;
+	ivar_s_Din6 AT %I*: BOOL;
+	ivar_s_Din7 AT %I*: BOOL;
+	ivar_s_Hin4 AT %I*: BOOL;
+	ivar_s_Hin5 AT %I*: BOOL;
+	ivar_s_Hin6 AT %I*: BOOL;
+	ivar_s_Hin7 AT %I*: BOOL;
+	ivar_a_Dout4 AT %I*: BOOL;
+	ivar_a_Dout5 AT %I*: BOOL;
+	ivar_a_Dout6 AT %I*: BOOL;
+	ivar_a_Dout7 AT %I*: BOOL;
+	ivar_a_Hout4 AT %I*: BOOL;
+	ivar_a_Hout5 AT %I*: BOOL;
+	ivar_a_Hout6 AT %I*: BOOL;
+	ivar_a_Hout7 AT %I*: BOOL;
+END_VAR</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>a9bc76e2-9ff6-44e7-b582-34bbd039231c</ObjectId>
+          </data>
+        </addData>
+      </globalVars>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/globalvars" handleUnknown="implementation">
+      <globalVars name="TIMERS">
+        <variable name="timer0">
+          <type>
+            <derived name="TON" />
+          </type>
+        </variable>
+        <variable name="timer1">
+          <type>
+            <derived name="TON" />
+          </type>
+        </variable>
+        <variable name="curTimer">
+          <type>
+            <INT />
+          </type>
+          <initialValue>
+            <simpleValue value="0" />
+          </initialValue>
+        </variable>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">VAR_GLOBAL
+	timer0: TON;
+	timer1: TON;
+	curTimer: INT := 0;
+END_VAR</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>52a6f32e-28ea-4ae5-b9bd-1a7fb0431afe</ObjectId>
+          </data>
+        </addData>
+      </globalVars>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Folder Name="CIF">
+          <Object Name="normProjIdx" ObjectId="cf99c537-bb4d-4ca6-971c-bc73b0157ae6" />
+          <Object Name="projArray0" ObjectId="b654e354-da2c-4455-9c27-53dde1defc41" />
+          <Object Name="STATE" ObjectId="3158a330-d43b-4a34-b8e5-1e6027810142" />
+          <Object Name="enum_E" ObjectId="7af3909d-7310-4693-ae65-80f6078eaa78" />
+          <Object Name="alg_s_Dinitialized" ObjectId="16654f60-5b1c-44a4-a6f3-b2ffd97f0e13" />
+          <Object Name="alg_s_Hinitialized" ObjectId="8274b497-1a5e-48f9-aeab-4cb03f759845" />
+          <Object Name="alg_a_Dstartled" ObjectId="0ece470d-8aaa-477f-8ed0-1c195c228476" />
+          <Object Name="alg_a_Dresetled" ObjectId="aab1ea77-348e-4709-851a-9e81db82c8ba" />
+          <Object Name="alg_a_DledQ1" ObjectId="1653b304-59db-4de6-b0c8-e9e74e1f10b3" />
+          <Object Name="alg_a_DledQ2" ObjectId="2eee93aa-6e94-48d3-81fd-ff26c7d2a31e" />
+          <Object Name="alg_a_pusher1" ObjectId="6486c2e2-8764-4c1e-abb6-f8e8e009c469" />
+          <Object Name="alg_a_pusher2" ObjectId="05da43ce-f026-4a3d-ad73-ebff80f40f16" />
+          <Object Name="alg_a_pusher3" ObjectId="ffb2a005-cced-4eed-baa6-ca0468d66c42" />
+          <Object Name="alg_a_Hstartled" ObjectId="c9b060fc-7765-4704-b3ee-525e58873aa9" />
+          <Object Name="alg_a_Hresetled" ObjectId="4dcbbbc0-8192-462f-8a6f-51c4c785ff8d" />
+          <Object Name="alg_a_HledQ1" ObjectId="c77971c3-3ef3-4106-a16e-fd6d76e343be" />
+          <Object Name="alg_a_HledQ2" ObjectId="e1dce2a0-33cb-489b-910e-93d0f2e97f4b" />
+          <Object Name="alg_a_x2distributing" ObjectId="7f53b37b-46a0-471a-a71e-2c8c8279b61f" />
+          <Object Name="alg_a_x2testing" ObjectId="57a77d78-7984-453c-a9b2-7d664469bcda" />
+          <Object Name="alg_a_zdown" ObjectId="455d7ab5-6cbd-4355-805e-33187d21fd07" />
+          <Object Name="alg_a_gripperclose" ObjectId="e481800f-a3fe-4eeb-852d-8a0b0a331c96" />
+          <Object Name="alg_a_transfer2pickpos" ObjectId="f83d32cb-313b-4fb9-b53f-e9cf4d8252b9" />
+          <Object Name="alg_a_transfer2droppos" ObjectId="6cab8be6-2743-4ae0-b929-927e1c457345" />
+          <Object Name="alg_a_vacuum" ObjectId="bf680297-04bc-45a4-9554-3a13b416e5be" />
+          <Object Name="alg_a_ejectpulse" ObjectId="8c811a96-b1d6-4289-bf05-c42d366d5988" />
+          <Object Name="alg_a_handlingready" ObjectId="abfc6936-b822-4602-9b8a-450fcc898643" />
+          <Object Name="alg_M_example_controller_a_Dstartled" ObjectId="787a670c-1346-40f1-ac2a-0a6c54cc5042" />
+          <Object Name="alg_M_example_controller_godown" ObjectId="e2da6fed-7003-412a-bd09-d742bdba3337" />
+          <Object Name="makeArray0" ObjectId="06710f70-6a32-48c8-8873-aa47db1f6fe5" />
+          <Object Name="derivcvar_M_HardwareMap_t" ObjectId="45f07fb6-ebe8-4f0a-9506-ad30b889e1b7" />
+          <Object Name="MAIN" ObjectId="75fc2c0a-b468-4991-aed0-c5510ded0472" />
+          <Object Name="INPUTS" ObjectId="a9bc76e2-9ff6-44e7-b582-34bbd039231c" />
+          <Object Name="TIMERS" ObjectId="52a6f32e-28ea-4ae5-b9bd-1a7fb0431afe" />
+        </Folder>
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_M_example_controller_a_Dstartled" Id="{cbdd63dd-acb4-4421-b4d5-776238a409d8}" SpecialFunc="None">
+  <POU Name="alg_M_example_controller_a_Dstartled" Id="{2726a8ac-3a0b-45f7-82ed-9f53c3d64a9c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_M_example_controller_a_Dstartled : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_M_example_controller_a_Dstartled := (state.dvar_M_example_controller) = (elit_running);]]></ST>
+      <ST><![CDATA[alg_M_example_controller_a_Dstartled := (state.dvar_M_example_controller) = (elit_starting);]]></ST>
     </Implementation>
     <LineIds Name="alg_M_example_controller_a_Dstartled">
       <LineId Id="2" Count="0" />

@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{fc0a0039-16f7-4442-9806-30fccaf41d75}">
+  <DUT Name="STATE" Id="{b0594fa9-bdc6-401f-9f99-3162d801f376}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
 	dvar_M_example_controller_a_x2distributing AT %Q*: BOOL;
 	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
-	dvar_M_example_controller_count AT %Q*: DINT;
+	dvar_M_example_controller_a_gripperclose AT %Q*: BOOL;
+	dvar_M_example_controller_gogrip AT %Q*: BOOL;
 	dvar_M_example_controller AT %Q*: enum_E;
 	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;

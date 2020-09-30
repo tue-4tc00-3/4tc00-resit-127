@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="MAIN" Id="{f991e436-6fca-4c81-9154-e397bba58448}" SpecialFunc="None">
+  <POU Name="MAIN" Id="{297c3b19-e851-40c2-a1ad-474804256345}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR_OUTPUT
 	timerValue0: TIME;
@@ -60,7 +60,8 @@ IF first THEN
     // Initialize state variables for initial state.
     state0.dvar_M_example_controller_a_x2distributing := FALSE;
     state0.dvar_M_example_controller_a_zdown := FALSE;
-    state0.dvar_M_example_controller_count := 0;
+    state0.dvar_M_example_controller_a_gripperclose := FALSE;
+    state0.dvar_M_example_controller_gogrip := FALSE;
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -106,59 +107,17 @@ END_IF;
 WHILE TRUE DO
     progress := FALSE;
 
-    // Event "M.example_controller_init".
+    // Event "M.example_controller_drop".
     IF NOT progress THEN
-        IF (state0.dvar_M_example_controller) = (elit_wait_init) THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller_a_x2distributing := TRUE;
-            state1.dvar_M_example_controller := elit_wait_start;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.example_controller_onpos".
-    IF NOT progress THEN
-        IF (state0.dvar_M_example_controller) = (elit_gopickup) THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller_count := (state0.dvar_M_example_controller_count) + (1);
-            state1.dvar_M_example_controller_a_x2distributing := FALSE;
-            state1.dvar_M_example_controller_a_zdown := TRUE;
-            state1.dvar_M_example_controller := elit_running;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.example_controller_start".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_wait_start);
-        b1 := b1 AND (ivar_s_xpos_at2);
+        b1 := (state0.dvar_M_example_controller) = (elit_pickupprod);
+        b1 := b1 AND (ivar_s_zpos_atdown);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_example_controller_a_x2distributing := FALSE;
-            state1.dvar_M_example_controller := elit_gopickup;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.example_controller_stop".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_running);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
+            state1.dvar_M_example_controller_a_gripperclose := NOT(state0.dvar_M_example_controller_gogrip);
             state1.dvar_M_example_controller_a_zdown := FALSE;
-            state1.dvar_M_example_controller := elit_wait_start;
+            state1.dvar_M_example_controller := elit_starting;
 
             state0 := state1;
         END_IF;
@@ -182,11 +141,31 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_starting);
         b1 := b1 AND (ivar_s_Dstartbutton);
+        b1 := b1 AND (ivar_s_gripper);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_example_controller := elit_wait_init;
+            state1.dvar_M_example_controller_a_zdown := TRUE;
+            state1.dvar_M_example_controller_gogrip := TRUE;
+            state1.dvar_M_example_controller := elit_pickupprod;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_starting);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        b1 := b1 AND (NOT(ivar_s_gripper));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_zdown := TRUE;
+            state1.dvar_M_example_controller_gogrip := FALSE;
+            state1.dvar_M_example_controller := elit_pickupprod;
 
             state0 := state1;
         END_IF;
@@ -1357,12 +1336,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_gripperclose) <> (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_gripperclose) <> (alg_a_gripperclose(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_gripperclose := FALSE;
+            state1.dvar_M_HardwareMap_out_a_gripperclose := alg_a_gripperclose(state0);
 
             state0 := state1;
         END_IF;
@@ -1452,7 +1431,7 @@ WHILE TRUE DO
 END_WHILE;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="1422" />
+      <LineId Id="3" Count="1401" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
