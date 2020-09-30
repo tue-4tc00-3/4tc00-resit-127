@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_M_example_controller_godown" Id="{05fdcaf5-53be-4851-9989-adf691f5c64c}" SpecialFunc="None">
+  <POU Name="alg_M_example_controller_godown" Id="{4cb60f5f-42cb-4ec6-9d8e-f1f6c9ceaf81}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_M_example_controller_godown : ARRAY[0..2] OF BOOL
 VAR_INPUT
 	state: STATE;

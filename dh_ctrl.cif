@@ -2,11 +2,11 @@ import "dh_ctrl_io.cif";
 
 //Example of a very simple controller that turns on the startled when the start button is pressed
 automaton example_controller:
-    alg bool a_Dstartled = running;
-
+    alg bool a_Dstartled = starting;
 
     disc bool a_x2distributing;
     disc bool a_zdown;
+    disc bool a_gripperclose;
     disc int count = 0;
     alg list[3] bool godown = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
 
@@ -17,20 +17,12 @@ automaton example_controller:
     edge when s_Dinitialized goto starting;
 
     location starting:
-        edge when s_Dstartbutton goto wait_init;
+        edge when s_Dstartbutton do a_zdown := true goto pickupprod;
 
-    location wait_init:
-        edge init   do a_x2distributing := true goto wait_start;
-
-    location wait_start:
+    location pickupprod:
         //edge start  when godown[count mod 3] do a_x2distributing := false goto gopickup;
-        edge start when s_xpos_at2 do a_x2distributing := false goto gopickup;
+        edge start when s_zpos_atdown do a_gripperclose := true, a_zdown := false goto init2;
 
-    location running:
-        edge stop   when s_zpos_atup do a_zdown := false    goto wait_start;
-
-    location gopickup:
-        edge onpos do count := count + 1, a_x2distributing := false, a_zdown := true goto running;
 
 
 end

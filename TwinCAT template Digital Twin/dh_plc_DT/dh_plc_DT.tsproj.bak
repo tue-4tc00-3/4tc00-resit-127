@@ -2,95 +2,125 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.32">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{D3E5EA89-8484-473F-A663-1093C2AB38C5}" AutoDeleteType="true">enum_E</Name>
+			<Name GUID="{B27EA6DC-8FF0-4248-BDE1-38E4293B48A0}" AutoDeleteType="true">enum_E</Name>
 			<BitSize>16</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init0]]>
+					<![CDATA[elit_gopickup]]>
 				</Text>
 				<Enum>0</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init1]]>
+					<![CDATA[elit_init0]]>
 				</Text>
 				<Enum>1</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init2]]>
+					<![CDATA[elit_init1]]>
 				</Text>
 				<Enum>2</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init3]]>
+					<![CDATA[elit_init2]]>
 				</Text>
 				<Enum>3</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init4]]>
+					<![CDATA[elit_init3]]>
 				</Text>
 				<Enum>4</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init5]]>
+					<![CDATA[elit_init4]]>
 				</Text>
 				<Enum>5</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init6]]>
+					<![CDATA[elit_init5]]>
 				</Text>
 				<Enum>6</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init7]]>
+					<![CDATA[elit_init6]]>
 				</Text>
 				<Enum>7</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init8]]>
+					<![CDATA[elit_init7]]>
 				</Text>
 				<Enum>8</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init9]]>
+					<![CDATA[elit_init8]]>
 				</Text>
 				<Enum>9</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_error]]>
+					<![CDATA[elit_init9]]>
 				</Text>
 				<Enum>10</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_ok]]>
+					<![CDATA[elit_init_error]]>
 				</Text>
 				<Enum>11</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_sensor_check]]>
+					<![CDATA[elit_init_ok]]>
 				</Text>
 				<Enum>12</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_initialized]]>
+					<![CDATA[elit_init_sensor_check]]>
 				</Text>
 				<Enum>13</Enum>
 			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_initialized]]>
+				</Text>
+				<Enum>14</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_running]]>
+				</Text>
+				<Enum>15</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_starting]]>
+				</Text>
+				<Enum>16</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_wait_init]]>
+				</Text>
+				<Enum>17</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_wait_start]]>
+				</Text>
+				<Enum>18</Enum>
+			</EnumInfo>
 			<Hides>
-				<Hide GUID="{435A70C4-B53C-4F05-AF7D-291315DADFD0}"/>
+				<Hide GUID="{D3E5EA89-8484-473F-A663-1093C2AB38C5}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>
@@ -118,27 +148,11 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_s_Dautoswitch</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>INPUTS.ivar_s_Dresetbutton</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_s_Din4</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Din5</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Din6</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Din7</Name>
+							<Name>INPUTS.ivar_s_Dautoswitch</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -202,27 +216,11 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_s_Hautoswitch</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>INPUTS.ivar_s_Hresetbutton</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_s_Hin4</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Hin5</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Hin6</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_s_Hin7</Name>
+							<Name>INPUTS.ivar_s_Hautoswitch</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -278,19 +276,35 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_a_Dstartled</Name>
+							<Name>INPUTS.ivar_s_Din4</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_a_Dresetled</Name>
+							<Name>INPUTS.ivar_s_Din5</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_a_DledQ1</Name>
+							<Name>INPUTS.ivar_s_Din6</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_a_DledQ2</Name>
+							<Name>INPUTS.ivar_s_Din7</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>INPUTS.ivar_s_Hin4</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>INPUTS.ivar_s_Hin5</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>INPUTS.ivar_s_Hin6</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>INPUTS.ivar_s_Hin7</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -310,34 +324,6 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>INPUTS.ivar_a_pusher1</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_pusher2</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_pusher3</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_Hstartled</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_Hresetled</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_HledQ1</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_HledQ2</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>INPUTS.ivar_a_Hout4</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -353,45 +339,25 @@
 							<Name>INPUTS.ivar_a_Hout7</Name>
 							<Type>BOOL</Type>
 						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_x2distributing</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_x2testing</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_zdown</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_gripperclose</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_transfer2pickpos</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_transfer2droppos</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_vacuum</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_ejectpulse</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>INPUTS.ivar_a_handlingready</Name>
-							<Type>BOOL</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.state0.dvar_M_example_controller_a_x2distributing</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.state0.dvar_M_example_controller_a_zdown</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.state0.dvar_M_example_controller_count</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.state0.dvar_M_example_controller</Name>
+							<Type GUID="{B27EA6DC-8FF0-4248-BDE1-38E4293B48A0}">enum_E</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap_out_a_Dstartled</Name>
 							<Type>BOOL</Type>
@@ -518,7 +484,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap</Name>
-							<Type GUID="{D3E5EA89-8484-473F-A663-1093C2AB38C5}">enum_E</Type>
+							<Type GUID="{B27EA6DC-8FF0-4248-BDE1-38E4293B48A0}">enum_E</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="enum_E" Id="{474b8a9e-c81c-4d01-b2c6-9aa20c40e309}">
+  <DUT Name="enum_E" Id="{21c2615d-566b-4781-ac49-c8382d9e50cd}">
     <Declaration><![CDATA[TYPE enum_E :
 (
 	elit_gopickup,

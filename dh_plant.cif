@@ -47,7 +47,6 @@ alg bool s_zpos_atup =      if gripperarm.z >= - 0.2 and gripperarm.z <= 0.2: tr
                             else false end;
 alg bool s_zpos_atdown =    if gripperarm.z >= 66.0 - 0.3 and gripperarm.z <= 66.0 + 0.3: true
                             else false end;
-
 alg bool s_gripper =        gripping;
 
 // Move the crane right to left and back

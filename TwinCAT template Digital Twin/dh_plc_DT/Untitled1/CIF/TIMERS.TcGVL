@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <GVL Name="TIMERS" Id="{23e71af7-ee21-43f2-b7cc-9cba96a2fcdf}">
+  <GVL Name="TIMERS" Id="{e173ac17-e337-4651-a380-9e430a34845d}">
     <Declaration><![CDATA[VAR_GLOBAL
 	timer0: TON;
 	timer1: TON;

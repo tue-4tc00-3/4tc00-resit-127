@@ -61,7 +61,7 @@ alg bool a_HledQ2           = false;
 alg bool a_x2distributing   = example_controller.a_x2distributing;
 alg bool a_x2testing        = false;
 alg bool a_zdown            = example_controller.a_zdown;
-alg bool a_gripperclose     = false;
+alg bool a_gripperclose     = example_controller.a_gripperclose;
 
 alg bool a_transfer2pickpos = false;
 alg bool a_transfer2droppos = false;

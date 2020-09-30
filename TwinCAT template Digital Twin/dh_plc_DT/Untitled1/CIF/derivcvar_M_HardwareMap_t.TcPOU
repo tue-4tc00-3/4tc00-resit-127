@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="derivcvar_M_HardwareMap_t" Id="{7eab8737-c2f9-4dc1-bcee-5d77f333b582}" SpecialFunc="None">
+  <POU Name="derivcvar_M_HardwareMap_t" Id="{9b8a4c35-d9e7-4139-9a16-bcf24c905dcd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION derivcvar_M_HardwareMap_t : LREAL
 VAR_INPUT
 	state: STATE;
