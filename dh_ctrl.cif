@@ -10,18 +10,22 @@ automaton example_controller:
     disc bool gogrip;
     alg list[3] bool godown = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
 
-    event drop;
+    event drop, pickup, full, nothing;
 
     location init2:
     initial;
     edge when s_Dinitialized goto starting;
 
     location starting:
-        edge when s_Dstartbutton and s_gripper do a_zdown := true, gogrip := true goto pickupprod;
-        edge when s_Dstartbutton and not s_gripper do a_zdown := true, gogrip := false goto pickupprod;
+        edge drop when s_Dstartbutton and s_gripper and not s_product4 and s_zpos_atup do a_zdown := true, gogrip := false goto pickupprod;
+        edge pickup when s_Dstartbutton and not s_gripper and s_product4 and s_zpos_atup do a_zdown := true, gogrip := true goto pickupprod;
+        //edge full when s_Dstartbutton and s_gripper and s_product4 and s_zpos_atup do gogrip := false goto pickupprod;
+        edge nothing when s_Dstartbutton and not s_gripper and not s_product4 and s_zpos_atup do a_zdown := true, gogrip := false goto pickupprod;
 
     location pickupprod:
-        edge drop when s_zpos_atdown do a_gripperclose := not gogrip, a_zdown := false goto starting;
+        edge drop when s_zpos_atdown do a_gripperclose := gogrip, a_zdown := false goto starting;
+        //edge full when not a_zdown do a_gripperclose := gogrip goto starting;
+        //edge misses when not s_gripper and not s_gripper do a_zdown := false goto init2;
 
 
 
