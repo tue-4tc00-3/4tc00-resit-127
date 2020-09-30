@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="enum_E" Id="{a06787fc-1583-42c7-a01c-ec3b233b79e5}">
+  <DUT Name="enum_E" Id="{d513a1b6-0f82-4dc6-b15f-bf10d06eb66c}">
     <Declaration><![CDATA[TYPE enum_E :
 (
 	elit_init0,

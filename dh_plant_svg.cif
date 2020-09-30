@@ -55,6 +55,7 @@ svgout id "s_xpos_at3"              attr "fill" value if s_xpos_at3:            
 svgout id "s_xpos_atdrop"           attr "fill" value if s_xpos_atdrop:          "lime" else "red" end;
 svgout id "s_zpos_atup"             attr "fill" value if s_zpos_atup:            "lime" else "red" end;
 svgout id "s_zpos_atdown"           attr "fill" value if s_zpos_atdown:          "lime" else "red" end;
+svgout id "s_gripper"               attr "fill" value if s_gripper:              "lime" else "red" end;
 
 // Sense the transfer
 svgout id "s_transfer_atpickup"           attr "fill" value if s_transfer_atpickup:          "lime" else "red" end;

@@ -337,6 +337,10 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.state0.dvar_M_example_controller_gogrip</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.state0.dvar_M_example_controller</Name>
 							<Type GUID="{C92FA84A-D222-43E7-99AB-5C7C3D4FA224}">enum_E</Type>
 						</Var>
