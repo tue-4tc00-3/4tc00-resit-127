@@ -19,7 +19,11 @@ automaton example_controller:
     location wait_start:
      edge when s_Dstartbutton goto starting;
 
-    location starting:
+location starting:
+        edge when s_gripper do a_x2distributing := true, gogrip := true goto pickupprod;
+        edge when not s_gripper do a_x2distributing := true, gogrip := false goto pickupprod;
+
+    location down:
         edge when s_gripper do a_zdown := true, gogrip := true goto pickupprod;
         edge when not s_gripper do a_zdown := true, gogrip := false goto pickupprod;
 
