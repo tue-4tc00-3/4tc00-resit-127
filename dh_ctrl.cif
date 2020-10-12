@@ -19,18 +19,11 @@ automaton example_controller:
     location wait_start:
      edge when s_Dstartbutton goto starting;
 
-    location starting:
-<<<<<<< HEAD
-        edge drop when s_Dstartbutton and s_gripper and not s_product4 and s_zpos_atup do a_zdown := true, gogrip := false goto pickupprod;
-        edge pickup when s_Dstartbutton and not s_gripper and s_product4 and s_zpos_atup do a_zdown := true, gogrip := true goto pickupprod;
-        //edge full when s_Dstartbutton and s_gripper and s_product4 and s_zpos_atup do gogrip := false goto pickupprod;
-        edge nothing when s_Dstartbutton and not s_gripper and not s_product4 and s_zpos_atup do a_zdown := true, gogrip := false goto pickupprod;
+location starting:
+        edge when s_gripper do a_x2distributing := true, gogrip := true goto pickupprod;
+        edge when not s_gripper do a_x2distributing := true, gogrip := false goto pickupprod;
 
-    location pickupprod:
-        edge drop when s_zpos_atdown do a_gripperclose := gogrip, a_zdown := false goto starting;
-        //edge full when not a_zdown do a_gripperclose := gogrip goto starting;
-        //edge misses when not s_gripper and not s_gripper do a_zdown := false goto init2;
-=======
+    location down:
         edge when s_gripper do a_zdown := true, gogrip := true goto pickupprod;
         edge when not s_gripper do a_zdown := true, gogrip := false goto pickupprod;
 
