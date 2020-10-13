@@ -61,12 +61,12 @@ alg bool s_gripper =        a_gripperclose;
 // Move The crane up and down
     location zdown:
     equation x' =   0;
-    equation z' =   9;
+    equation z' =   20;
     edge pick when not a_zdown goto grips;
 
     location zup:
     equation x' =   0;
-    equation z' =   -9;
+    equation z' =   -20;
     edge drop when s_zpos_atup goto move;
 
 // Grip the block
