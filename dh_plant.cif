@@ -52,8 +52,8 @@ alg bool s_gripper =        a_gripperclose;
 // Move the crane right to left and back
     location move:
     initial;
-    equation x' =   if a_x2distributing and x >= -136.9245:    -6
-                    elif not a_x2distributing and x <= 0:    6
+    equation x' =   if a_x2distributing and x >= -136.9245:    -50
+                    elif not a_x2distributing and x <= 0:    50
                     else 0 end;
     equation z' =   0;
     edge down when a_zdown goto zdown;
@@ -61,12 +61,20 @@ alg bool s_gripper =        a_gripperclose;
 // Move The crane up and down
     location zdown:
     equation x' =   0;
+<<<<<<< Updated upstream
     equation z' =   20;
+=======
+    equation z' =   50;
+>>>>>>> Stashed changes
     edge pick when not a_zdown goto grips;
 
     location zup:
     equation x' =   0;
+<<<<<<< Updated upstream
     equation z' =   -20;
+=======
+    equation z' =   -50;
+>>>>>>> Stashed changes
     edge drop when s_zpos_atup goto move;
 
 // Grip the block
