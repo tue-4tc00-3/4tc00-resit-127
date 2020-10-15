@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-  <POU Name="alg_a_Hstartled" Id="{d66ecadf-49f6-45fa-bebd-992c2fcd08a9}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Hstartled" Id="{cb5a3869-94f6-4249-a671-5322161b7640}" SpecialFunc="None">
->>>>>>> master
+  <POU Name="alg_a_Hstartled" Id="{3aeb5288-3dd6-41e9-bb58-1a2ba2216a12}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_Hstartled : BOOL
 VAR_INPUT
 	state: STATE;

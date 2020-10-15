@@ -49,7 +49,7 @@ alg bool a_Dresetled        = false;
 alg bool a_DledQ1           = false;
 alg bool a_DledQ2           = false;
 
-alg bool a_pusher1          = false;
+alg bool a_pusher1          = inventory1.a_pusher1;
 alg bool a_pusher2          = false;
 alg bool a_pusher3          = false;
 
@@ -59,7 +59,7 @@ alg bool a_HledQ1           = false;
 alg bool a_HledQ2           = false;
 
 alg bool a_x2distributing   = example_controller.a_x2distributing;
-alg bool a_x2testing        = false;
+alg bool a_x2testing        = example_controller.a_x2testing;
 alg bool a_zdown            = example_controller.a_zdown;
 alg bool a_gripperclose     = example_controller.a_gripperclose;
 

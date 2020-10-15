@@ -7,32 +7,53 @@ automaton example_controller:
     disc bool a_x2distributing;
     disc bool a_zdown;
     disc bool a_gripperclose;
+    disc bool a_x2testing;
     disc bool gogrip;
     alg list[3] bool godown = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
 
-    event drop, pickup, full, nothing;
+    event drop; //pickup, full, nothing;
 
     location init2:
     initial;
-    edge when s_Dinitialized goto wait_start;
+        edge when s_Dinitialized goto wait_start;
 
     location wait_start:
-     edge when s_Dstartbutton goto move;
+        edge when s_Dstartbutton goto starting;
 
-location move:
-        edge when s_xpos_at1 do a_x2distributing := true goto down;
-        edge when not s_xpos_at1 do a_x2distributing := true goto down;
+    location starting:
+        edge do a_x2distributing := true goto move;
+
+    location move:
+        edge when s_xpos_at1 do a_zdown := true goto down;
 
     location down:
-        edge when s_gripper do a_zdown := true, gogrip := true goto pickupprod;
-        edge when not s_gripper do a_zdown := true, gogrip := false goto pickupprod;
+        edge when s_gripper and s_zpos_atdown do a_zdown := false, a_gripperclose := true goto goback;
+        edge when not s_gripper and s_zpos_atdown do a_zdown := false goto goback;
 
-    location pickupprod:
-        edge drop when s_zpos_atdown do a_gripperclose := not gogrip, a_zdown := false goto moving_up;
-
+    location goback:
+        edge when s_zpos_atup and s_gripper do a_x2testing := true, a_x2distributing := false goto goback;
+        edge when s_xpos_atdrop do a_zdown := true goto down;
 
     location moving_up:
         edge when s_zpos_atup goto wait_start;
 
+
+end
+
+automaton inventory1:
+    disc bool a_pusher1;
+
+    location init2:
+    initial;
+        edge when s_Dinitialized goto wait_start;
+
+    location wait_start:
+        edge when s_Dstartbutton goto starting;
+
+    location starting:
+        edge do a_pusher1 := true goto going;
+
+    location going:
+        edge when s_pusher1_in do a_pusher1 := false goto starting;
 
 end

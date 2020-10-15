@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-  <POU Name="alg_a_pusher1" Id="{9f34d037-e0b0-4ce4-ad4e-c7dc7fdea8ff}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_pusher1" Id="{49a4e75d-5f13-4db9-b96e-331b8c1257d7}" SpecialFunc="None">
->>>>>>> master
+  <POU Name="alg_a_pusher1" Id="{c1a449ff-c753-4807-a403-310455b3f4cb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_pusher1 : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_pusher1 := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_pusher1 := state.dvar_M_inventory1_a_pusher1;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_pusher1">
       <LineId Id="2" Count="0" />
