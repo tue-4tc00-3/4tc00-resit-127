@@ -9,9 +9,10 @@ automaton example_controller:
     disc bool a_gripperclose;
     disc bool a_x2testing;
     disc bool gogrip;
-    alg list[3] bool godown = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+    disc bool a_x2testing;
 
-    event drop; //pickup, full, nothing;
+
+    event drop;
 
     location init2:
     initial;
@@ -20,11 +21,21 @@ automaton example_controller:
     location wait_start:
         edge when s_Dstartbutton goto starting;
 
-    location starting:
-        edge do a_x2distributing := true goto move;
-
     location move:
-        edge when s_xpos_at1 do a_zdown := true goto down;
+        edge when s_xpos_at1 do a_x2testing := true,  a_x2distributing := false goto godropoff;
+        edge when not s_xpos_at1 do a_x2distributing := true goto goD1;
+
+    location godropoff:
+        edge when s_xpos_atdrop goto down;
+
+    location goD1:
+        edge when s_xpos_at1 goto down;
+
+    //location goD2:
+       // edge when s_xpos_at1 goto down;
+
+    //location goD3:
+        //edge when s_xpos_at1 goto down;
 
     location down:
         edge when s_gripper and s_zpos_atdown do a_zdown := false, a_gripperclose := true goto goback;
@@ -35,7 +46,7 @@ automaton example_controller:
         edge when s_xpos_atdrop do a_zdown := true goto down;
 
     location moving_up:
-        edge when s_zpos_atup goto wait_start;
+        edge when s_zpos_atup goto move;
 
 
 end

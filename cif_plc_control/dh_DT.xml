@@ -48,6 +48,11 @@
                 <BOOL/>
               </type>
             </variable>
+            <variable address="%Q*" name="dvar_M_example_controller_a_x2testing">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
             <variable address="%Q*" name="dvar_M_example_controller">
               <type>
                 <derived name="enum_E"/>
@@ -231,8 +236,13 @@
           <enum>
             <values>
               <value name="elit_down"/>
+<<<<<<< HEAD
               <value name="elit_goback"/>
               <value name="elit_going"/>
+=======
+              <value name="elit_goD1"/>
+              <value name="elit_godropoff"/>
+>>>>>>> master
               <value name="elit_init0"/>
               <value name="elit_init1"/>
               <value name="elit_init2"/>
@@ -249,7 +259,11 @@
               <value name="elit_initialized"/>
               <value name="elit_move"/>
               <value name="elit_moving_up"/>
+<<<<<<< HEAD
               <value name="elit_starting"/>
+=======
+              <value name="elit_pickupprod"/>
+>>>>>>> master
               <value name="elit_wait_start"/>
             </values>
           </enum>
@@ -694,79 +708,6 @@
           </ST>
         </body>
       </pou>
-      <pou name="alg_M_example_controller_godown" pouType="function">
-        <interface>
-          <returnType>
-            <array>
-              <dimension lower="0" upper="2"/>
-              <baseType>
-                <BOOL/>
-              </baseType>
-            </array>
-          </returnType>
-          <inputVars>
-            <variable name="state">
-              <type>
-                <derived name="STATE"/>
-              </type>
-            </variable>
-          </inputVars>
-        </interface>
-        <body>
-          <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_M_example_controller_godown := makeArray0(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);</xhtml>
-          </ST>
-        </body>
-      </pou>
-      <pou name="makeArray0" pouType="function">
-        <interface>
-          <returnType>
-            <array>
-              <dimension lower="0" upper="2"/>
-              <baseType>
-                <BOOL/>
-              </baseType>
-            </array>
-          </returnType>
-          <inputVars>
-            <variable name="elem0">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-            <variable name="elem1">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-            <variable name="elem2">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-          </inputVars>
-          <localVars>
-            <variable name="rslt">
-              <type>
-                <array>
-                  <dimension lower="0" upper="2"/>
-                  <baseType>
-                    <BOOL/>
-                  </baseType>
-                </array>
-              </type>
-            </variable>
-          </localVars>
-        </interface>
-        <body>
-          <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
-rslt[1] := elem1;
-rslt[2] := elem2;
-makeArray0 := rslt;</xhtml>
-          </ST>
-        </body>
-      </pou>
       <pou name="derivcvar_M_HardwareMap_t" pouType="function">
         <interface>
           <returnType>
@@ -917,6 +858,7 @@ IF first THEN
     state0.dvar_M_example_controller_a_gripperclose := FALSE;
     state0.dvar_M_example_controller_a_x2testing := FALSE;
     state0.dvar_M_example_controller_gogrip := FALSE;
+    state0.dvar_M_example_controller_a_x2testing := FALSE;
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -966,13 +908,24 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
+<<<<<<< HEAD
         b1 := (state0.dvar_M_example_controller) = (elit_init2);
         b1 := b1 AND (alg_s_Dinitialized(state0));
+=======
+        b1 := (state0.dvar_M_example_controller) = (elit_pickupprod);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+>>>>>>> master
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+<<<<<<< HEAD
             state1.dvar_M_example_controller := elit_wait_start;
+=======
+            state1.dvar_M_example_controller_a_gripperclose := NOT(state0.dvar_M_example_controller_gogrip);
+            state1.dvar_M_example_controller_a_zdown := FALSE;
+            state1.dvar_M_example_controller := elit_moving_up;
+>>>>>>> master
 
             state0 := state1;
         END_IF;
@@ -980,13 +933,22 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
+<<<<<<< HEAD
         b1 := (state0.dvar_M_example_controller) = (elit_wait_start);
         b1 := b1 AND (ivar_s_Dstartbutton);
+=======
+        b1 := (state0.dvar_M_example_controller) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+>>>>>>> master
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+<<<<<<< HEAD
             state1.dvar_M_example_controller := elit_starting;
+=======
+            state1.dvar_M_example_controller := elit_wait_start;
+>>>>>>> master
 
             state0 := state1;
         END_IF;
@@ -1013,7 +975,75 @@ WHILE TRUE DO
             progress := TRUE;
             state1 := state0;
 
+<<<<<<< HEAD
             state1.dvar_M_example_controller_a_zdown := TRUE;
+            state1.dvar_M_example_controller := elit_down;
+=======
+            state1.dvar_M_example_controller := elit_move;
+>>>>>>> master
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+<<<<<<< HEAD
+        b1 := (state0.dvar_M_example_controller) = (elit_down);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+=======
+        b1 := (state0.dvar_M_example_controller) = (elit_move);
+        b1 := b1 AND (ivar_s_xpos_at1);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2testing := TRUE;
+            state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.dvar_M_example_controller := elit_godropoff;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_move);
+        b1 := b1 AND (NOT(ivar_s_xpos_at1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2distributing := TRUE;
+            state1.dvar_M_example_controller := elit_goD1;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_godropoff);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller := elit_down;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_goD1);
+        b1 := b1 AND (ivar_s_xpos_at1);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
             state1.dvar_M_example_controller := elit_down;
 
             state0 := state1;
@@ -1024,14 +1054,20 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_down);
         b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND (ivar_s_zpos_atdown);
+>>>>>>> master
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+<<<<<<< HEAD
             state1.dvar_M_example_controller_a_zdown := FALSE;
             state1.dvar_M_example_controller_a_gripperclose := TRUE;
             state1.dvar_M_example_controller := elit_goback;
+=======
+            state1.dvar_M_example_controller_a_zdown := TRUE;
+            state1.dvar_M_example_controller_gogrip := TRUE;
+            state1.dvar_M_example_controller := elit_pickupprod;
+>>>>>>> master
 
             state0 := state1;
         END_IF;
@@ -1041,6 +1077,7 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_down);
         b1 := b1 AND (NOT(ivar_s_gripper));
+<<<<<<< HEAD
         b1 := b1 AND (ivar_s_zpos_atdown);
         IF b1 THEN
             progress := TRUE;
@@ -1073,12 +1110,19 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_goback);
         b1 := b1 AND (ivar_s_xpos_atdrop);
+=======
+>>>>>>> master
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
             state1.dvar_M_example_controller_a_zdown := TRUE;
+<<<<<<< HEAD
             state1.dvar_M_example_controller := elit_down;
+=======
+            state1.dvar_M_example_controller_gogrip := FALSE;
+            state1.dvar_M_example_controller := elit_pickupprod;
+>>>>>>> master
 
             state0 := state1;
         END_IF;
@@ -1092,7 +1136,11 @@ WHILE TRUE DO
             progress := TRUE;
             state1 := state0;
 
+<<<<<<< HEAD
             state1.dvar_M_example_controller := elit_wait_start;
+=======
+            state1.dvar_M_example_controller := elit_move;
+>>>>>>> master
 
             state0 := state1;
         END_IF;
