@@ -7,7 +7,8 @@ group operator:
     alg bool s_Dstartbutton = start_button.on;
     alg bool s_Dresetbutton = reset_button.on;
     alg bool s_Dstopbutton  = stop_button.on;
-
+alg bool s_zpos_atdown          = crane.Extended;
+alg bool s_zpos_atup            = crane.Retracted;
     start_button: UI_button(u_start);
     reset_button: UI_button(u_reset);
     stop_button:  UI_button(u_stop);
@@ -76,8 +77,70 @@ alg bool s_gripper =        a_gripperclose;
     edge rise do gripping := not gripping goto zup;
 end
 
+//handling station
 
+automaton Rails:
+    event left, right, at_pusher1, at_drop, at_pusher2, at_pusher3;
+    const real v = -20;
+    cont x = 0;
 
+    location Xpos_at_drop:
+        initial;
+        equation x'= 0;
+        edge left when not a_x2testing and s_product1 goto Moving_left;
+
+    location Moving_left:
+        equation x' = if not a_x2testing: v else 0 end;
+        edge at_pusher1 when not a_x2testing and -95<= x and x<= -94.9 and s_product1 goto Xpos_pusher_1;
+        edge at_pusher2 when not a_x2testing and -66<= x and x<= -64.9 and s_product2 goto Xpos_pusher_2;
+        edge at_pusher3 when not a_x2testing and -30.6<= x and x<= -30.1 and s_product3 goto Xpos_pusher_3;
+
+    location Xpos_pusher_1:
+        equation x'= 0;
+        edge right when not Pusher.product goto Moving_right;
+end
+
+automaton crane:
+    event down, at_maxz, at_minz, up;
+
+    const real v_set = -20;
+    cont y = 0;
+
+    location Retracted:
+        initial;
+        equation y' = 0;
+        edge down when  a_zdown do y:=0 goto Down;
+
+    location Down:
+        equation y' = if a_zdown: v_set else 0 end;
+        edge at_maxz when  -36 <= y and y <= -32 goto Extended;
+
+    location Up:
+        equation y' = if not a_zdown: -v_set else 0 end;
+        edge at_minz  when not a_zdown and 0 <= y do y:= 0  goto Retracted;
+
+    location Extended:
+        equation y' = 0;
+        edge up when not a_zdown and ((s_gripper and not s_xpos_atdrop) or (not s_gripper and s_xpos_atdrop)) goto Up;
+end
+
+automaton gripper:
+    event release_no, released, grab;
+    const real v_set = 1;
+    cont x = 0;
+
+    location Idle:
+        initial;
+        equation x' = 0;
+        edge grab when a_gripperclose and s_xpos_at1 or s_xpos_at2 or s_xpos_at3  goto Grabbed;
+
+    location Grabbed:
+        equation x' = 0;
+        edge release_no when s_xpos_atdrop and s_zpos_atdown goto Release;
+    location Release:
+        equation x' = if not a_gripperclose : -v_set else 0 end;
+        edge released when not a_gripperclose and 0 <= x and x <= 0.025 goto Idle;
+end
 
 
 

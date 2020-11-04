@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <GVL Name="GVLS" Id="{fd9d710d-9ef7-48b3-8d7c-92279c37bc04}">
+    <Declaration><![CDATA[
+{attribute 'qualified_only'}
+VAR_GLOBAL
+//<!-- PRESPECTIVE_AUTO_INJECT_VAR_START -->
+Actuator : ARRAY [0..11] OF ACTUATOR; //Automatically Exported Collection of POU's of type 'Actuator'
+INDICATORLIGHT : ARRAY [0..57] OF INDICATORLIGHT; //Automatically Exported Collection of POU's of type 'INDICATORLIGHT'
+//<!-- PRESPECTIVE_AUTO_INJECT_VAR_END -->
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

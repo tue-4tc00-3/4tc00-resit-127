@@ -43,6 +43,17 @@ svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0) 
 svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
 svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
 svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+//svg crane
+Rails_arm_glider:   OutputItem("Rails", "grey", Rails.x, 0);
+Crane_black_part: OutputItem("a_zdown", "black", 0, crane.y);
+Crane_gripper: OutputItem("crane_gripper_base", "grey", 0, crane.y);
+Crane_right_claw : OutputItem("crane_right_claw_out", "grey", 0, crane.y);
+Crane_left_claw : OutputItem("crane_left_claw_out", "grey", 0, crane.y);
+
+group def OutputItem(alg string Label; alg string color; alg real x, y):
+    svgout id Label attr "transform" value fmt("translate(%s,%s)", x, -y);
+    svgout id Label attr "fill"      value if color = "": "none" else color end;
+end
 
 // Move block with crane
 svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z)
