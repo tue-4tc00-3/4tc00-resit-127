@@ -80,10 +80,10 @@ automaton inventory2:
         edge when s_Dstartbutton goto starting;
 
     location starting:
-        edge when s_pusher2_in and s_stack2filled and not s_product2 do a_pusher2 := true goto going;
+        edge when s_pusher2_in and not s_product2 do a_pusher2 := true goto going;
 
     location going:
-        edge when s_pusher2_out do a_pusher2 := false goto starting;
+        edge when s_pusher2_out and s_stack2filled do a_pusher2 := false goto starting;
 
 end
 
@@ -98,10 +98,10 @@ automaton inventory3:
         edge when s_Dstartbutton goto starting;
 
     location starting:
-        edge when s_pusher3_in do a_pusher3 := true goto going;
+        edge when s_pusher3_in and not s_product3 do a_pusher3 := true goto going;
 
     location going:
-        edge when s_pusher3_out do a_pusher3 := false goto starting;
+        edge when s_pusher3_out and s_stack3filled do a_pusher3 := false goto starting;
 
 end
 
