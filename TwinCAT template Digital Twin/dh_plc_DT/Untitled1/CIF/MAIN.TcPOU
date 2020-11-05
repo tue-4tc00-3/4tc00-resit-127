@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="MAIN" Id="{6c23897d-3e67-4726-b8c3-bd8274b6c1f4}" SpecialFunc="None">
+  <POU Name="MAIN" Id="{d234719b-c6bc-4c17-b20f-bc83f046600c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR_OUTPUT
 	timerValue0: TIME;
@@ -62,6 +62,9 @@ IF first THEN
     state0.dvar_M_example_controller_a_zdown := FALSE;
     state0.dvar_M_example_controller_a_gripperclose := FALSE;
     state0.dvar_M_example_controller_a_x2testing := FALSE;
+    state0.dvar_M_example_controller_pickpos := makeArray0(1, 2, 1, 3);
+    state0.dvar_M_example_controller_i := 1;
+    state0.dvar_M_example_controller_atpos := makeArray1(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -101,6 +104,11 @@ IF first THEN
     state0.dvar_M_inventory2 := elit_init2;
     state0.dvar_M_inventory3_a_pusher3 := FALSE;
     state0.dvar_M_inventory3 := elit_init2;
+    state0.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+    state0.dvar_M_vacuum_a_transfer2droppos := FALSE;
+    state0.dvar_M_vacuum_a_vacuum := FALSE;
+    state0.dvar_M_vacuum_a_ejectpulse := FALSE;
+    state0.dvar_M_vacuum := elit_init2;
 ELSE
     // Update continuous variables for time delay.
     state1.cvar_M_HardwareMap_t := state0.cvar_M_HardwareMap_t + curDeltaSecs * derivcvar_M_HardwareMap_t(state0);
@@ -179,11 +187,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_movetopickup);
-        b1 := b1 AND (ivar_s_xpos_at2);
+        b1 := b1 AND (state0.dvar_M_example_controller_atpos[normProjIdx(state0.dvar_M_example_controller_pickpos[normProjIdx((state0.dvar_M_example_controller_i) MOD (4), 4)], 3)]);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+            state1.dvar_M_example_controller_i := (state0.dvar_M_example_controller_i) + (1);
             state1.dvar_M_example_controller_a_x2distributing := TRUE;
             state1.dvar_M_example_controller_a_x2testing := TRUE;
             state1.dvar_M_example_controller := elit_down;
@@ -1437,12 +1446,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2pickpos) <> (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2pickpos) <> (alg_a_transfer2pickpos(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := FALSE;
+            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := alg_a_transfer2pickpos(state0);
 
             state0 := state1;
         END_IF;
@@ -1451,12 +1460,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2droppos) <> (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2droppos) <> (alg_a_transfer2droppos(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_transfer2droppos := FALSE;
+            state1.dvar_M_HardwareMap_out_a_transfer2droppos := alg_a_transfer2droppos(state0);
 
             state0 := state1;
         END_IF;
@@ -1465,12 +1474,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_vacuum) <> (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_vacuum) <> (alg_a_vacuum(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_vacuum := FALSE;
+            state1.dvar_M_HardwareMap_out_a_vacuum := alg_a_vacuum(state0);
 
             state0 := state1;
         END_IF;
@@ -1479,12 +1488,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_ejectpulse) <> (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_ejectpulse) <> (alg_a_ejectpulse(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_ejectpulse := FALSE;
+            state1.dvar_M_HardwareMap_out_a_ejectpulse := alg_a_ejectpulse(state0);
 
             state0 := state1;
         END_IF;
@@ -1684,6 +1693,134 @@ WHILE TRUE DO
         END_IF;
     END_IF;
 
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_starting);
+        b1 := b1 AND (ivar_s_product4);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        b1 := b1 AND (NOT(ivar_s_vacuum));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
+            state1.dvar_M_vacuum := elit_pickupvac;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_starting);
+        b1 := b1 AND (ivar_s_vacuum);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+            state1.dvar_M_vacuum := elit_pickupvac;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
+        b1 := b1 AND (ivar_s_transfer_atpickup);
+        b1 := b1 AND (NOT(ivar_s_vacuum));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+            state1.dvar_M_vacuum_a_vacuum := TRUE;
+            state1.dvar_M_vacuum := elit_testingdrop;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
+        b1 := b1 AND (ivar_s_transfer_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_vacuum := FALSE;
+            state1.dvar_M_vacuum_a_ejectpulse := TRUE;
+            state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
+            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+            state1.dvar_M_vacuum := elit_rest;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
+        b1 := b1 AND (ivar_s_vacuum);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_rest);
+        b1 := b1 AND (ivar_s_transfer_athalfway);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+            state1.dvar_M_vacuum_a_vacuum := FALSE;
+            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
     // Done with events?
     IF NOT progress THEN
         EXIT;
@@ -1698,7 +1835,7 @@ WHILE TRUE DO
 END_WHILE;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="1668" />
+      <LineId Id="3" Count="1805" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

@@ -9,6 +9,10 @@ automaton example_controller:
     disc bool a_gripperclose;
     disc bool a_x2testing;
 
+    disc list[4] int pickpos = [1,2,1,3];
+    disc int i = 1;
+    disc list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+
     location init2:
         initial;
         edge when s_Dinitialized goto wait_start;
@@ -21,7 +25,7 @@ automaton example_controller:
         edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
     location movetopickup:
-        edge when s_xpos_at2 do a_x2distributing := true, a_x2testing := true goto down;
+        edge when atpos[pickpos[i mod 4]] do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
 
     //location goD2:
        // edge when s_xpos_at1 goto down;
@@ -94,6 +98,36 @@ automaton inventory3:
         edge when s_pusher3_out and s_stack3filled do a_pusher3 := false goto starting;
 
 end
+
+automaton vacuum:
+    disc bool a_transfer2pickpos;
+    disc bool a_transfer2droppos;
+    disc bool a_vacuum;
+    disc bool a_ejectpulse;
+
+
+    location init2:
+    initial;
+        edge when s_Dinitialized goto wait_start;
+
+    location wait_start:
+        edge when s_Dstartbutton goto starting;
+
+    location starting:
+        edge when s_product4 and s_zpos_atup and not s_vacuum do a_transfer2pickpos := true goto pickupvac;
+        edge when s_vacuum do a_transfer2droppos := true goto pickupvac;
+
+    location pickupvac:
+        edge when s_transfer_atpickup and not s_vacuum do a_transfer2pickpos := false, a_vacuum := true goto testingdrop;
+        edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse:= true , a_transfer2pickpos := true, a_transfer2droppos := false goto rest;
+
+    location testingdrop:
+        edge when s_vacuum do a_transfer2droppos := true goto starting;
+
+    location rest:
+        edge when s_transfer_athalfway do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto starting;
+end
+
 
 // automaton Crane:
 //     event at_pusher_1,at_pusher_2,at_pusher_3, at_drop, move_to_left, move_to_right, product_removed, product_gripped

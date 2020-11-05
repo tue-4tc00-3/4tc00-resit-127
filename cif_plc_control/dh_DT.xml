@@ -43,6 +43,31 @@
                 <BOOL/>
               </type>
             </variable>
+            <variable address="%Q*" name="dvar_M_example_controller_pickpos">
+              <type>
+                <array>
+                  <dimension lower="0" upper="3"/>
+                  <baseType>
+                    <DINT/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_example_controller_i">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_example_controller_atpos">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2"/>
+                  <baseType>
+                    <BOOL/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
             <variable address="%Q*" name="dvar_M_example_controller">
               <type>
                 <derived name="enum_E"/>
@@ -238,6 +263,31 @@
                 <derived name="enum_E"/>
               </type>
             </variable>
+            <variable address="%Q*" name="dvar_M_vacuum_a_transfer2pickpos">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_vacuum_a_transfer2droppos">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_vacuum_a_vacuum">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_vacuum_a_ejectpulse">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable address="%Q*" name="dvar_M_vacuum">
+              <type>
+                <derived name="enum_E"/>
+              </type>
+            </variable>
           </struct>
         </baseType>
       </dataType>
@@ -265,7 +315,10 @@
               <value name="elit_init_sensor_check"/>
               <value name="elit_initialized"/>
               <value name="elit_movetopickup"/>
+              <value name="elit_pickupvac"/>
+              <value name="elit_rest"/>
               <value name="elit_starting"/>
+              <value name="elit_testingdrop"/>
               <value name="elit_wait_start"/>
             </values>
           </enum>
@@ -611,7 +664,7 @@
         </interface>
         <body>
           <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2pickpos := FALSE;</xhtml>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2pickpos := state.dvar_M_vacuum_a_transfer2pickpos;</xhtml>
           </ST>
         </body>
       </pou>
@@ -630,7 +683,7 @@
         </interface>
         <body>
           <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2droppos := FALSE;</xhtml>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_transfer2droppos := state.dvar_M_vacuum_a_transfer2droppos;</xhtml>
           </ST>
         </body>
       </pou>
@@ -649,7 +702,7 @@
         </interface>
         <body>
           <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_vacuum := FALSE;</xhtml>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_vacuum := state.dvar_M_vacuum_a_vacuum;</xhtml>
           </ST>
         </body>
       </pou>
@@ -668,7 +721,7 @@
         </interface>
         <body>
           <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_ejectpulse := FALSE;</xhtml>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_a_ejectpulse := state.dvar_M_vacuum_a_ejectpulse;</xhtml>
           </ST>
         </body>
       </pou>
@@ -859,6 +912,9 @@ IF first THEN
     state0.dvar_M_example_controller_a_zdown := FALSE;
     state0.dvar_M_example_controller_a_gripperclose := FALSE;
     state0.dvar_M_example_controller_a_x2testing := FALSE;
+    state0.dvar_M_example_controller_pickpos := makeArray0(1, 2, 1, 3);
+    state0.dvar_M_example_controller_i := 1;
+    state0.dvar_M_example_controller_atpos := makeArray1(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -898,6 +954,11 @@ IF first THEN
     state0.dvar_M_inventory2 := elit_init2;
     state0.dvar_M_inventory3_a_pusher3 := FALSE;
     state0.dvar_M_inventory3 := elit_init2;
+    state0.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+    state0.dvar_M_vacuum_a_transfer2droppos := FALSE;
+    state0.dvar_M_vacuum_a_vacuum := FALSE;
+    state0.dvar_M_vacuum_a_ejectpulse := FALSE;
+    state0.dvar_M_vacuum := elit_init2;
 ELSE
     // Update continuous variables for time delay.
     state1.cvar_M_HardwareMap_t := state0.cvar_M_HardwareMap_t + curDeltaSecs * derivcvar_M_HardwareMap_t(state0);
@@ -976,11 +1037,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_movetopickup);
-        b1 := b1 AND (ivar_s_xpos_at2);
+        b1 := b1 AND (state0.dvar_M_example_controller_atpos[normProjIdx(state0.dvar_M_example_controller_pickpos[normProjIdx((state0.dvar_M_example_controller_i) MOD (4), 4)], 3)]);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+            state1.dvar_M_example_controller_i := (state0.dvar_M_example_controller_i) + (1);
             state1.dvar_M_example_controller_a_x2distributing := TRUE;
             state1.dvar_M_example_controller_a_x2testing := TRUE;
             state1.dvar_M_example_controller := elit_down;
@@ -2234,12 +2296,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2pickpos) &lt;&gt; (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2pickpos) &lt;&gt; (alg_a_transfer2pickpos(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := FALSE;
+            state1.dvar_M_HardwareMap_out_a_transfer2pickpos := alg_a_transfer2pickpos(state0);
 
             state0 := state1;
         END_IF;
@@ -2248,12 +2310,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2droppos) &lt;&gt; (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_transfer2droppos) &lt;&gt; (alg_a_transfer2droppos(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_transfer2droppos := FALSE;
+            state1.dvar_M_HardwareMap_out_a_transfer2droppos := alg_a_transfer2droppos(state0);
 
             state0 := state1;
         END_IF;
@@ -2262,12 +2324,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_vacuum) &lt;&gt; (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_vacuum) &lt;&gt; (alg_a_vacuum(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_vacuum := FALSE;
+            state1.dvar_M_HardwareMap_out_a_vacuum := alg_a_vacuum(state0);
 
             state0 := state1;
         END_IF;
@@ -2276,12 +2338,12 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_HardwareMap) = (elit_initialized);
-        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_ejectpulse) &lt;&gt; (FALSE));
+        b1 := b1 AND ((state0.dvar_M_HardwareMap_out_a_ejectpulse) &lt;&gt; (alg_a_ejectpulse(state0)));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_HardwareMap_out_a_ejectpulse := FALSE;
+            state1.dvar_M_HardwareMap_out_a_ejectpulse := alg_a_ejectpulse(state0);
 
             state0 := state1;
         END_IF;
@@ -2481,6 +2543,134 @@ WHILE TRUE DO
         END_IF;
     END_IF;
 
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_starting);
+        b1 := b1 AND (ivar_s_product4);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        b1 := b1 AND (NOT(ivar_s_vacuum));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
+            state1.dvar_M_vacuum := elit_pickupvac;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_starting);
+        b1 := b1 AND (ivar_s_vacuum);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+            state1.dvar_M_vacuum := elit_pickupvac;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
+        b1 := b1 AND (ivar_s_transfer_atpickup);
+        b1 := b1 AND (NOT(ivar_s_vacuum));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+            state1.dvar_M_vacuum_a_vacuum := TRUE;
+            state1.dvar_M_vacuum := elit_testingdrop;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
+        b1 := b1 AND (ivar_s_transfer_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_vacuum := FALSE;
+            state1.dvar_M_vacuum_a_ejectpulse := TRUE;
+            state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
+            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+            state1.dvar_M_vacuum := elit_rest;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
+        b1 := b1 AND (ivar_s_vacuum);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_rest);
+        b1 := b1 AND (ivar_s_transfer_athalfway);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+            state1.dvar_M_vacuum_a_vacuum := FALSE;
+            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+            state1.dvar_M_vacuum := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
     // Done with events?
     IF NOT progress THEN
         EXIT;
@@ -2493,6 +2683,145 @@ WHILE TRUE DO
         EXIT;
     END_IF;
 END_WHILE;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="makeArray0" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="3"/>
+              <baseType>
+                <DINT/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="elem0">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem1">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem2">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem3">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="rslt">
+              <type>
+                <array>
+                  <dimension lower="0" upper="3"/>
+                  <baseType>
+                    <DINT/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+rslt[3] := elem3;
+makeArray0 := rslt;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="makeArray1" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="2"/>
+              <baseType>
+                <BOOL/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="elem0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="elem1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="elem2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="rslt">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2"/>
+                  <baseType>
+                    <BOOL/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+makeArray1 := rslt;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="normProjIdx" pouType="function">
+        <interface>
+          <returnType>
+            <DINT/>
+          </returnType>
+          <inputVars>
+            <variable name="idx">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="size">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="tmp">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">tmp := idx;
+IF tmp &lt; 0 THEN
+    tmp := size + tmp;
+END_IF;
+normProjIdx := tmp;</xhtml>
           </ST>
         </body>
       </pou>
