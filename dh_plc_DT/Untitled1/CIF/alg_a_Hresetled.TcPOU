@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_Hresetled" Id="{d9a8011b-2286-4547-8f3d-dbcbab28cbf4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_Hresetled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_Hresetled := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_Hresetled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

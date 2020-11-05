@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_DledQ2" Id="{5c3370ea-12bf-4e5a-bf19-45ef4e608248}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_DledQ2 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_DledQ2 := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_DledQ2">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

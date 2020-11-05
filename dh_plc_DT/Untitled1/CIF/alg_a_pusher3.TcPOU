@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_pusher3" Id="{91544a69-2a3b-46b4-8c7b-d72052283bd9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_pusher3 : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_pusher3 := state.dvar_M_inventory3_a_pusher3;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_pusher3">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

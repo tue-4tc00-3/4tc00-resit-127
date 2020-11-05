@@ -15,6 +15,69 @@
     <LibraryReferences>{6616d806-b155-45d7-b4fe-cfc93491e27a}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CIF\alg_a_DledQ1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_DledQ2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_Dresetled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_Dstartled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_ejectpulse.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_gripperclose.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_handlingready.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_HledQ1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_HledQ2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_Hresetled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_Hstartled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_pusher1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_pusher2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_pusher3.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_transfer2droppos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_transfer2pickpos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_vacuum.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_x2distributing.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_x2testing.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_a_zdown.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_example_controller_a_Dstartled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\alg_s_Dinitialized.TcPOU">
       <SubType>Code</SubType>
     </Compile>

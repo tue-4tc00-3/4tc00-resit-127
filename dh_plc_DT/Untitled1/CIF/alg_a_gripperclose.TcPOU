@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_gripperclose" Id="{d84ed6f0-d8d8-4aed-84c4-679a72b972a7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_gripperclose : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_gripperclose := state.dvar_M_example_controller_a_gripperclose;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_gripperclose">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

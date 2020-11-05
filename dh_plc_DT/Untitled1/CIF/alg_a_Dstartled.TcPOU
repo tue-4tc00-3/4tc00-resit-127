@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_Dstartled" Id="{76a52463-a4a7-43d2-adc4-34ded06ebbd6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_Dstartled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_Dstartled := alg_M_example_controller_a_Dstartled(state);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_Dstartled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -67,17 +67,43 @@ svgout id "s_xpos_atdrop"           attr "fill" value if s_xpos_atdrop:         
 svgout id "s_zpos_atup"             attr "fill" value if s_zpos_atup:            "lime" else "red" end;
 svgout id "s_zpos_atdown"           attr "fill" value if s_zpos_atdown:          "lime" else "red" end;
 svgout id "s_gripper"               attr "fill" value if s_gripper:              "lime" else "red" end;
+svgout id "s_handlingbusy"          attr "fill" value if s_handlingbusy:         "lime" else "red" end;
+
 
 // Sense the transfer
-svgout id "s_transfer_atpickup"           attr "fill" value if s_transfer_atpickup:          "lime" else "red" end;
-svgout id "s_transfer_athalfway"          attr "fill" value if s_transfer_athalfway:          "lime" else "red" end;
+svgout id "s_transfer_atpickup"           attr "fill" value if s_transfer_atpickup:        "lime" else "red" end;
+svgout id "s_transfer_athalfway"          attr "fill" value if s_transfer_athalfway:       "lime" else "red" end;
 svgout id "s_transfer_atdrop"             attr "fill" value if s_transfer_atdrop:          "lime" else "red" end;
+svgout id "s_vacuum"                      attr "fill" value if s_vacuum:                   "lime" else "red" end;
+svgout id "s_product4"                    attr "fill" value if s_product4:                 "lime" else "red" end;
+svgout id "s_testingbusy"                 attr "fill" value if s_testingbusy:              "lime" else "red" end;
 
 // Show gripper correctly
 svgout id "crane_right_claw_out"           attr "fill" value if not s_gripper:   "black" else "white" end;
 svgout id "crane_left_claw_out"            attr "fill" value if not s_gripper:   "black" else "white" end;
 svgout id "crane_right_claw_in"            attr "fill" value if s_gripper:       "black" else "white" end;
 svgout id "crane_left_claw_in"             attr "fill" value if s_gripper:       "black" else "white" end;
+
+// Sense the pusher position
+
+svgout id "s_product1"                     attr "fill" value if s_product1:                "lime" else "red" end;
+svgout id "s_stack1filled"                 attr "fill" value if s_stack1filled:            "lime" else "red" end;
+svgout id "s_pusher1_out"                  attr "fill" value if s_pusher1_out:             "lime" else "red" end;
+svgout id "s_pusher1_1n"                   attr "fill" value if s_pusher1_in:              "lime" else "red" end;
+
+svgout id "s_product2"                     attr "fill" value if s_product2:                "lime" else "red" end;
+svgout id "s_stack2filled"                 attr "fill" value if s_stack2filled:            "lime" else "red" end;
+svgout id "s_pusher2_out"                  attr "fill" value if s_pusher2_out:             "lime" else "red" end;
+svgout id "s_pusher2_1n"                   attr "fill" value if s_pusher2_in:              "lime" else "red" end;
+
+svgout id "s_product3"                     attr "fill" value if s_product3:                "lime" else "red" end;
+svgout id "s_stack3filled"                 attr "fill" value if s_stack3filled:            "lime" else "red" end;
+svgout id "s_pusher3_out"                  attr "fill" value if s_pusher3_out:             "lime" else "red" end;
+svgout id "s_pusher3_1n"                   attr "fill" value if s_pusher3_in:              "lime" else "red" end;
+
+
+
+
 
 
 

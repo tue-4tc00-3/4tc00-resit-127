@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_a_zdown" Id="{2a10cbcc-1bc3-4dd6-b415-3fc84c25918b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_a_zdown : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_a_zdown := state.dvar_M_example_controller_a_zdown;]]></ST>
+    </Implementation>
+    <LineIds Name="alg_a_zdown">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

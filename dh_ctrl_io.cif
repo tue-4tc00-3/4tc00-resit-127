@@ -50,8 +50,8 @@ alg bool a_DledQ1           = false;
 alg bool a_DledQ2           = false;
 
 alg bool a_pusher1          = inventory1.a_pusher1;
-alg bool a_pusher2          = false;
-alg bool a_pusher3          = false;
+alg bool a_pusher2          = inventory2.a_pusher2;
+alg bool a_pusher3          = inventory3.a_pusher3;
 
 alg bool a_Hstartled        = false;
 alg bool a_Hresetled        = false;
