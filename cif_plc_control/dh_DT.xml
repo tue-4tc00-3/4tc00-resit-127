@@ -43,29 +43,14 @@
                 <BOOL/>
               </type>
             </variable>
-            <variable address="%Q*" name="dvar_M_example_controller_pickpos">
-              <type>
-                <array>
-                  <dimension lower="0" upper="3"/>
-                  <baseType>
-                    <DINT/>
-                  </baseType>
-                </array>
-              </type>
-            </variable>
             <variable address="%Q*" name="dvar_M_example_controller_i">
               <type>
                 <DINT/>
               </type>
             </variable>
-            <variable address="%Q*" name="dvar_M_example_controller_atpos">
+            <variable address="%Q*" name="cvar_M_example_controller_t">
               <type>
-                <array>
-                  <dimension lower="0" upper="2"/>
-                  <baseType>
-                    <BOOL/>
-                  </baseType>
-                </array>
+                <LREAL/>
               </type>
             </variable>
             <variable address="%Q*" name="dvar_M_example_controller">
@@ -297,6 +282,7 @@
             <values>
               <value name="elit_down"/>
               <value name="elit_droppoint"/>
+              <value name="elit_finished"/>
               <value name="elit_goback"/>
               <value name="elit_going"/>
               <value name="elit_gopickup"/>
@@ -316,6 +302,7 @@
               <value name="elit_initialized"/>
               <value name="elit_movetopickup"/>
               <value name="elit_pickupvac"/>
+              <value name="elit_reset"/>
               <value name="elit_rest"/>
               <value name="elit_starting"/>
               <value name="elit_testingdrop"/>
@@ -763,6 +750,214 @@
           </ST>
         </body>
       </pou>
+      <pou name="alg_M_example_controller_pickpos" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="3"/>
+              <baseType>
+                <DINT/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE"/>
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_M_example_controller_pickpos := makeArray0(0, 1, 0, 2);</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="makeArray0" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="3"/>
+              <baseType>
+                <DINT/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="elem0">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem1">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem2">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+            <variable name="elem3">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="rslt">
+              <type>
+                <array>
+                  <dimension lower="0" upper="3"/>
+                  <baseType>
+                    <DINT/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+rslt[3] := elem3;
+makeArray0 := rslt;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="alg_M_example_controller_atpos" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="2"/>
+              <baseType>
+                <BOOL/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE"/>
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">alg_M_example_controller_atpos := makeArray1(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="makeArray1" pouType="function">
+        <interface>
+          <returnType>
+            <array>
+              <dimension lower="0" upper="2"/>
+              <baseType>
+                <BOOL/>
+              </baseType>
+            </array>
+          </returnType>
+          <inputVars>
+            <variable name="elem0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="elem1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="elem2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="rslt">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2"/>
+                  <baseType>
+                    <BOOL/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+makeArray1 := rslt;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="derivcvar_M_example_controller_t" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL/>
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE"/>
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">derivcvar_M_example_controller_t := ifExprFunc1(state);</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="ifExprFunc1" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL/>
+          </returnType>
+          <inputVars>
+            <variable name="state">
+              <type>
+                <derived name="STATE"/>
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">IF ((state.dvar_M_example_controller) = (elit_init2)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_wait_start)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_droppoint)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_movetopickup)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_down)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_gopickup)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_goback)) THEN
+    ifExprFunc1 := 1.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_finished)) THEN
+    ifExprFunc1 := 0.0;
+ELSE
+    ifExprFunc1 := 1.0;
+END_IF;</xhtml>
+          </ST>
+        </body>
+      </pou>
       <pou name="derivcvar_M_HardwareMap_t" pouType="function">
         <interface>
           <returnType>
@@ -912,9 +1107,8 @@ IF first THEN
     state0.dvar_M_example_controller_a_zdown := FALSE;
     state0.dvar_M_example_controller_a_gripperclose := FALSE;
     state0.dvar_M_example_controller_a_x2testing := FALSE;
-    state0.dvar_M_example_controller_pickpos := makeArray0(1, 2, 1, 3);
-    state0.dvar_M_example_controller_i := 1;
-    state0.dvar_M_example_controller_atpos := makeArray1(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);
+    state0.dvar_M_example_controller_i := 0;
+    state0.cvar_M_example_controller_t := 0.0;
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -961,9 +1155,11 @@ IF first THEN
     state0.dvar_M_vacuum := elit_init2;
 ELSE
     // Update continuous variables for time delay.
+    state1.cvar_M_example_controller_t := state0.cvar_M_example_controller_t + curDeltaSecs * derivcvar_M_example_controller_t(state0);
     state1.cvar_M_HardwareMap_t := state0.cvar_M_HardwareMap_t + curDeltaSecs * derivcvar_M_HardwareMap_t(state0);
 
     state0.curTime := curTime;
+    state0.cvar_M_example_controller_t := state1.cvar_M_example_controller_t;
     state0.cvar_M_HardwareMap_t := state1.cvar_M_HardwareMap_t;
 END_IF;
 
@@ -1037,12 +1233,31 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_movetopickup);
-        b1 := b1 AND (state0.dvar_M_example_controller_atpos[normProjIdx(state0.dvar_M_example_controller_pickpos[normProjIdx((state0.dvar_M_example_controller_i) MOD (4), 4)], 3)]);
+        b1 := b1 AND (projArray1(alg_M_example_controller_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_example_controller_i)));
+        b1 := b1 AND ((state0.dvar_M_example_controller_i) &lt; (3));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
             state1.dvar_M_example_controller_i := (state0.dvar_M_example_controller_i) + (1);
+            state1.dvar_M_example_controller_a_x2distributing := TRUE;
+            state1.dvar_M_example_controller_a_x2testing := TRUE;
+            state1.dvar_M_example_controller := elit_down;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_movetopickup);
+        b1 := b1 AND (projArray1(alg_M_example_controller_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_example_controller_i)));
+        b1 := b1 AND ((state0.dvar_M_example_controller_i) &gt;= (3));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_i := 0;
             state1.dvar_M_example_controller_a_x2distributing := TRUE;
             state1.dvar_M_example_controller_a_x2testing := TRUE;
             state1.dvar_M_example_controller := elit_down;
@@ -1102,16 +1317,69 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_gopickup);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+        b1 := b1 AND (NOT(ivar_s_gripper));
+        b1 := b1 AND (NOT(ivar_s_xpos_atdrop));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_zdown := FALSE;
+            state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.dvar_M_example_controller_a_x2testing := TRUE;
+            state1.dvar_M_example_controller := elit_finished;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_goback);
         b1 := b1 AND (ivar_s_zpos_atup);
         b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND ((state0.cvar_M_example_controller_t) &gt; (1));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
             state1.dvar_M_example_controller_a_x2testing := TRUE;
             state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.cvar_M_example_controller_t := 0.0;
             state1.dvar_M_example_controller := elit_droppoint;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_finished);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2distributing := TRUE;
+            state1.dvar_M_example_controller_a_x2testing := TRUE;
+            state1.dvar_M_example_controller := elit_reset;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_example_controller) = (elit_reset);
+        b1 := b1 AND ((state0.cvar_M_example_controller_t) &gt; (1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller_a_x2distributing := FALSE;
+            state1.dvar_M_example_controller_a_x2testing := FALSE;
+            state1.dvar_M_example_controller := elit_wait_start;
 
             state0 := state1;
         END_IF;
@@ -2686,40 +2954,13 @@ END_WHILE;</xhtml>
           </ST>
         </body>
       </pou>
-      <pou name="makeArray0" pouType="function">
+      <pou name="projArray0" pouType="function">
         <interface>
           <returnType>
-            <array>
-              <dimension lower="0" upper="3"/>
-              <baseType>
-                <DINT/>
-              </baseType>
-            </array>
+            <DINT/>
           </returnType>
           <inputVars>
-            <variable name="elem0">
-              <type>
-                <DINT/>
-              </type>
-            </variable>
-            <variable name="elem1">
-              <type>
-                <DINT/>
-              </type>
-            </variable>
-            <variable name="elem2">
-              <type>
-                <DINT/>
-              </type>
-            </variable>
-            <variable name="elem3">
-              <type>
-                <DINT/>
-              </type>
-            </variable>
-          </inputVars>
-          <localVars>
-            <variable name="rslt">
+            <variable name="arr">
               <type>
                 <array>
                   <dimension lower="0" upper="3"/>
@@ -2729,64 +2970,16 @@ END_WHILE;</xhtml>
                 </array>
               </type>
             </variable>
-          </localVars>
-        </interface>
-        <body>
-          <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
-rslt[1] := elem1;
-rslt[2] := elem2;
-rslt[3] := elem3;
-makeArray0 := rslt;</xhtml>
-          </ST>
-        </body>
-      </pou>
-      <pou name="makeArray1" pouType="function">
-        <interface>
-          <returnType>
-            <array>
-              <dimension lower="0" upper="2"/>
-              <baseType>
-                <BOOL/>
-              </baseType>
-            </array>
-          </returnType>
-          <inputVars>
-            <variable name="elem0">
+            <variable name="idx">
               <type>
-                <BOOL/>
-              </type>
-            </variable>
-            <variable name="elem1">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-            <variable name="elem2">
-              <type>
-                <BOOL/>
+                <DINT/>
               </type>
             </variable>
           </inputVars>
-          <localVars>
-            <variable name="rslt">
-              <type>
-                <array>
-                  <dimension lower="0" upper="2"/>
-                  <baseType>
-                    <BOOL/>
-                  </baseType>
-                </array>
-              </type>
-            </variable>
-          </localVars>
         </interface>
         <body>
           <ST>
-            <xhtml xmlns="http://www.w3.org/1999/xhtml">rslt[0] := elem0;
-rslt[1] := elem1;
-rslt[2] := elem2;
-makeArray1 := rslt;</xhtml>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">projArray0 := arr[normProjIdx(idx, 4)];</xhtml>
           </ST>
         </body>
       </pou>
@@ -2822,6 +3015,35 @@ IF tmp &lt; 0 THEN
     tmp := size + tmp;
 END_IF;
 normProjIdx := tmp;</xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="projArray1" pouType="function">
+        <interface>
+          <returnType>
+            <BOOL/>
+          </returnType>
+          <inputVars>
+            <variable name="arr">
+              <type>
+                <array>
+                  <dimension lower="0" upper="2"/>
+                  <baseType>
+                    <BOOL/>
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+            <variable name="idx">
+              <type>
+                <DINT/>
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">projArray1 := arr[normProjIdx(idx, 3)];</xhtml>
           </ST>
         </body>
       </pou>

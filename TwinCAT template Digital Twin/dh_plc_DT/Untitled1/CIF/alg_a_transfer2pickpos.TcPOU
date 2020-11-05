@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_transfer2pickpos" Id="{e0940764-00a6-4f9d-9f26-ac3f313d6991}" SpecialFunc="None">
+  <POU Name="alg_a_transfer2pickpos" Id="{91a1e2e3-1e45-48c4-9cf0-502b99c0e4f9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_transfer2pickpos : BOOL
 VAR_INPUT
 	state: STATE;

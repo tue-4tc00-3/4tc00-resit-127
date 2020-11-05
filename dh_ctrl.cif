@@ -9,24 +9,34 @@ automaton example_controller:
     disc bool a_gripperclose;
     disc bool a_x2testing;
 
-    disc list[4] int pickpos = [1,2,1,3];
-    disc int i = 1;
-    disc list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+    alg list[4] int pickpos = [0,1,0,2];
+    disc int i = 0;
+    alg list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+
+    cont t = 0;
 
     location init2:
+        equation t' = 0;
+
         initial;
         edge when s_Dinitialized goto wait_start;
 
     location wait_start:
+        equation t' = 0;
+
         edge when s_Dstartbutton goto droppoint;
 
     location droppoint:
+        equation t' = 0;
+
         edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
         edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
     location movetopickup:
-        edge when atpos[pickpos[i mod 4]] do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
+        equation t' = 0;
 
+        edge when atpos[pickpos[i]] and i < 3 do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
+        edge when atpos[pickpos[i]] and i >= 3 do i:= 0, a_x2distributing := true, a_x2testing := true goto down;
     //location goD2:
        // edge when s_xpos_at1 goto down;
 
@@ -34,14 +44,28 @@ automaton example_controller:
         //edge when s_xpos_at1 goto down;
 
     location down:
+        equation t' = 0;
+
         edge do a_zdown := true goto gopickup;
 
     location gopickup:
+        equation t' = 0;
+
         edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true, a_zdown := false goto goback;
         edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
+        edge when s_zpos_atdown and not s_gripper and not s_xpos_atdrop do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
 
     location goback:
-        edge when s_zpos_atup and s_gripper do a_x2testing := true, a_x2distributing := false goto droppoint;
+        equation t' = 1;
+        edge when s_zpos_atup and s_gripper and t > 1 do a_x2testing := true, a_x2distributing := false, t:=0 goto droppoint;
+
+    location finished:
+        equation t' = 0;
+        edge when s_xpos_atdrop do a_x2distributing := true, a_x2testing := true goto reset;
+
+    location reset:
+        equation t' = 1;
+        edge when t>1 do a_x2distributing := false, a_x2testing := false goto wait_start;
 
 end
 

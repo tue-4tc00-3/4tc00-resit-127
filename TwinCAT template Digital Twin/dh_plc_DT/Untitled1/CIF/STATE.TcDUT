@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{ccdcd2a2-6d4b-4534-b73a-8816f78e8082}">
+  <DUT Name="STATE" Id="{d1f875c1-cad4-4e7b-b568-7a4903b4676b}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
@@ -8,9 +8,8 @@ STRUCT
 	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
 	dvar_M_example_controller_a_gripperclose AT %Q*: BOOL;
 	dvar_M_example_controller_a_x2testing AT %Q*: BOOL;
-	dvar_M_example_controller_pickpos AT %Q*: ARRAY[0..3] OF DINT;
 	dvar_M_example_controller_i AT %Q*: DINT;
-	dvar_M_example_controller_atpos AT %Q*: ARRAY[0..2] OF BOOL;
+	cvar_M_example_controller_t AT %Q*: LREAL;
 	dvar_M_example_controller AT %Q*: enum_E;
 	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;

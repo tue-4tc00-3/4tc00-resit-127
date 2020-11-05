@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_DledQ1" Id="{21d025a9-a200-47fe-935e-fb221a0d1294}" SpecialFunc="None">
+  <POU Name="alg_a_DledQ1" Id="{ccdefc47-7379-49e2-b5be-3ffb0554ff22}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_DledQ1 : BOOL
 VAR_INPUT
 	state: STATE;
