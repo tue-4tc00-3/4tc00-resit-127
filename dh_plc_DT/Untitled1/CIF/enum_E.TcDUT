@@ -1,18 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="enum_E" Id="{d103a44b-14fa-4233-ad4a-1dc654a02d65}">
+  <DUT Name="enum_E" Id="{eb0590ae-0dcc-4574-906d-5834f6287d83}">
     <Declaration><![CDATA[TYPE enum_E :
 (
-	elit_Crane_gliding_left,
-	elit_Crane_gliding_right,
 	elit_down,
-	elit_goback,
-	elit_goD1,
-	elit_godropoff,
+	elit_droppoint,
 	elit_going,
-	elit_Gripper_off,
-	elit_Gripper_on,
-	elit_Idle,
 	elit_init0,
 	elit_init1,
 	elit_init2,
@@ -27,13 +20,9 @@
 	elit_init_ok,
 	elit_init_sensor_check,
 	elit_initialized,
-	elit_move,
-	elit_Moving_down,
-	elit_Moving_up,
-	elit_moving_up2,
+	elit_movetopickup,
 	elit_starting,
-	elit_wait_start,
-	elit_Waiting
+	elit_wait_start
 );
 END_TYPE
 ]]></Declaration>

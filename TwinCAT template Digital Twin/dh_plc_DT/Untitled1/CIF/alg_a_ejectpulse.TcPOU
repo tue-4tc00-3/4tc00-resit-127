@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_ejectpulse" Id="{bbcd1181-d4c9-46a0-820b-299812370e90}" SpecialFunc="None">
+  <POU Name="alg_a_ejectpulse" Id="{7e361471-3f82-4c7a-a559-bb20fa37da64}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_ejectpulse : BOOL
 VAR_INPUT
 	state: STATE;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="MAIN" Id="{731bfe8c-e54a-45e0-a37f-1f598b2a8c6e}" SpecialFunc="None">
+  <POU Name="MAIN" Id="{300db0d2-d10f-458d-a910-a5345692aa73}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR_OUTPUT
 	timerValue0: TIME;
@@ -58,12 +58,10 @@ IF first THEN
     first := FALSE;
 
     // Initialize state variables for initial state.
-    state0.dvar_M_Crane := elit_Idle;
     state0.dvar_M_example_controller_a_x2distributing := FALSE;
     state0.dvar_M_example_controller_a_zdown := FALSE;
     state0.dvar_M_example_controller_a_gripperclose := FALSE;
     state0.dvar_M_example_controller_a_x2testing := FALSE;
-    state0.dvar_M_example_controller_gogrip := FALSE;
     state0.dvar_M_example_controller := elit_init2;
     state0.dvar_M_HardwareMap_out_a_Dstartled := FALSE;
     state0.dvar_M_HardwareMap_out_a_Dresetled := FALSE;
@@ -115,207 +113,6 @@ END_IF;
 WHILE TRUE DO
     progress := FALSE;
 
-    // Event "M.Crane_at_drop".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Crane_gliding_right);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_at_pusher_1".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Crane_gliding_left);
-        b1 := b1 AND (ivar_s_product1);
-        b1 := b1 AND (ivar_s_xpos_at1);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_at_pusher_2".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Crane_gliding_left);
-        b1 := b1 AND (ivar_s_product1);
-        b1 := b1 AND (ivar_s_xpos_at2);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_at_pusher_3".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Crane_gliding_left);
-        b1 := b1 AND (ivar_s_product1);
-        b1 := b1 AND (ivar_s_xpos_at3);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_move_to_left".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Moving_up);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Crane_gliding_left;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_move_to_right".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Moving_up);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        b1 := b1 AND (NOT(ivar_s_xpos_atdrop));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Crane_gliding_right;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_new_product".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Waiting);
-        IF b1 THEN
-            b2 := ivar_s_product1;
-            b2 := b2 OR (ivar_s_product2);
-            b2 := b2 OR (ivar_s_product3);
-            b1 := b1 AND (b2);
-        END_IF;
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Idle;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_no_products".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Crane_gliding_left);
-        b1 := b1 AND (NOT(ivar_s_product1));
-        b1 := b1 AND (NOT(ivar_s_product2));
-        b1 := b1 AND (NOT(ivar_s_product3));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Waiting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_picking_up".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Moving_down);
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        IF b1 THEN
-            b2 := ivar_s_xpos_at1;
-            b2 := b2 OR (ivar_s_xpos_at2);
-            b2 := b2 OR (ivar_s_xpos_at3);
-            b1 := b1 AND (b2);
-        END_IF;
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Gripper_on;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_product_gripped".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Gripper_on);
-        b1 := b1 AND (ivar_s_gripper);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_up;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_product_removed".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Gripper_off);
-        b1 := b1 AND (NOT(ivar_s_gripper));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Moving_up;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_releasing_prod".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Moving_down);
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Gripper_off;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.Crane_start".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Crane) = (elit_Idle);
-        b1 := b1 AND (ivar_s_Hstartbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Crane := elit_Crane_gliding_left;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_example_controller) = (elit_init2);
@@ -338,7 +135,7 @@ WHILE TRUE DO
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_example_controller := elit_move;
+            state1.dvar_M_example_controller := elit_movetopickup;
 
             state0 := state1;
         END_IF;
@@ -346,15 +143,14 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_move);
-        b1 := b1 AND (ivar_s_xpos_at1);
+        b1 := (state0.dvar_M_example_controller) = (elit_droppoint);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_example_controller_a_x2testing := TRUE;
-            state1.dvar_M_example_controller_a_x2distributing := FALSE;
-            state1.dvar_M_example_controller := elit_godropoff;
+            state1.dvar_M_example_controller := elit_down;
 
             state0 := state1;
         END_IF;
@@ -362,14 +158,25 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_move);
-        b1 := b1 AND (NOT(ivar_s_xpos_at1));
+        b1 := (state0.dvar_M_example_controller) = (elit_droppoint);
+        b1 := b1 AND (NOT(ivar_s_gripper));
         IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_example_controller := elit_movetopickup;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "tau".
+    IF NOT progress THEN
+        IF (state0.dvar_M_example_controller) = (elit_movetopickup) THEN
             progress := TRUE;
             state1 := state0;
 
             state1.dvar_M_example_controller_a_x2distributing := TRUE;
-            state1.dvar_M_example_controller := elit_goD1;
 
             state0 := state1;
         END_IF;
@@ -377,105 +184,11 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_godropoff);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller := elit_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_goD1);
-        b1 := b1 AND (ivar_s_xpos_at1);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller := elit_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_down);
-        b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller_a_zdown := FALSE;
-            state1.dvar_M_example_controller_a_gripperclose := TRUE;
-            state1.dvar_M_example_controller := elit_goback;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_down);
-        b1 := b1 AND (NOT(ivar_s_gripper));
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller_a_zdown := FALSE;
-            state1.dvar_M_example_controller := elit_goback;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_goback);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        b1 := b1 AND (ivar_s_gripper);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller_a_x2testing := TRUE;
-            state1.dvar_M_example_controller_a_x2distributing := FALSE;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_goback);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
+        IF (state0.dvar_M_example_controller) = (elit_down) THEN
             progress := TRUE;
             state1 := state0;
 
             state1.dvar_M_example_controller_a_zdown := TRUE;
-            state1.dvar_M_example_controller := elit_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_example_controller) = (elit_moving_up2);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_example_controller := elit_move;
 
             state0 := state1;
         END_IF;
@@ -1819,7 +1532,6 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory2) = (elit_starting);
         b1 := b1 AND (ivar_s_pusher2_in);
-        b1 := b1 AND (ivar_s_stack2filled);
         b1 := b1 AND (NOT(ivar_s_product2));
         IF b1 THEN
             progress := TRUE;
@@ -1836,6 +1548,7 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory2) = (elit_going);
         b1 := b1 AND (ivar_s_pusher2_out);
+        b1 := b1 AND (ivar_s_stack2filled);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
@@ -1879,6 +1592,7 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory3) = (elit_starting);
         b1 := b1 AND (ivar_s_pusher3_in);
+        b1 := b1 AND (NOT(ivar_s_product3));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
@@ -1894,6 +1608,7 @@ WHILE TRUE DO
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory3) = (elit_going);
         b1 := b1 AND (ivar_s_pusher3_out);
+        b1 := b1 AND (ivar_s_stack3filled);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
@@ -1919,7 +1634,7 @@ WHILE TRUE DO
 END_WHILE;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="1889" />
+      <LineId Id="3" Count="1604" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

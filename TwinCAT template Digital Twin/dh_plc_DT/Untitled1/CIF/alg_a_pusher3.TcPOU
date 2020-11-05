@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_pusher3" Id="{75f4f2d3-275d-47ef-84ae-c11c543f2396}" SpecialFunc="None">
+  <POU Name="alg_a_pusher3" Id="{9aa7311d-e2b1-41f0-8ad9-b41bfb01eccc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_pusher3 : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_pusher3 := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_pusher3 := state.dvar_M_inventory3_a_pusher3;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_pusher3">
       <LineId Id="2" Count="0" />

@@ -8,28 +8,20 @@ automaton example_controller:
     disc bool a_zdown;
     disc bool a_gripperclose;
     disc bool a_x2testing;
-    disc bool gogrip;
-
-
-
-    event drop;
 
     location init2:
-    initial;
+        initial;
         edge when s_Dinitialized goto wait_start;
 
     location wait_start:
-        edge when s_Dstartbutton goto move;
+        edge when s_Dstartbutton goto droppoint;
 
-    location move:
-        edge when s_xpos_at1 do a_x2testing := true,  a_x2distributing := false goto godropoff;
-        edge when not s_xpos_at1 do a_x2distributing := true goto goD1;
+    location droppoint:
+        edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
+        edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
-    location godropoff:
-        edge when s_xpos_atdrop goto down;
-
-    location goD1:
-        edge when s_xpos_at1 goto down;
+    location movetopickup:
+        edge when s_xpos_at2 do a_x2distributing := true, a_x2testing := true goto down;
 
     //location goD2:
        // edge when s_xpos_at1 goto down;
@@ -38,16 +30,14 @@ automaton example_controller:
         //edge when s_xpos_at1 goto down;
 
     location down:
-        edge when s_gripper and s_zpos_atdown do a_zdown := false, a_gripperclose := true goto goback;
-        edge when not s_gripper and s_zpos_atdown do a_zdown := false goto goback;
+        edge do a_zdown := true goto gopickup;
+
+    location gopickup:
+        edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true, a_zdown := false goto goback;
+        edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
 
     location goback:
-        edge when s_zpos_atup and s_gripper do a_x2testing := true, a_x2distributing := false goto goback;
-        edge when s_xpos_atdrop do a_zdown := true goto down;
-
-    location moving_up:
-        edge when s_zpos_atup goto move;
-
+        edge when s_zpos_atup and s_gripper do a_x2testing := true, a_x2distributing := false goto droppoint;
 
 end
 
@@ -105,36 +95,36 @@ automaton inventory3:
 
 end
 
-automaton Crane:
-    event at_pusher_1,at_pusher_2,at_pusher_3, at_drop, move_to_left, move_to_right, product_removed, product_gripped
-    , no_products, start, picking_up, releasing_prod, new_product;
-    location Idle:
-        initial;
-        edge start when s_Hstartbutton goto Crane_gliding_left;
-
-    location Crane_gliding_left:
-        edge at_pusher_1 when s_product1  and s_xpos_at1   goto Moving_down;
-        edge at_pusher_2 when s_product1  and s_xpos_at2  goto Moving_down;
-        edge at_pusher_3 when s_product1  and s_xpos_at3 goto Moving_down;
-        edge no_products when not s_product1 and not s_product2 and not s_product3 goto Waiting ;
-
-    location Moving_down:
-        edge picking_up when s_zpos_atdown and (s_xpos_at1 or s_xpos_at2 or s_xpos_at3) goto Gripper_on;
-        edge releasing_prod when s_zpos_atdown and s_xpos_atdrop goto Gripper_off;
-
-    location Gripper_on:
-        edge product_gripped when s_gripper goto Moving_up;
-
-    location Moving_up:
-        edge move_to_right when s_zpos_atup and not s_xpos_atdrop goto Crane_gliding_right;
-        edge move_to_left when s_zpos_atup and s_xpos_atdrop goto Crane_gliding_left;
-
-    location Crane_gliding_right:
-        edge at_drop when s_xpos_atdrop goto Moving_down;
-
-    location Gripper_off:
-        edge product_removed when not s_gripper goto Moving_up;
-
-    location Waiting:
-        edge new_product when s_product1 or s_product2 or s_product3 goto Idle;
-end
+// automaton Crane:
+//     event at_pusher_1,at_pusher_2,at_pusher_3, at_drop, move_to_left, move_to_right, product_removed, product_gripped
+//     , no_products, start, picking_up, releasing_prod, new_product;
+//     location Idle:
+//         initial;
+//         edge start when s_Hstartbutton goto Crane_gliding_left;
+//
+//     location Crane_gliding_left:
+//         edge at_pusher_1 when s_product1  and s_xpos_at1   goto Moving_down;
+//         edge at_pusher_2 when s_product1  and s_xpos_at2  goto Moving_down;
+//         edge at_pusher_3 when s_product1  and s_xpos_at3 goto Moving_down;
+//         edge no_products when not s_product1 and not s_product2 and not s_product3 goto Waiting ;
+//
+//     location Moving_down:
+//         edge picking_up when s_zpos_atdown and (s_xpos_at1 or s_xpos_at2 or s_xpos_at3) goto Gripper_on;
+//         edge releasing_prod when s_zpos_atdown and s_xpos_atdrop goto Gripper_off;
+//
+//     location Gripper_on:
+//         edge product_gripped when s_gripper goto Moving_up;
+//
+//     location Moving_up:
+//         edge move_to_right when s_zpos_atup and not s_xpos_atdrop goto Crane_gliding_right;
+//         edge move_to_left when s_zpos_atup and s_xpos_atdrop goto Crane_gliding_left;
+//
+//     location Crane_gliding_right:
+//         edge at_drop when s_xpos_atdrop goto Moving_down;
+//
+//     location Gripper_off:
+//         edge product_removed when not s_gripper goto Moving_up;
+//
+//     location Waiting:
+//         edge new_product when s_product1 or s_product2 or s_product3 goto Idle;
+// end

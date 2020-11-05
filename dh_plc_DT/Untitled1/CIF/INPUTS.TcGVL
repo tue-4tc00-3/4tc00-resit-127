@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <GVL Name="INPUTS" Id="{bf3f56bc-6624-42ae-9e55-2ee7046e6ae1}">
+  <GVL Name="INPUTS" Id="{ef4b151c-204e-469a-abf6-be368b020eb5}">
     <Declaration><![CDATA[VAR_GLOBAL
 	ivar_s_Dstartbutton AT %I*: BOOL;
 	ivar_s_Dstopbutton AT %I*: BOOL;

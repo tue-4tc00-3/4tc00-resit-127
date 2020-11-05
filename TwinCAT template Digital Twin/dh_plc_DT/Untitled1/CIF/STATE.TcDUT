@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{3f15fd22-6ab7-444c-9c28-91c31cdd5f54}">
+  <DUT Name="STATE" Id="{61356aeb-4f35-4397-92c1-45237ca86a16}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
@@ -8,7 +8,6 @@ STRUCT
 	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
 	dvar_M_example_controller_a_gripperclose AT %Q*: BOOL;
 	dvar_M_example_controller_a_x2testing AT %Q*: BOOL;
-	dvar_M_example_controller_gogrip AT %Q*: BOOL;
 	dvar_M_example_controller AT %Q*: enum_E;
 	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
@@ -44,6 +43,10 @@ STRUCT
 	dvar_M_HardwareMap AT %Q*: enum_E;
 	dvar_M_inventory1_a_pusher1 AT %Q*: BOOL;
 	dvar_M_inventory1 AT %Q*: enum_E;
+	dvar_M_inventory2_a_pusher2 AT %Q*: BOOL;
+	dvar_M_inventory2 AT %Q*: enum_E;
+	dvar_M_inventory3_a_pusher3 AT %Q*: BOOL;
+	dvar_M_inventory3 AT %Q*: enum_E;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
