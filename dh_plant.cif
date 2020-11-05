@@ -80,7 +80,7 @@ end
 //handling station
 
 automaton Rails:
-    event left, right, at_pusher1, at_drop, at_pusher2, at_pusher3;
+    event left, right, at_pusher1, at_drop, at_pusher2, at_pusher3, Pusher;
     const real v = -20;
     cont x = 0;
 
@@ -92,12 +92,28 @@ automaton Rails:
     location Moving_left:
         equation x' = if not a_x2testing: v else 0 end;
         edge at_pusher1 when not a_x2testing and -95<= x and x<= -94.9 and s_product1 goto Xpos_pusher_1;
-        edge at_pusher2 when not a_x2testing and -66<= x and x<= -64.9 and s_product2 goto Xpos_pusher_2;
+        edge at_pusher2 when not a_x2testing and -66<= x and x= -64.9 and s_product2 goto Xpos_pusher_2;
         edge at_pusher3 when not a_x2testing and -30.6<= x and x<= -30.1 and s_product3 goto Xpos_pusher_3;
+
 
     location Xpos_pusher_1:
         equation x'= 0;
         edge right when not Pusher.product goto Moving_right;
+
+    location Xpos_pusher_2:
+        equation x'= 0;
+        edge right when not Pusher.product goto Moving_right;
+
+    location Xpos_pusher_3:
+        equation x'= 0;
+        edge right when not Pusher.product goto Moving_right;
+
+    location Moving_right:
+    initial;
+    equation x' =   if a_x2distributing and x >= -136.9245:    -50
+                    elif not a_x2distributing and x <= 0:    50
+                    else 0 end;
+    edge down when a_zdown goto zdown;
 end
 
 automaton crane:

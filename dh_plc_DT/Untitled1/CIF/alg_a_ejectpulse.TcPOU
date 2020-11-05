@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_ejectpulse" Id="{c6e27458-0bb0-414a-af8a-c1186d0fe0a2}" SpecialFunc="None">
+  <POU Name="alg_a_ejectpulse" Id="{f46fbece-6627-4d97-bdda-11561d51212b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_ejectpulse : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_ejectpulse := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_ejectpulse := state.dvar_M_vacuum_a_ejectpulse;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_ejectpulse">
       <LineId Id="2" Count="0" />

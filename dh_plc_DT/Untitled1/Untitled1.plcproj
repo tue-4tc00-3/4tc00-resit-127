@@ -75,7 +75,13 @@
     <Compile Include="CIF\alg_a_zdown.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CIF\alg_M_example_controller_atpos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\alg_M_example_controller_a_Dstartled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_example_controller_pickpos.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\alg_s_Dinitialized.TcPOU">
@@ -84,16 +90,37 @@
     <Compile Include="CIF\alg_s_Hinitialized.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CIF\derivcvar_M_example_controller_t.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\derivcvar_M_HardwareMap_t.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\enum_E.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CIF\ifExprFunc1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\INPUTS.TcGVL">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\makeArray0.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\makeArray1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\normProjIdx.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\projArray0.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\projArray1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\STATE.TcDUT">
