@@ -10,7 +10,7 @@ automaton example_controller:
     disc bool a_x2testing;
 
     alg list[4] int pickpos = [0,1,0,2];
-    disc int i = 1;
+    disc int i = 0;
     alg list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
 
     cont t = 0;
