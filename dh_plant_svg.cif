@@ -35,20 +35,20 @@ svgout id "a_ejectpulse_led"        attr "fill" value if a_ejectpulse:          
 svgout id "a_handlingready_led"     attr "fill" value if a_handlingready:        "lime" else "red" end;
 
 // Moving the crane left end right
-svgout id "crane_arm_base"          attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "crane_arm_glider"        attr "transform" value fmt("translate(%s,0)",gripperarm.x);
-svgout id "a_zdown"                 attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
-svgout id "crane_gripper_base"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
-svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
-svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
-svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
-svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z);
+svgout id "crane_arm_base"          attr "transform" value fmt("translate(%s,0)",Rails.x);
+svgout id "crane_arm_glider"        attr "transform" value fmt("translate(%s,0)",Rails.x);
+svgout id "a_zdown"                 attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
+svgout id "crane_gripper_base"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
+svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
+svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
+svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
+svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
 //svg crane
-Rails_arm_glider:   OutputItem("Rails", "grey", Rails.x, 0);
-Crane_black_part: OutputItem("a_zdown", "black", 0, crane.y);
-Crane_gripper: OutputItem("crane_gripper_base", "grey", 0, crane.y);
-Crane_right_claw : OutputItem("crane_right_claw_out", "grey", 0, crane.y);
-Crane_left_claw : OutputItem("crane_left_claw_out", "grey", 0, crane.y);
+// Rails_arm_glider:   OutputItem("Rails", "grey", Rails.x, 0);
+// Crane_black_part: OutputItem("a_zdown", "black", 0, crane.y);
+// Crane_gripper: OutputItem("crane_gripper_base", "grey", 0, crane.y);
+// Crane_right_claw : OutputItem("crane_right_claw_out", "grey", 0, crane.y);
+// Crane_left_claw : OutputItem("crane_left_claw_out", "grey", 0, crane.y);
 
 group def OutputItem(alg string Label; alg string color; alg real x, y):
     svgout id Label attr "transform" value fmt("translate(%s,%s)", x, -y);
@@ -56,7 +56,7 @@ group def OutputItem(alg string Label; alg string color; alg real x, y):
 end
 
 // Move block with crane
-svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",gripperarm.x,gripperarm.z)
+svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y)
                                                            else fmt("translate(0,65.7)") end;
 
 // Sense the position of the crane
@@ -89,17 +89,17 @@ svgout id "crane_left_claw_in"             attr "fill" value if s_gripper:      
 svgout id "s_product1"                     attr "fill" value if s_product1:                "lime" else "red" end;
 svgout id "s_stack1filled"                 attr "fill" value if s_stack1filled:            "lime" else "red" end;
 svgout id "s_pusher1_out"                  attr "fill" value if s_pusher1_out:             "lime" else "red" end;
-svgout id "s_pusher1_1n"                   attr "fill" value if s_pusher1_in:              "lime" else "red" end;
+svgout id "s_pusher1_in"                   attr "fill" value if s_pusher1_in:              "lime" else "red" end;
 
 svgout id "s_product2"                     attr "fill" value if s_product2:                "lime" else "red" end;
 svgout id "s_stack2filled"                 attr "fill" value if s_stack2filled:            "lime" else "red" end;
 svgout id "s_pusher2_out"                  attr "fill" value if s_pusher2_out:             "lime" else "red" end;
-svgout id "s_pusher2_1n"                   attr "fill" value if s_pusher2_in:              "lime" else "red" end;
+svgout id "s_pusher2_in"                   attr "fill" value if s_pusher2_in:              "lime" else "red" end;
 
 svgout id "s_product3"                     attr "fill" value if s_product3:                "lime" else "red" end;
 svgout id "s_stack3filled"                 attr "fill" value if s_stack3filled:            "lime" else "red" end;
 svgout id "s_pusher3_out"                  attr "fill" value if s_pusher3_out:             "lime" else "red" end;
-svgout id "s_pusher3_1n"                   attr "fill" value if s_pusher3_in:              "lime" else "red" end;
+svgout id "s_pusher3_in"                   attr "fill" value if s_pusher3_in:              "lime" else "red" end;
 
 
 

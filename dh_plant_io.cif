@@ -53,13 +53,13 @@ alg bool s_Hstopbutton       = true; // inverted
 alg bool s_Hautoswitch       = false;
 alg bool s_Hresetbutton      = false;
 
-alg bool s_xpos_at1          = gripperarm.s_xpos_at1;
-alg bool s_xpos_at2          = gripperarm.s_xpos_at2;
-alg bool s_xpos_at3          = gripperarm.s_xpos_at3;
-alg bool s_xpos_atdrop       = gripperarm.s_xpos_atdrop;
-alg bool s_zpos_atup         = gripperarm.s_zpos_atup;
-alg bool s_zpos_atdown       = gripperarm.s_zpos_atdown;
-alg bool s_gripper           = gripperarm.s_gripper;
+alg bool s_xpos_at1          = Rails.s_xpos_at1;
+alg bool s_xpos_at2          = Rails.s_xpos_at2;
+alg bool s_xpos_at3          = Rails.s_xpos_at3;
+alg bool s_xpos_atdrop       = Rails.s_xpos_atdrop;
+alg bool s_zpos_atup         = crane.s_zpos_atup;
+alg bool s_zpos_atdown       = crane.s_zpos_atdown;
+alg bool s_gripper           = gripper.s_gripper;
 
 alg bool s_transfer_atpickup  = false;
 alg bool s_transfer_atdrop    = false;

@@ -28,64 +28,81 @@ automaton def UI_button(uncontrollable u_press):
         edge u_press;
 end
 
-automaton gripperarm:
-cont x = 0;
-cont z = 0;
-event down, pick, drop, rise;
-
-disc bool gripping = false;
-
-// Sense the position of the crane
-alg bool s_xpos_at1 =       if gripperarm.x >= -136.9245 - 0.1 and gripperarm.x <= -136.9245 + 0.1: true
-                            else false end;
-alg bool s_xpos_at2 =       if gripperarm.x >= -90.2245 - 0.1 and gripperarm.x <= -90.2245 + 0.1: true
-                            else false end;
-alg bool s_xpos_at3 =       if gripperarm.x >= -44.5625 - 0.1 and gripperarm.x <= -44.2625 + 0.1: true
-                            else false end;
-alg bool s_xpos_atdrop =    if gripperarm.x >= - 0.1 and gripperarm.x <= 0.1: true
-                            else false end;
-alg bool s_zpos_atup =      if gripperarm.z >= - 0.2 and gripperarm.z <= 0.2: true
-                            else false end;
-alg bool s_zpos_atdown =    if gripperarm.z >= 66.0 - 0.3 and gripperarm.z <= 66.0 + 0.3: true
-                            else false end;
-alg bool s_gripper =        a_gripperclose;
-
-// Move the crane right to left and back
-    location move:
-    initial;
-    equation x' =   if a_x2distributing and x >= -136.9245:    -50
-                    elif not a_x2distributing and x <= 0:    50
-                    else 0 end;
-    equation z' =   0;
-    edge down when a_zdown goto zdown;
-
-// Move The crane up and down
-    location zdown:
-    equation x' =   0;
-    equation z' =   20;
-    edge pick when not a_zdown goto grips;
-
-    location zup:
-    equation x' =   0;
-    equation z' =   -20;
-    edge drop when s_zpos_atup goto move;
-
-// Grip the block
-    location grips:
-    equation x' =   0;
-    equation z' =   0;
-    edge rise do gripping := not gripping goto zup;
-end
+// automaton gripperarm:
+// cont x = 0;
+// cont z = 0;
+// event down, pick, drop, rise;
+//
+// disc bool gripping = false;
+//
+// // Sense the position of the crane
+// alg bool s_xpos_at1 =       if gripperarm.x >= -136.9245 - 0.1 and gripperarm.x <= -136.9245 + 0.1: true
+//                             else false end;
+// alg bool s_xpos_at2 =       if gripperarm.x >= -90.2245 - 0.1 and gripperarm.x <= -90.2245 + 0.1: true
+//                             else false end;
+// alg bool s_xpos_at3 =       if gripperarm.x >= -44.5625 - 0.1 and gripperarm.x <= -44.2625 + 0.1: true
+//                             else false end;
+// alg bool s_xpos_atdrop =    if gripperarm.x >= - 0.1 and gripperarm.x <= 0.1: true
+//                             else false end;
+// alg bool s_zpos_atup =      if gripperarm.z >= - 0.2 and gripperarm.z <= 0.2: true
+//                             else false end;
+// alg bool s_zpos_atdown =    if gripperarm.z >= 66.0 - 0.3 and gripperarm.z <= 66.0 + 0.3: true
+//                             else false end;
+// alg bool s_gripper =        a_gripperclose;
+//
+// // Move the crane right to left and back
+//     location move:
+//     initial;
+//     equation x' =   if a_x2distributing and x >= -136.9245:    -50
+//                     elif not a_x2distributing and x <= 0:    50
+//                     else 0 end;
+//     equation z' =   0;
+//     edge down when a_zdown goto zdown;
+//
+// // Move The crane up and down
+//     location zdown:
+//     equation x' =   0;
+//     equation z' =   20;
+//     edge pick when not a_zdown goto grips;
+//
+//     location zup:
+//     equation x' =   0;
+//     equation z' =   -20;
+//     edge drop when s_zpos_atup goto move;
+//
+// // Grip the block
+//     location grips:
+//     equation x' =   0;
+//     equation z' =   0;
+//     edge rise do gripping := not gripping goto zup;
+// end
 
 //handling station
 
 automaton Rails:
+<<<<<<< HEAD
     event left, right, at_pusher1, at_drop, at_pusher2, at_pusher3, Pusher;
     const real v = -20;
+=======
+//    Sense the position of the crane
+    alg bool s_xpos_at1 =       if Rails.x >= -136.745 - 0.15 and Rails.x <= -136.745 + 0.15: true
+                                else false end;
+    alg bool s_xpos_at2 =       if Rails.x >= -90.2245 - 0.15 and Rails.x <= -90.2245 + 0.15: true
+                                else false end;
+    alg bool s_xpos_at3 =       if Rails.x >= -44.5625 - 0.15 and Rails.x <= -44.2625 + 0.15: true
+                                else false end;
+    alg bool s_xpos_atdrop =    if Rails.x >= - 0.1 and Rails.x <= 0.1: true
+                                else false end;
+
+    alg bool s_gripper =        a_gripperclose;
+
+    const real v = -17;
+>>>>>>> master
     cont x = 0;
 
-    location Xpos_at_drop:
+    location Moving:
         initial;
+<<<<<<< HEAD
         equation x'= 0;
         edge left when not a_x2testing and s_product1 goto Moving_left;
 
@@ -114,33 +131,51 @@ automaton Rails:
                     elif not a_x2distributing and x <= 0:    50
                     else 0 end;
     edge down when a_zdown goto zdown;
+=======
+        equation x' =   if a_x2testing and a_x2distributing: 0
+                        elif a_x2testing: -v
+                        elif a_x2distributing: v
+                        else 0 end;
+
+        edge when a_x2testing = not a_x2testing goto Moving;
+        edge when a_x2distributing = not a_x2distributing goto Moving;
+>>>>>>> master
 end
 
 automaton crane:
+    alg bool s_zpos_atup =      if crane.y >= - 0.2 and crane.y <= 0.2: true
+                                else false end;
+    alg bool s_zpos_atdown =    if crane.y >= 66.0 - 0.3 and crane.y <= 66.0 + 0.3: true
+                                else false end;
+
     event down, at_maxz, at_minz, up;
 
-    const real v_set = -20;
+    alg real v_set = 20;
     cont y = 0;
 
     location Retracted:
         initial;
         equation y' = 0;
-        edge down when  a_zdown do y:=0 goto Down;
+        edge down when a_zdown goto Down;
 
     location Down:
-        equation y' = if a_zdown: v_set else 0 end;
-        edge at_maxz when  -36 <= y and y <= -32 goto Extended;
+        equation y' = v_set;
+        edge at_maxz when y >= 66.0 goto Extended;
+        edge when not a_zdown goto Up;
 
     location Up:
-        equation y' = if not a_zdown: -v_set else 0 end;
-        edge at_minz  when not a_zdown and 0 <= y do y:= 0  goto Retracted;
+        equation y' = -v_set;
+        edge at_minz  when not a_zdown and y <= 0.0  goto Retracted;
+        edge when a_zdown goto Down;
 
     location Extended:
         equation y' = 0;
-        edge up when not a_zdown and ((s_gripper and not s_xpos_atdrop) or (not s_gripper and s_xpos_atdrop)) goto Up;
+        edge up when not a_zdown goto Up;
 end
 
 automaton gripper:
+    alg bool s_gripper =        a_gripperclose;
+
     event release_no, released, grab;
     const real v_set = 1;
     cont x = 0;
