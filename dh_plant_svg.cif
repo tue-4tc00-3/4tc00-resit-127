@@ -91,15 +91,21 @@ svgout id "s_stack1filled"                 attr "fill" value if s_stack1filled: 
 svgout id "s_pusher1_out"                  attr "fill" value if s_pusher1_out:             "lime" else "red" end;
 svgout id "s_pusher1_in"                   attr "fill" value if s_pusher1_in:              "lime" else "red" end;
 
+svgout id "a_pusher1"                      attr "transform" value fmt("translate(%s,0)",pusher1.x);
+
 svgout id "s_product2"                     attr "fill" value if s_product2:                "lime" else "red" end;
 svgout id "s_stack2filled"                 attr "fill" value if s_stack2filled:            "lime" else "red" end;
 svgout id "s_pusher2_out"                  attr "fill" value if s_pusher2_out:             "lime" else "red" end;
 svgout id "s_pusher2_in"                   attr "fill" value if s_pusher2_in:              "lime" else "red" end;
 
+svgout id "a_pusher2"                      attr "transform" value fmt("translate(%s,0)",pusher2.x);
+
 svgout id "s_product3"                     attr "fill" value if s_product3:                "lime" else "red" end;
 svgout id "s_stack3filled"                 attr "fill" value if s_stack3filled:            "lime" else "red" end;
 svgout id "s_pusher3_out"                  attr "fill" value if s_pusher3_out:             "lime" else "red" end;
 svgout id "s_pusher3_in"                   attr "fill" value if s_pusher3_in:              "lime" else "red" end;
+
+svgout id "a_pusher3"                      attr "transform" value fmt("translate(%s,0)",pusher3.x);
 
 
 
