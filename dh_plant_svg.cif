@@ -57,7 +57,7 @@ end
 
 // Move block with crane
 svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y)
-                                                           else fmt("translate(0,65.7)") end;
+                                                           else             fmt("translate(0,65.7)") end;
 
 // Sense the position of the crane
 svgout id "s_xpos_at1"              attr "fill" value if s_xpos_at1:             "lime" else "red" end;
