@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="makeArray1" Id="{dbff0c9d-b2ff-43ef-9442-a9531192467e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION makeArray1 : ARRAY[0..2] OF BOOL
+VAR_INPUT
+	elem0: BOOL;
+	elem1: BOOL;
+	elem2: BOOL;
+END_VAR
+VAR
+	rslt: ARRAY[0..2] OF BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rslt[0] := elem0;
+rslt[1] := elem1;
+rslt[2] := elem2;
+makeArray1 := rslt;]]></ST>
+    </Implementation>
+    <LineIds Name="makeArray1">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
