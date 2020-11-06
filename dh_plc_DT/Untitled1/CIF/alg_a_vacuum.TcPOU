@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_vacuum" Id="{c682f584-f531-49d8-8c49-f693a0964607}" SpecialFunc="None">
+  <POU Name="alg_a_vacuum" Id="{ef66a729-3edf-43eb-bd08-3db09097dab8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_vacuum : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_vacuum := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_vacuum := state.dvar_M_vacuum_a_vacuum;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_vacuum">
       <LineId Id="2" Count="0" />

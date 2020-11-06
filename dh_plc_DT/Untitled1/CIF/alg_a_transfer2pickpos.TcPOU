@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_transfer2pickpos" Id="{3c096fa1-5072-4cde-83dd-401e6b642831}" SpecialFunc="None">
+  <POU Name="alg_a_transfer2pickpos" Id="{ca43196d-5139-4e4f-b49c-ae4153290243}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_transfer2pickpos : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_transfer2pickpos := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_transfer2pickpos := state.dvar_M_vacuum_a_transfer2pickpos;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_transfer2pickpos">
       <LineId Id="2" Count="0" />

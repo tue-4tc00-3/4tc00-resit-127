@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_example_controller_pickpos" Id="{a7b73084-3338-4150-bcd2-b695d2757b38}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_example_controller_pickpos : ARRAY[0..3] OF DINT
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_example_controller_pickpos := makeArray0(0, 1, 0, 2);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_example_controller_pickpos">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

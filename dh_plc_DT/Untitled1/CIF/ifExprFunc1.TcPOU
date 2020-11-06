@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="ifExprFunc1" Id="{629fc9d4-048c-4731-8c05-853f5f5747ec}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ifExprFunc1 : LREAL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF ((state.dvar_M_example_controller) = (elit_init2)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_wait_start)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_droppoint)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_movetopickup)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_down)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_gopickup)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_goback)) THEN
+    ifExprFunc1 := 1.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_finished)) THEN
+    ifExprFunc1 := 0.0;
+ELSE
+    ifExprFunc1 := 1.0;
+END_IF;]]></ST>
+    </Implementation>
+    <LineIds Name="ifExprFunc1">
+      <LineId Id="3" Count="17" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

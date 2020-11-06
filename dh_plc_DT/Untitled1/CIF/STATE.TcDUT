@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{147e9ea4-7673-43d0-8228-59c59e009e63}">
+  <DUT Name="STATE" Id="{8870b12b-9a22-40ec-9345-14825682cc7a}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
@@ -8,6 +8,8 @@ STRUCT
 	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
 	dvar_M_example_controller_a_gripperclose AT %Q*: BOOL;
 	dvar_M_example_controller_a_x2testing AT %Q*: BOOL;
+	dvar_M_example_controller_i AT %Q*: DINT;
+	cvar_M_example_controller_t AT %Q*: LREAL;
 	dvar_M_example_controller AT %Q*: enum_E;
 	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
@@ -47,6 +49,11 @@ STRUCT
 	dvar_M_inventory2 AT %Q*: enum_E;
 	dvar_M_inventory3_a_pusher3 AT %Q*: BOOL;
 	dvar_M_inventory3 AT %Q*: enum_E;
+	dvar_M_vacuum_a_transfer2pickpos AT %Q*: BOOL;
+	dvar_M_vacuum_a_transfer2droppos AT %Q*: BOOL;
+	dvar_M_vacuum_a_vacuum AT %Q*: BOOL;
+	dvar_M_vacuum_a_ejectpulse AT %Q*: BOOL;
+	dvar_M_vacuum AT %Q*: enum_E;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
