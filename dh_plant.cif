@@ -92,7 +92,7 @@ automaton Rails:
 
     alg bool s_gripper =        a_gripperclose;
 
-    const real v = -17;
+    const real v = -16;
     cont x = 0;
 
     location Moving:

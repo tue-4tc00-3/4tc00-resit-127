@@ -61,7 +61,7 @@ alg bool s_zpos_atup         = crane.s_zpos_atup;
 alg bool s_zpos_atdown       = crane.s_zpos_atdown;
 alg bool s_gripper           = gripper.s_gripper;
 
-alg bool s_transfer_atpickup  = false;
+alg bool s_transfer_atpickup  = false ;
 alg bool s_transfer_atdrop    = false;
 alg bool s_transfer_athalfway = false;
 alg bool s_vacuum             = false;
