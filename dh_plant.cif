@@ -80,10 +80,6 @@ end
 //handling station
 
 automaton Rails:
-<<<<<<< HEAD
-    event left, right, at_pusher1, at_drop, at_pusher2, at_pusher3, Pusher;
-    const real v = -20;
-=======
 //    Sense the position of the crane
     alg bool s_xpos_at1 =       if Rails.x >= -136.745 - 0.15 and Rails.x <= -136.745 + 0.15: true
                                 else false end;
@@ -101,36 +97,6 @@ automaton Rails:
 
     location Moving:
         initial;
-<<<<<<< HEAD
-        equation x'= 0;
-        edge left when not a_x2testing and s_product1 goto Moving_left;
-
-    location Moving_left:
-        equation x' = if not a_x2testing: v else 0 end;
-        edge at_pusher1 when not a_x2testing and -95<= x and x<= -94.9 and s_product1 goto Xpos_pusher_1;
-        edge at_pusher2 when not a_x2testing and -66<= x and x= -64.9 and s_product2 goto Xpos_pusher_2;
-        edge at_pusher3 when not a_x2testing and -30.6<= x and x<= -30.1 and s_product3 goto Xpos_pusher_3;
-
-
-    location Xpos_pusher_1:
-        equation x'= 0;
-        edge right when not Pusher.product goto Moving_right;
-
-    location Xpos_pusher_2:
-        equation x'= 0;
-        edge right when not Pusher.product goto Moving_right;
-
-    location Xpos_pusher_3:
-        equation x'= 0;
-        edge right when not Pusher.product goto Moving_right;
-
-    location Moving_right:
-    initial;
-    equation x' =   if a_x2distributing and x >= -136.9245:    -50
-                    elif not a_x2distributing and x <= 0:    50
-                    else 0 end;
-    edge down when a_zdown goto zdown;
-=======
         equation x' =   if a_x2testing and a_x2distributing: 0
                         elif a_x2testing: -v
                         elif a_x2distributing: v
@@ -138,7 +104,6 @@ automaton Rails:
 
         edge when a_x2testing = not a_x2testing goto Moving;
         edge when a_x2distributing = not a_x2distributing goto Moving;
->>>>>>> master
 end
 
 automaton crane:
@@ -192,111 +157,17 @@ automaton gripper:
         edge released when not a_gripperclose and 0 <= x and x <= 0.025 goto Idle;
 end
 
-automaton pusher1:
-    alg bool s_stack1filled = false;
-    alg bool s_product1 = false;
-    alg bool s_pusher1_in = pusher1.x >=-0.1;
-    alg bool s_pusher1_out = pusher1.x<=-14.387+0.1;
+automaton resetbutton:
+    uncontrollable u_press;
+    event release;
 
-    disc real pusherspeed = 22;
+    cont t der 1;
 
-    cont x = 0;
-
-    location Extended:
-        equation x'=0;
-
+    location Off:
         initial;
-        edge when a_pusher1 goto left;
+        edge u_press do t := 0 goto On;
 
-    location left:
-        equation x'= -pusherspeed;
-
-        edge when not a_pusher1 goto right;
-        edge when pusher1.x<=-14.387+0.1 goto Retracted;
-
-    location right:
-        equation x' = pusherspeed;
-
-        edge when a_pusher1 goto left;
-        edge when pusher1.x >=-0.1 goto Extended;
-
-    location Retracted:
-        equation x' = 0;
-
-        edge when not a_pusher1 goto right;
-
+    location On:
+        edge release when t > 0.1 goto Off;
 end
-
-automaton pusher2:
-    alg bool s_stack2filled = false;
-    alg bool s_product2 = false;
-    alg bool s_pusher2_in = pusher2.x >=-0.1;
-    alg bool s_pusher2_out = pusher2.x<=-14.387+0.1;
-
-    disc real pusherspeed = 22;
-
-    cont x = 0;
-
-    location Extended:
-        equation x'=0;
-
-        initial;
-        edge when a_pusher2 goto left;
-
-    location left:
-        equation x'= -pusherspeed;
-
-        edge when not a_pusher2 goto right;
-        edge when pusher2.x<=-14.387+0.1 goto Retracted;
-
-    location right:
-        equation x' = pusherspeed;
-
-        edge when a_pusher2 goto left;
-        edge when pusher2.x >=-0.1 goto Extended;
-
-    location Retracted:
-        equation x' = 0;
-
-        edge when not a_pusher2 goto right;
-
-end
-
-automaton pusher3:
-    alg bool s_stack3filled = false;
-    alg bool s_product3 = false;
-    alg bool s_pusher3_in = pusher3.x >=-0.1;
-    alg bool s_pusher3_out = pusher3.x<=-14.387+0.1;
-
-    disc real pusherspeed = 22;
-
-    cont x = 0;
-
-    location Extended:
-        equation x'=0;
-
-        initial;
-        edge when a_pusher3 goto left;
-
-    location left:
-        equation x'= -pusherspeed;
-
-        edge when not a_pusher3 goto right;
-        edge when pusher3.x<=-14.387+0.1 goto Retracted;
-
-    location right:
-        equation x' = pusherspeed;
-
-        edge when a_pusher3 goto left;
-        edge when pusher3.x >=-0.1 goto Extended;
-
-    location Retracted:
-        equation x' = 0;
-
-        edge when not a_pusher3 goto right;
-
-end
-
-
-
 
