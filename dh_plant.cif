@@ -90,7 +90,10 @@ automaton Rails:
     alg bool s_xpos_atdrop =    if Rails.x >= - 0.1 and Rails.x <= 0.1: true
                                 else false end;
 
-    alg bool s_gripper =        a_gripperclose;
+    alg bool s_gripper =        (s_xpos_at1 and s_zpos_atdown and s_product1)
+                                or (s_xpos_at2 and s_zpos_atdown and s_product2)
+                                or (s_xpos_at3 and s_zpos_atdown and s_product3)
+                                or a_gripperclose;
 
     const real v = -20;
     cont x = 0;
@@ -114,7 +117,7 @@ automaton crane:
 
     event down, at_maxz, at_minz, up;
 
-    alg real v_set = 20;
+    alg real v_set = 30;
     cont y = 0;
 
     location Retracted:
@@ -138,33 +141,42 @@ automaton crane:
 end
 
 automaton gripper:
-    alg bool s_gripper =        a_gripperclose;
 
     event release_no, released, grab;
     const real v_set = 1;
     cont x = 0;
+    disc list[3] string colorpick = ["grey", "red", "RED"];
+    alg string color = if s_gripper and s_xpos_at1 and s_zpos_atdown: colorpick[0]
+                       elif s_gripper and s_xpos_at2 and s_zpos_atdown: colorpick[1]
+                       elif s_gripper and s_xpos_at3 and s_zpos_atdown: colorpick[2]
+                       else "non" end;
+    alg string colorhold = if s_gripper and s_xpos_at1: colorpick[0]
+                       else "none" end;
+
 
     location Idle:
         initial;
         equation x' = 0;
-        edge grab when a_gripperclose and s_xpos_at1 or s_xpos_at2 or s_xpos_at3  goto Grabbed;
+        edge grab when a_gripperclose goto Grabbed;
 
     location Grabbed:
         equation x' = 0;
-        edge release_no when s_xpos_atdrop and s_zpos_atdown goto Release;
+        edge release_no goto Release;
+
     location Release:
         equation x' = if not a_gripperclose : -v_set else 0 end;
         edge released when not a_gripperclose and 0 <= x and x <= 0.025 goto Idle;
 end
 
 automaton pusher1:
-    alg bool s_stack1filled = false;
-    alg bool s_product1 = false;
-    alg bool s_pusher1_in = pusher1.x >=-0.1;
-    alg bool s_pusher1_out = pusher1.x<=-14.387+0.1;
+    alg bool s_stack1filled = i<prodmax;
+    alg bool s_product1 = i>0 and (pusher1.Extended or pusher1.right) and i<prodmax+1;
+    alg bool s_pusher1_in = pusher1.x >=-0.2;
+    alg bool s_pusher1_out = pusher1.x<=-14.387+0.2;
 
     disc real pusherspeed = 22;
-
+    disc int i = 0;
+    disc int prodmax = 7;
     cont x = 0;
 
     location Extended:
@@ -172,18 +184,19 @@ automaton pusher1:
 
         initial;
         edge when a_pusher1 goto left;
+        edge when gripper.color = "grey" goto left;
 
     location left:
         equation x'= -pusherspeed;
 
         edge when not a_pusher1 goto right;
-        edge when pusher1.x<=-14.387+0.1 goto Retracted;
+        edge when pusher1.x<=-14.387+0.2 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
 
         edge when a_pusher1 goto left;
-        edge when pusher1.x >=-0.1 goto Extended;
+        edge when pusher1.x >=-0.2 goto Extended;
 
     location Retracted:
         equation x' = 0;
@@ -193,13 +206,14 @@ automaton pusher1:
 end
 
 automaton pusher2:
-    alg bool s_stack2filled = false;
-    alg bool s_product2 = false;
-    alg bool s_pusher2_in = pusher2.x >=-0.1;
-    alg bool s_pusher2_out = pusher2.x<=-14.387+0.1;
+    alg bool s_stack2filled = i<prodmax;
+    alg bool s_product2 = i>0 and (pusher2.Extended or pusher2.right) and i<prodmax+1;
+    alg bool s_pusher2_in = pusher2.x >=-0.2;
+    alg bool s_pusher2_out = pusher2.x<=-14.387+0.2;
 
     disc real pusherspeed = 22;
-
+    disc int i = 0;
+    disc int prodmax = 7;
     cont x = 0;
 
     location Extended:
@@ -207,18 +221,19 @@ automaton pusher2:
 
         initial;
         edge when a_pusher2 goto left;
+        edge when gripper.color = "red" goto left;
 
     location left:
         equation x'= -pusherspeed;
 
         edge when not a_pusher2 goto right;
-        edge when pusher2.x<=-14.387+0.1 goto Retracted;
+        edge when pusher2.x<=-14.387+0.2 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
 
         edge when a_pusher2 goto left;
-        edge when pusher2.x >=-0.1 goto Extended;
+        edge when pusher2.x >=-0.2 goto Extended;
 
     location Retracted:
         equation x' = 0;
@@ -228,13 +243,14 @@ automaton pusher2:
 end
 
 automaton pusher3:
-    alg bool s_stack3filled = false;
-    alg bool s_product3 = false;
-    alg bool s_pusher3_in = pusher3.x >=-0.1;
-    alg bool s_pusher3_out = pusher3.x<=-14.387+0.1;
+    alg bool s_stack3filled = i<prodmax;
+    alg bool s_product3 = i>0 and (pusher3.Extended or pusher3.right) and i<prodmax+1;
+    alg bool s_pusher3_in = pusher3.x >=-0.2;
+    alg bool s_pusher3_out = pusher3.x<=-14.387+0.2;
 
     disc real pusherspeed = 22;
-
+    disc int i = 0;
+    disc int prodmax = 7;
     cont x = 0;
 
     location Extended:
@@ -242,18 +258,19 @@ automaton pusher3:
 
         initial;
         edge when a_pusher3 goto left;
+        edge when gripper.color = "RED" goto left;
 
     location left:
         equation x'= -pusherspeed;
 
         edge when not a_pusher3 goto right;
-        edge when pusher3.x<=-14.387+0.1 goto Retracted;
+        edge when pusher3.x<=-14.387+0.2 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
 
         edge when a_pusher3 goto left;
-        edge when pusher3.x >=-0.1 goto Extended;
+        edge when pusher3.x >=-0.2 goto Extended;
 
     location Retracted:
         equation x' = 0;

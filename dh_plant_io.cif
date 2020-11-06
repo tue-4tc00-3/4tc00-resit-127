@@ -59,7 +59,7 @@ alg bool s_xpos_at3          = Rails.s_xpos_at3;
 alg bool s_xpos_atdrop       = Rails.s_xpos_atdrop;
 alg bool s_zpos_atup         = crane.s_zpos_atup;
 alg bool s_zpos_atdown       = crane.s_zpos_atdown;
-alg bool s_gripper           = gripper.s_gripper;
+alg bool s_gripper           = Rails.s_gripper;
 
 alg bool s_transfer_atpickup  = false ;
 alg bool s_transfer_atdrop    = false;
