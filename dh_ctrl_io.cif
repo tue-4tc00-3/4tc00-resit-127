@@ -66,6 +66,6 @@ alg bool a_gripperclose     = example_controller.a_gripperclose;
 alg bool a_transfer2pickpos = vacuum.a_transfer2pickpos;
 alg bool a_transfer2droppos = vacuum.a_transfer2droppos;
 alg bool a_vacuum           = vacuum.a_vacuum;
-alg bool a_ejectpulse       =  vacuum.a_ejectpulse;
+alg bool a_ejectpulse       = vacuum.a_ejectpulse;
 alg bool a_handlingready    = false;
 

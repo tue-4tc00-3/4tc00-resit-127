@@ -92,7 +92,7 @@ automaton Rails:
 
     alg bool s_gripper =        a_gripperclose;
 
-    const real v = -16;
+    const real v = -20;
     cont x = 0;
 
     location Moving:
@@ -156,6 +156,112 @@ automaton gripper:
         equation x' = if not a_gripperclose : -v_set else 0 end;
         edge released when not a_gripperclose and 0 <= x and x <= 0.025 goto Idle;
 end
+
+automaton pusher1:
+    alg bool s_stack1filled = false;
+    alg bool s_product1 = false;
+    alg bool s_pusher1_in = pusher1.x >=-0.1;
+    alg bool s_pusher1_out = pusher1.x<=-14.387+0.1;
+
+    disc real pusherspeed = 22;
+
+    cont x = 0;
+
+    location Extended:
+        equation x'=0;
+
+        initial;
+        edge when a_pusher1 goto left;
+
+    location left:
+        equation x'= -pusherspeed;
+
+        edge when not a_pusher1 goto right;
+        edge when pusher1.x<=-14.387+0.1 goto Retracted;
+
+    location right:
+        equation x' = pusherspeed;
+
+        edge when a_pusher1 goto left;
+        edge when pusher1.x >=-0.1 goto Extended;
+
+    location Retracted:
+        equation x' = 0;
+
+        edge when not a_pusher1 goto right;
+
+end
+
+automaton pusher2:
+    alg bool s_stack2filled = false;
+    alg bool s_product2 = false;
+    alg bool s_pusher2_in = pusher2.x >=-0.1;
+    alg bool s_pusher2_out = pusher2.x<=-14.387+0.1;
+
+    disc real pusherspeed = 22;
+
+    cont x = 0;
+
+    location Extended:
+        equation x'=0;
+
+        initial;
+        edge when a_pusher2 goto left;
+
+    location left:
+        equation x'= -pusherspeed;
+
+        edge when not a_pusher2 goto right;
+        edge when pusher2.x<=-14.387+0.1 goto Retracted;
+
+    location right:
+        equation x' = pusherspeed;
+
+        edge when a_pusher2 goto left;
+        edge when pusher2.x >=-0.1 goto Extended;
+
+    location Retracted:
+        equation x' = 0;
+
+        edge when not a_pusher2 goto right;
+
+end
+
+automaton pusher3:
+    alg bool s_stack3filled = false;
+    alg bool s_product3 = false;
+    alg bool s_pusher3_in = pusher3.x >=-0.1;
+    alg bool s_pusher3_out = pusher3.x<=-14.387+0.1;
+
+    disc real pusherspeed = 22;
+
+    cont x = 0;
+
+    location Extended:
+        equation x'=0;
+
+        initial;
+        edge when a_pusher3 goto left;
+
+    location left:
+        equation x'= -pusherspeed;
+
+        edge when not a_pusher3 goto right;
+        edge when pusher3.x<=-14.387+0.1 goto Retracted;
+
+    location right:
+        equation x' = pusherspeed;
+
+        edge when a_pusher3 goto left;
+        edge when pusher3.x >=-0.1 goto Extended;
+
+    location Retracted:
+        equation x' = 0;
+
+        edge when not a_pusher3 goto right;
+
+end
+
 
 
 
