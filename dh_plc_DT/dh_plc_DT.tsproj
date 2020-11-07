@@ -2,7 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.32">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}" AutoDeleteType="true">enum_E</Name>
+			<Name GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}" AutoDeleteType="true">enum_E</Name>
 			<BitSize>16</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
 			<EnumInfo>
@@ -193,24 +193,30 @@
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_testingdrop]]>
+					<![CDATA[elit_stop]]>
 				</Text>
 				<Enum>31</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_wait_start]]>
+					<![CDATA[elit_testingdrop]]>
 				</Text>
 				<Enum>32</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_wait_vacuum]]>
+					<![CDATA[elit_wait_start]]>
 				</Text>
 				<Enum>33</Enum>
 			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_wait_vacuum]]>
+				</Text>
+				<Enum>34</Enum>
+			</EnumInfo>
 			<Hides>
-				<Hide GUID="{6C7101E9-EDB9-40B9-AF0E-8B7FBC51F697}"/>
+				<Hide GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>
@@ -458,7 +464,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_example_controller</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap_out_a_Dstartled</Name>
@@ -586,7 +592,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory1_a_pusher1</Name>
@@ -594,7 +600,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory1</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory2_a_pusher2</Name>
@@ -602,7 +608,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory2</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory3_a_pusher3</Name>
@@ -610,7 +616,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory3</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_vacuum_a_transfer2pickpos</Name>
@@ -630,7 +636,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_vacuum</Name>
-							<Type GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}">enum_E</Type>
+							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>

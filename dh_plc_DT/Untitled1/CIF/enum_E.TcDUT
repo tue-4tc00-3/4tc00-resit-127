@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="enum_E" Id="{b397b065-e986-49bc-83f6-8592f78efcc1}">
+  <DUT Name="enum_E" Id="{aa855097-cd01-4379-8744-ff4a091382a5}">
     <Declaration><![CDATA[TYPE enum_E :
 (
 	elit_clear_vacuum,
@@ -34,6 +34,7 @@
 	elit_reset_place,
 	elit_rest,
 	elit_starting,
+	elit_stop,
 	elit_testingdrop,
 	elit_wait_start,
 	elit_wait_vacuum
