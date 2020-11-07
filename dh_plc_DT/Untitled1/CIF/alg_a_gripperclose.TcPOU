@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_gripperclose" Id="{8e8e085c-4104-4f8a-b2ec-4319eaca3f77}" SpecialFunc="None">
+  <POU Name="alg_a_gripperclose" Id="{45445b8e-5e34-46bf-823b-15ace928c4ca}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_gripperclose : BOOL
 VAR_INPUT
 	state: STATE;

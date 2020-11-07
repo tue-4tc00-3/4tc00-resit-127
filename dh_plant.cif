@@ -154,7 +154,7 @@ automaton pusher1:
 end
 
 automaton pusher1:
-    alg bool s_stack1filled = i<prodmax;
+    alg bool s_stack1filled = i<prodmax +1;
     alg bool s_product1 = i>0 and (pusher1.Extended or pusher1.right) and i<prodmax+1;
     alg bool s_pusher1_in = pusher1.x >=-0.5;
     alg bool s_pusher1_out = pusher1.x<=-14.387+0.5;
@@ -191,7 +191,7 @@ automaton pusher1:
 end
 
 automaton pusher2:
-    alg bool s_stack2filled = i<prodmax;
+    alg bool s_stack2filled = i<prodmax+1;
     alg bool s_product2 = i>0 and (pusher2.Extended or pusher2.right) and i<prodmax+1;
     alg bool s_pusher2_in = pusher2.x >=-0.5;
     alg bool s_pusher2_out = pusher2.x<=-14.387+0.5;
@@ -228,7 +228,7 @@ automaton pusher2:
 end
 
 automaton pusher3:
-    alg bool s_stack3filled = i<prodmax;
+    alg bool s_stack3filled = i<prodmax+1;
     alg bool s_product3 = i>0 and (pusher3.Extended or pusher3.right) and i<prodmax+1;
     alg bool s_pusher3_in = pusher3.x >=-0.5;
     alg bool s_pusher3_out = pusher3.x<=-14.387+0.5;
@@ -249,7 +249,7 @@ automaton pusher3:
         equation x'= -pusherspeed;
 
         edge when not a_pusher3 goto right;
-        edge when s_pusher3_out do i := i + 1 goto Retracted;
+        edge when pusher3.x<=-14.387+0.5 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
@@ -266,7 +266,7 @@ end
 
 automaton vacuumplant:
 
-alg bool s_transfer_atpickup = r<0.1;
+alg bool s_transfer_atpickup = r<0.5;
 alg bool s_transfer_athalfway = r<90.5 and r>89.5;
 alg bool s_transfer_atdrop = r >179.5;
 alg bool s_vacuum = haveprod;
@@ -281,14 +281,13 @@ cont t = 0;
     location testing:
         equation r'= 0;
         equation t'= 0;
-        initial;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
         edge when a_vacuum goto sucking;
 
     location right:
         equation r'= rotationspeed;
         equation t'= 0;
-        edge when r>180 goto stop;
+        edge when r>179.5 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)  goto stop;
 
     location dropping:
@@ -299,20 +298,21 @@ cont t = 0;
     location left:
         equation r'=-rotationspeed;
         equation t'= 0;
-        edge when r<0 goto stop;
+        edge when r<0.5 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
 
     location sucking:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := true goto stop;
+        edge when t >= 1 do haveprod := true, t:= 0, newprod := false goto stop;
 
     location ejecting:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := false goto stop;
+        edge when t >= 1 do haveprod := false, t := 0 goto stop;
 
     location stop:
+        initial;
         equation r'=0;
         equation t'=0;
         edge when a_transfer2droppos and not a_transfer2pickpos goto right;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="derivcvar_M_example_controller_t" Id="{6200d117-7ec5-40bc-824e-21b528d2c693}" SpecialFunc="None">
+  <POU Name="derivcvar_M_example_controller_t" Id="{c56c3bcc-0bed-4c32-b6cf-31c8ac6560d6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION derivcvar_M_example_controller_t : LREAL
 VAR_INPUT
 	state: STATE;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="normProjIdx" Id="{afb0f747-dcfc-49e1-9651-9a245891c27c}" SpecialFunc="None">
+  <POU Name="normProjIdx" Id="{19ec3150-6028-4ee4-9a53-e79f624d72b0}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION normProjIdx : DINT
 VAR_INPUT
 	idx: DINT;
