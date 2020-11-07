@@ -294,35 +294,56 @@ automaton vacuumplant:
 alg bool s_transfer_atpickup = r<0.1;
 alg bool s_transfer_athalfway = r<90.5 and r>89.5;
 alg bool s_transfer_atdrop = r >179.5;
+alg bool s_vacuum = haveprod;
+disc bool haveprod = false;
+alg bool s_product4 = newprod;
+disc bool newprod = true;
 
 disc real rotationspeed = 40;
 cont r = 0;
-
+cont t = 0;
 
     location testing:
         equation r'= 0;
+        equation t'= 0;
         initial;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
+        edge when a_vacuum goto sucking;
 
     location right:
         equation r'= rotationspeed;
-        edge when r>180 goto dropping;
+        equation t'= 0;
+        edge when r>180 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)  goto stop;
 
     location dropping:
         equation r'=0;
+        equation t'=0;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)  goto stop;
 
     location left:
         equation r'=-rotationspeed;
-        edge when r<0 goto testing;
+        equation t'= 0;
+        edge when r<0 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
+
+    location sucking:
+        equation r'=0;
+        equation t'=1;
+        edge when t >= 1 do haveprod := true goto stop;
+
+    location ejecting:
+        equation r'=0;
+        equation t'=1;
+        edge when t >= 1 do haveprod := false goto stop;
 
     location stop:
         equation r'=0;
+        equation t'=0;
         edge when a_transfer2droppos and not a_transfer2pickpos goto right;
         edge when a_transfer2pickpos and not a_transfer2droppos goto left;
-
+        edge when a_ejectpulse and haveprod goto ejecting;
+        edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
 end
 
 
