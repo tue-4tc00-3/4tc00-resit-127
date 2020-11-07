@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="projArray0" Id="{5fe79b7c-197a-45c0-bb1c-56bc6b49325d}" SpecialFunc="None">
+  <POU Name="projArray0" Id="{b6c94b6d-a1cd-4e5b-855b-772f6363929b}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION projArray0 : DINT
 VAR_INPUT
 	arr: ARRAY[0..3] OF DINT;
