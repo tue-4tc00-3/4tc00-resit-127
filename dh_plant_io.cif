@@ -64,8 +64,8 @@ alg bool s_gripper           = Rails.s_gripper;
 alg bool s_transfer_atpickup  = vacuumplant.s_transfer_atpickup;
 alg bool s_transfer_atdrop    = vacuumplant.s_transfer_atdrop;
 alg bool s_transfer_athalfway = vacuumplant.s_transfer_athalfway;
-alg bool s_vacuum             = false;
-alg bool s_product4           = false;
+alg bool s_vacuum             = vacuumplant.s_vacuum;
+alg bool s_product4           = vacuumplant.s_product4;
 alg bool s_testingbusy        = false;
 
 alg bool s_Hinitialized       = true;

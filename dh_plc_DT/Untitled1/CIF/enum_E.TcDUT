@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<<<<<<< HEAD
   <DUT Name="enum_E" Id="{aa855097-cd01-4379-8744-ff4a091382a5}">
+=======
+  <DUT Name="enum_E" Id="{8d3b7f4d-0b24-47d8-841d-6250140d39e2}">
+>>>>>>> master
     <Declaration><![CDATA[TYPE enum_E :
 (
 	elit_clear_vacuum,

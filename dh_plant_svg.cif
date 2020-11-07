@@ -148,5 +148,3 @@ svgout id "prod_RED0"                      attr "transform" value if pusher3.x' 
 svgout id "transfer_arm"                   attr "transform" value fmt("rotate(%s,326.706,160.517)",vacuumplant.r);
 svgout id "transfer_with_vacuum"           attr "transform" value fmt("rotate(%s,326.706,160.517) rotate(%s,273.874,163.250)",vacuumplant.r,-vacuumplant.r);
 
-
-
