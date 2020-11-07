@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_mode_a_Dresetled" Id="{66dcda6a-a5d2-450e-bc29-979a51a349e2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_mode_a_Dresetled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_mode_a_Dresetled := (state.dvar_M_mode) = (elit_reset);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_mode_a_Dresetled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -45,7 +45,7 @@ input bool s_Hinitialized;
 
 // OUTPUTS
 alg bool a_Dstartled        = example_controller.a_Dstartled;
-alg bool a_Dresetled        = false;
+alg bool a_Dresetled        = example_controller.a_Dresetled;
 alg bool a_DledQ1           = false;
 alg bool a_DledQ2           = false;
 

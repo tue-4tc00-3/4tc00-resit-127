@@ -182,7 +182,7 @@ automaton resetbutton:
         edge release when t > 0.1 goto Off;
 end
 
-
+automaton pusher1:
     disc real pusherspeed = 22;
     disc int i = 0;
     disc int prodmax = 7;

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_mode_a_Dstartled" Id="{e97a5acd-d5d2-4ed0-8d98-beb3d47e7a72}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_mode_a_Dstartled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_mode_a_Dstartled := (state.dvar_M_mode) = (elit_on);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_mode_a_Dstartled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

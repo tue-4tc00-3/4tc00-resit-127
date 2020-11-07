@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="projArray1" Id="{c16b03e0-beb4-4345-b063-fed519836fd5}" SpecialFunc="None">
+  <POU Name="projArray1" Id="{d9dfd675-2d04-449d-be6a-f4fc0e684256}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION projArray1 : BOOL
 VAR_INPUT
 	arr: ARRAY[0..2] OF BOOL;

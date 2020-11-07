@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_Dresetled" Id="{4492794e-5d28-404b-96c7-b46e11f46ce4}" SpecialFunc="None">
+  <POU Name="alg_a_Dresetled" Id="{cfee8df4-ffa9-4679-9254-1393039b2280}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_Dresetled : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_Dresetled := FALSE;]]></ST>
+      <ST><![CDATA[alg_a_Dresetled := alg_M_example_controller_a_Dresetled(state);]]></ST>
     </Implementation>
     <LineIds Name="alg_a_Dresetled">
       <LineId Id="2" Count="0" />

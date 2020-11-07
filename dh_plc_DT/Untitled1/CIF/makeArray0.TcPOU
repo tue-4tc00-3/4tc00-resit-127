@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="makeArray0" Id="{ac490945-809d-43be-b010-341b2f31916c}" SpecialFunc="None">
+  <POU Name="makeArray0" Id="{61e41df4-6364-4c0a-bacc-f780903c20eb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION makeArray0 : ARRAY[0..3] OF DINT
 VAR_INPUT
 	elem0: DINT;
