@@ -117,43 +117,6 @@ automaton gripper:
 end
 
 automaton pusher1:
-    alg bool s_stack1filled = i<prodmax;
-    alg bool s_product1 = i>0 and (pusher1.Extended or pusher1.right) and i<prodmax+1;
-    alg bool s_pusher1_in = pusher1.x >=-0.2;
-    alg bool s_pusher1_out = pusher1.x<=-14.387+0.2;
-
-    disc real pusherspeed = 22;
-    disc int i = 0;
-    disc int prodmax = 7;
-    cont x = 0;
-
-    location Extended:
-        equation x'=0;
-
-        initial;
-        edge when a_pusher1 goto left;
-        edge when gripper.color = "grey" goto left;
-
-    location left:
-        equation x'= -pusherspeed;
-
-        edge when not a_pusher1 goto right;
-        edge when pusher1.x<=-14.387+0.2 do i := i + 1 goto Retracted;
-
-    location right:
-        equation x' = pusherspeed;
-
-        edge when a_pusher1 goto left;
-        edge when pusher1.x >=-0.2 goto Extended;
-
-    location Retracted:
-        equation x' = 0;
-
-        edge when not a_pusher1 goto right;
-
-end
-
-automaton pusher1:
     alg bool s_stack1filled = i<prodmax +1;
     alg bool s_product1 = i>0 and (pusher1.Extended or pusher1.right) and i<prodmax+1;
     alg bool s_pusher1_in = pusher1.x >=-0.5;
