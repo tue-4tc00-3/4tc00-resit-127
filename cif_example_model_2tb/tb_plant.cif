@@ -168,3 +168,60 @@ group ws:
     end
 
 end // end group ws
+
+// Buttons
+automaton startbutton:
+    uncontrollable u_press;
+    event release;
+
+    cont t der 1;
+
+    location Off:
+        initial;
+        edge u_press do t := 0 goto On;
+
+    location On:
+        edge release when t > 0.1 goto Off;
+end
+
+automaton resetbutton:
+    uncontrollable u_press;
+    event release;
+
+    cont t der 1;
+
+    location Off:
+        initial;
+        edge u_press do t := 0 goto On;
+
+    location On:
+        edge release when t > 0.1 goto Off;
+end
+// Buttons handling station
+automaton H_startbutton:
+    uncontrollable u_press;
+    event release;
+
+    cont t der 1;
+
+    location Off:
+        initial;
+        edge u_press do t := 0 goto On;
+
+    location On:
+        edge release when t > 0.1 goto Off;
+end
+
+automaton H_resetbutton:
+    uncontrollable u_press;
+    event release;
+
+    cont t der 1;
+
+    location Off:
+        initial;
+        edge u_press do t := 0 goto On;
+
+    location On:
+        edge release when t > 0.1 goto Off;
+end

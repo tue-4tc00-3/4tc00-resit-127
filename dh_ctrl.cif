@@ -6,6 +6,7 @@ import "dh_ctrl_io.cif";
 automaton example_controller:
     alg bool  a_Dstartled = not wait_start and not init2;
     alg bool  a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
+    alg bool  a_Dstopled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
     disc bool a_x2distributing;
     disc bool a_zdown;
     disc bool a_gripperclose;
@@ -45,14 +46,21 @@ automaton example_controller:
     location droppoint:
         equation t' = 0;
         edge when s_Dresetbutton goto reset_button;
+        edge when s_Dstopbutton goto stop_button;
         edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
         edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
     location movetopickup:
         equation t' = 0;
         edge when s_Dresetbutton goto reset_button;
+        edge when s_Dstopbutton goto stop_button;
         edge when atpos[pickpos[i]] and i < 3 do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
         edge when atpos[pickpos[i]] and i >= 3 do i:= 0, a_x2distributing := true, a_x2testing := true goto down;
+
+    location stop_button:
+    equation t' = 0;
+        edge when s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto reset_down;
+        edge when not s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
     //location goD2:
        // edge when s_xpos_at1 goto down;
 
