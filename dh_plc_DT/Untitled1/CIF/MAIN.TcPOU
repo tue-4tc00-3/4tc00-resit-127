@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="MAIN" Id="{0804710d-293e-4a49-9844-8df60334c76c}" SpecialFunc="None">
+  <POU Name="MAIN" Id="{5b514baf-59c6-49f0-a8b2-c74ddb83d447}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR_OUTPUT
 	timerValue0: TIME;
