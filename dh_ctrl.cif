@@ -4,9 +4,14 @@ import "dh_ctrl_io.cif";
 
 
 automaton example_controller:
+<<<<<<< HEAD
     alg bool  a_Dstartled = not wait_start and not init2;
     alg bool  a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
     alg bool  a_Dstopled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
+=======
+    alg bool  a_Dstartled = not wait_start and not init2 and not stop;
+    alg bool  a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback and not stop;
+>>>>>>> master
     disc bool a_x2distributing;
     disc bool a_zdown;
     disc bool a_gripperclose;
@@ -31,6 +36,7 @@ automaton example_controller:
 
     location reset_button:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true goto wait_vacuum;
         edge when s_gripper and s_xpos_atdrop do a_zdown := false, a_x2distributing := true, a_x2testing := false goto pauze_left;
         edge when not s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true goto wait_vacuum;
@@ -38,31 +44,42 @@ automaton example_controller:
 
     location pauze_left:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when not s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true, a_x2testing := true goto wait_vacuum;
         edge when s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true, a_x2testing := true goto wait_vacuum;
 
     location wait_vacuum:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when not s_gripper and s_transfer_athalfway do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
         edge when s_gripper and s_transfer_athalfway do a_zdown := false, a_x2distributing := false, a_x2testing := true goto reset_down;
 
     location reset_down:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_xpos_atdrop do a_zdown := true, a_x2distributing :=true goto reset_place;
 
     location reset_place:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_zpos_atdown do t:=0, a_gripperclose := false, a_zdown := false, a_x2distributing := false, a_x2testing := false goto finished;
+
+    location stop:
+        equation t' = 0;
+        edge when s_Dstartbutton do a_x2testing := true goto droppoint;
+        edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
 
     location droppoint:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
         edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
     location movetopickup:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when atpos[pickpos[i]] and i < 3 do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
         edge when atpos[pickpos[i]] and i >= 3 do i:= 0, a_x2distributing := true, a_x2testing := true goto down;
 
@@ -78,12 +95,14 @@ automaton example_controller:
 
     location down:
         equation t' = 0;
-        edge when s_Dresetbutton goto reset_button;
+        edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge do a_zdown := true goto gopickup;
 
     location gopickup:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true, a_zdown := false goto goback;
         edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
         edge when s_zpos_atdown and not s_gripper and not s_xpos_atdrop do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
@@ -91,14 +110,17 @@ automaton example_controller:
     location goback:
         equation t' = 1;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_zpos_atup and s_gripper and t > 1 do a_x2testing := true, a_x2distributing := false, t:=0 goto droppoint;
 
     location finished:
         equation t' = 0;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_xpos_atdrop do a_x2distributing := true, a_x2testing := true goto reset;
 
     location reset:
         equation t' = 1;
+        edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when t>1 do t:=0, a_x2distributing := false, a_x2testing := false goto wait_start;
 
 end
@@ -113,12 +135,17 @@ automaton inventory1:
     location wait_start:
         edge when s_Dstartbutton goto starting;
 
+    location stop:
+        edge when s_Dstartbutton goto starting;
+
     location starting:
         edge when s_pusher1_in and not s_product1 do a_pusher1 := true goto going;
+        edge when s_pusher1_out and s_stack1filled goto going;
+        edge when not s_Dstopbutton do a_pusher1 := false goto stop;
 
     location going:
         edge when s_pusher1_out and s_stack1filled do a_pusher1 := false goto starting;
-
+        edge when not s_Dstopbutton goto stop;
 end
 
 automaton inventory2:
@@ -131,12 +158,17 @@ automaton inventory2:
     location wait_start:
         edge when s_Dstartbutton goto starting;
 
+    location stop:
+        edge when s_Dstartbutton goto starting;
+
     location starting:
         edge when s_pusher2_in and not s_product2 do a_pusher2 := true goto going;
+        edge when s_pusher2_out and s_stack1filled goto going;
+        edge when not s_Dstopbutton do a_pusher2 := false goto stop;
 
     location going:
         edge when s_pusher2_out and s_stack2filled do a_pusher2 := false goto starting;
-
+        edge when not s_Dstopbutton goto stop;
 end
 
 automaton inventory3:
@@ -149,11 +181,17 @@ automaton inventory3:
     location wait_start:
         edge when s_Dstartbutton goto starting;
 
+    location stop:
+        edge when s_Dstartbutton goto starting;
+
     location starting:
         edge when s_pusher3_in and not s_product3 do a_pusher3 := true goto going;
+        edge when s_pusher3_out and s_stack1filled goto going;
+        edge when not s_Dstopbutton do a_pusher3 := false goto stop;
 
     location going:
         edge when s_pusher3_out and s_stack3filled do a_pusher3 := false goto starting;
+        edge when not s_Dstopbutton goto stop;
 
 end
 
@@ -176,29 +214,38 @@ automaton vacuum:
     location reset_button:
         edge when s_transfer_athalfway do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto wait_start;
 
+    location stop:
+        edge when s_Dstartbutton goto starting;
+        edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
+
    location key:
         edge when not s_Dautoswitch goto starting;
 
     location starting:
         edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
+        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_product4 and s_zpos_atup and not s_vacuum do a_transfer2pickpos := true goto pickupvac;
         edge when s_vacuum do a_transfer2droppos := true goto pickupvac;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
     location pickupvac:
         edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
+        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_transfer_atpickup and not s_vacuum do a_transfer2pickpos := false, a_vacuum := true goto testingdrop;
         edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse:= true , a_transfer2pickpos := true, a_transfer2droppos := false goto rest;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
     location testingdrop:
         edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
+        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_vacuum do a_transfer2droppos := true goto starting;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
     location rest:
+        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_transfer_athalfway and s_Dautoswitch do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto key;
         edge when s_transfer_athalfway and not s_Dautoswitch do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto starting;
+
 end
 
 

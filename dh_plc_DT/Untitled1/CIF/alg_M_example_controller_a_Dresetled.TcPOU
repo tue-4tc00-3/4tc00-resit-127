@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<<<<<<< HEAD
   <POU Name="alg_M_example_controller_a_Dresetled" Id="{64855464-3f82-4456-b0f5-50a136a380ad}" SpecialFunc="None">
+=======
+  <POU Name="alg_M_example_controller_a_Dresetled" Id="{d40173c3-b56d-46db-9722-9e548f466e63}" SpecialFunc="None">
+>>>>>>> master
     <Declaration><![CDATA[FUNCTION alg_M_example_controller_a_Dresetled : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_M_example_controller_a_Dresetled := (((((((state.dvar_M_example_controller) <> (elit_wait_start)) AND ((state.dvar_M_example_controller) <> (elit_init2))) AND ((state.dvar_M_example_controller) <> (elit_droppoint))) AND ((state.dvar_M_example_controller) <> (elit_movetopickup))) AND ((state.dvar_M_example_controller) <> (elit_down))) AND ((state.dvar_M_example_controller) <> (elit_gopickup))) AND ((state.dvar_M_example_controller) <> (elit_goback));]]></ST>
+      <ST><![CDATA[alg_M_example_controller_a_Dresetled := ((((((((state.dvar_M_example_controller) <> (elit_wait_start)) AND ((state.dvar_M_example_controller) <> (elit_init2))) AND ((state.dvar_M_example_controller) <> (elit_droppoint))) AND ((state.dvar_M_example_controller) <> (elit_movetopickup))) AND ((state.dvar_M_example_controller) <> (elit_down))) AND ((state.dvar_M_example_controller) <> (elit_gopickup))) AND ((state.dvar_M_example_controller) <> (elit_goback))) AND ((state.dvar_M_example_controller) <> (elit_stop));]]></ST>
     </Implementation>
     <LineIds Name="alg_M_example_controller_a_Dresetled">
       <LineId Id="2" Count="0" />
