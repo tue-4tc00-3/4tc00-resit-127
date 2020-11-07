@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="ifExprFunc1" Id="{dc2d9303-0408-4915-bd0b-dd50bce2e760}" SpecialFunc="None">
+  <POU Name="ifExprFunc1" Id="{7ef90385-876d-4843-8436-0d18d5a38cfe}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION ifExprFunc1 : LREAL
 VAR_INPUT
 	state: STATE;
@@ -12,6 +12,10 @@ END_VAR
 ELSIF ((state.dvar_M_example_controller) = (elit_wait_start)) THEN
     ifExprFunc1 := 0.0;
 ELSIF ((state.dvar_M_example_controller) = (elit_reset_button)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_pauze_left)) THEN
+    ifExprFunc1 := 0.0;
+ELSIF ((state.dvar_M_example_controller) = (elit_wait_vacuum)) THEN
     ifExprFunc1 := 0.0;
 ELSIF ((state.dvar_M_example_controller) = (elit_reset_down)) THEN
     ifExprFunc1 := 0.0;
@@ -34,7 +38,7 @@ ELSE
 END_IF;]]></ST>
     </Implementation>
     <LineIds Name="ifExprFunc1">
-      <LineId Id="3" Count="23" />
+      <LineId Id="3" Count="27" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

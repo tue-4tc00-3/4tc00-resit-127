@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="enum_E" Id="{8f8aa52e-f7bb-4d08-b286-0c37a20ebb28}">
+  <DUT Name="enum_E" Id="{b397b065-e986-49bc-83f6-8592f78efcc1}">
     <Declaration><![CDATA[TYPE enum_E :
 (
 	elit_clear_vacuum,
@@ -26,6 +26,7 @@
 	elit_initialized,
 	elit_key,
 	elit_movetopickup,
+	elit_pauze_left,
 	elit_pickupvac,
 	elit_reset,
 	elit_reset_button,
@@ -34,7 +35,8 @@
 	elit_rest,
 	elit_starting,
 	elit_testingdrop,
-	elit_wait_start
+	elit_wait_start,
+	elit_wait_vacuum
 );
 END_TYPE
 ]]></Declaration>
