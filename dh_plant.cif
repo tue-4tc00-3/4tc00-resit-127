@@ -107,6 +107,7 @@ automaton gripper:
                        elif s_gripper and s_xpos_at3 and s_zpos_atdown: colorpick[2]
                        else "non" end;
     disc string colorhold = "none";
+    disc bool newprod = false;
 
 
     location Idle:
@@ -130,7 +131,7 @@ automaton pusher1:
     alg bool s_pusher1_out = pusher1.x<=-14.387+0.5;
 
     disc real pusherspeed = 22;
-    disc int i = 6;
+    disc int i = 0;
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -256,7 +257,7 @@ alg bool s_transfer_athalfway = r<90.5 and r>89.5;
 alg bool s_transfer_atdrop = r >179.5;
 alg bool s_vacuum = haveprod;
 disc bool haveprod = false;
-alg bool s_product4 = newprod;
+alg bool s_product4 = not s_gripper and newprod;
 disc bool newprod = true;
 
 disc real rotationspeed = 40;
@@ -283,7 +284,7 @@ cont t = 0;
     location ejecting:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := false, t := 0 goto stop;
+        edge when t >= 1 do haveprod := false, t := 0, newprod := true goto stop;
 
     location stop:
         initial;
