@@ -101,7 +101,7 @@ svgout id "prod_grey4"                      attr "fill" value if pusher1.i >= 4:
 svgout id "prod_grey3"                      attr "fill" value if pusher1.i >= 5:   "white" else "grey" end;
 svgout id "prod_grey2"                      attr "fill" value if pusher1.i >= 6:   "white" else "grey" end;
 svgout id "prod_grey1"                      attr "fill" value if pusher1.i >= 7:   "white" else "grey" end;
-svgout id "prod_grey0"                      attr "fill" value if pusher1.i = 0 or pusher3.i >= 8 or pusher1.left:   "white" else "grey" end;
+svgout id "prod_grey0"                      attr "fill" value if pusher1.i = 0 or pusher1.i >= 8 or pusher1.left:   "white" else "grey" end;
 svgout id "prod_grey0"                      attr "transform" value if pusher1.x' >0: fmt("translate(%s,0)",pusher1.x+12.802)
                                                                   elif pusher1.Retracted: fmt("translate(0,0)")
                                                                   else              fmt("translate(12.,0)") end;

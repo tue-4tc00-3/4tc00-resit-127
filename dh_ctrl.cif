@@ -82,11 +82,6 @@ automaton example_controller:
     equation t' = 0;
         edge when s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto reset_down;
         edge when not s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
-    //location goD2:
-       // edge when s_xpos_at1 goto down;
-
-    //location goD3:
-        //edge when s_xpos_at1 goto down;
 
     location down:
         equation t' = 0;
@@ -121,6 +116,8 @@ automaton example_controller:
 end
 
 automaton inventory1:
+    event a,b,c,d;
+
     disc bool a_pusher1;
 
     location init2:
@@ -134,12 +131,12 @@ automaton inventory1:
         edge when s_Dstartbutton goto starting;
 
     location starting:
-        edge when s_pusher1_in and not s_product1 do a_pusher1 := true goto going;
-        edge when s_pusher1_out and s_stack1filled goto going;
-        edge when not s_Dstopbutton do a_pusher1 := false goto stop;
+        edge a when s_pusher1_in and not s_product1 do a_pusher1 := true goto going;
+        edge b when s_pusher1_out and s_stack1filled and a_pusher1 goto going;
+        edge c when not s_Dstopbutton do a_pusher1 := false goto stop;
 
     location going:
-        edge when s_pusher1_out and s_stack1filled do a_pusher1 := false goto starting;
+        edge d when s_pusher1_out and s_stack1filled do a_pusher1 := false goto starting;
         edge when not s_Dstopbutton goto stop;
 end
 
@@ -158,7 +155,7 @@ automaton inventory2:
 
     location starting:
         edge when s_pusher2_in and not s_product2 do a_pusher2 := true goto going;
-        edge when s_pusher2_out and s_stack1filled goto going;
+        edge when s_pusher2_out and s_stack1filled and a_pusher2 goto going;
         edge when not s_Dstopbutton do a_pusher2 := false goto stop;
 
     location going:
@@ -181,7 +178,7 @@ automaton inventory3:
 
     location starting:
         edge when s_pusher3_in and not s_product3 do a_pusher3 := true goto going;
-        edge when s_pusher3_out and s_stack1filled goto going;
+        edge when s_pusher3_out and s_stack1filled and a_pusher3 goto going;
         edge when not s_Dstopbutton do a_pusher3 := false goto stop;
 
     location going:
