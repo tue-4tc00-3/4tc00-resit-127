@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <POU Name="makeArray0" Id="{8a74912b-ad34-4196-a72f-8800a8287164}" SpecialFunc="None">
 =======
   <POU Name="makeArray0" Id="{eb9bd147-16ac-4339-9dd0-32f1549f77ec}" SpecialFunc="None">
+=======
+  <POU Name="makeArray0" Id="{eb9bd147-16ac-4339-9dd0-32f1549f77ec}" SpecialFunc="None">
+=======
+  <POU Name="makeArray0" Id="{8a74912b-ad34-4196-a72f-8800a8287164}" SpecialFunc="None">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[FUNCTION makeArray0 : ARRAY[0..3] OF DINT
 VAR_INPUT

@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <GVL Name="TIMERS" Id="{34ddc689-3645-495c-9a26-425bbb09735e}">
 =======
   <GVL Name="TIMERS" Id="{8cdb4728-1ddb-4ff0-a5a4-2f51026ef1e5}">
+=======
+  <GVL Name="TIMERS" Id="{8cdb4728-1ddb-4ff0-a5a4-2f51026ef1e5}">
+=======
+  <GVL Name="TIMERS" Id="{34ddc689-3645-495c-9a26-425bbb09735e}">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[VAR_GLOBAL
 	timer0: TON;

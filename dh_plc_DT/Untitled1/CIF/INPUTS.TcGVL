@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <GVL Name="INPUTS" Id="{0a1c9f6c-80e0-41fe-848a-746567ff9db9}">
 =======
   <GVL Name="INPUTS" Id="{9b3d3164-1ae0-4c1a-9ae1-84b9e27695e9}">
+=======
+  <GVL Name="INPUTS" Id="{9b3d3164-1ae0-4c1a-9ae1-84b9e27695e9}">
+=======
+  <GVL Name="INPUTS" Id="{0a1c9f6c-80e0-41fe-848a-746567ff9db9}">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[VAR_GLOBAL
 	ivar_s_Dstartbutton AT %I*: BOOL;

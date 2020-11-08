@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <POU Name="alg_a_x2distributing" Id="{4d312c4a-688e-4951-91b3-dc45c2c68090}" SpecialFunc="None">
 =======
   <POU Name="alg_a_x2distributing" Id="{a8a18b7b-0c1a-46ff-8a48-d0b663f7dfdd}" SpecialFunc="None">
+=======
+  <POU Name="alg_a_x2distributing" Id="{a8a18b7b-0c1a-46ff-8a48-d0b663f7dfdd}" SpecialFunc="None">
+=======
+  <POU Name="alg_a_x2distributing" Id="{4d312c4a-688e-4951-91b3-dc45c2c68090}" SpecialFunc="None">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[FUNCTION alg_a_x2distributing : BOOL
 VAR_INPUT

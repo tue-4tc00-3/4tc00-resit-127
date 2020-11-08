@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <POU Name="alg_M_example_controller_pickpos" Id="{1768631b-9c44-4aa7-a24b-b71d358a7a57}" SpecialFunc="None">
 =======
   <POU Name="alg_M_example_controller_pickpos" Id="{d35060d0-53ef-4e3c-8896-2a949ec79d45}" SpecialFunc="None">
+=======
+  <POU Name="alg_M_example_controller_pickpos" Id="{d35060d0-53ef-4e3c-8896-2a949ec79d45}" SpecialFunc="None">
+=======
+  <POU Name="alg_M_example_controller_pickpos" Id="{1768631b-9c44-4aa7-a24b-b71d358a7a57}" SpecialFunc="None">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[FUNCTION alg_M_example_controller_pickpos : ARRAY[0..3] OF DINT
 VAR_INPUT

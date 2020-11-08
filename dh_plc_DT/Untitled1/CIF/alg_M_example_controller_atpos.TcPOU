@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <POU Name="alg_M_example_controller_atpos" Id="{77c00914-2119-4272-b6c5-92c69512db45}" SpecialFunc="None">
 =======
   <POU Name="alg_M_example_controller_atpos" Id="{396ec065-3dd1-421c-b6c8-b1b5829c3989}" SpecialFunc="None">
+=======
+  <POU Name="alg_M_example_controller_atpos" Id="{396ec065-3dd1-421c-b6c8-b1b5829c3989}" SpecialFunc="None">
+=======
+  <POU Name="alg_M_example_controller_atpos" Id="{77c00914-2119-4272-b6c5-92c69512db45}" SpecialFunc="None">
+>>>>>>> master
 >>>>>>> master
     <Declaration><![CDATA[FUNCTION alg_M_example_controller_atpos : ARRAY[0..2] OF BOOL
 VAR_INPUT
