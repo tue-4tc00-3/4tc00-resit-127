@@ -44,8 +44,8 @@ input bool s_testingbusy;
 input bool s_Hinitialized;
 
 // OUTPUTS
-alg bool a_Dstartled        = example_controller.a_Dstartled;
-alg bool a_Dresetled        = example_controller.a_Dresetled;
+alg bool a_Dstartled        = Distributing.a_Dstartled;
+alg bool a_Dresetled        = Distributing.a_Dresetled;
 alg bool a_DledQ1           = false;
 alg bool a_DledQ2           = false;
 
@@ -58,10 +58,10 @@ alg bool a_Hresetled        = false;
 alg bool a_HledQ1           = false;
 alg bool a_HledQ2           = false;
 
-alg bool a_x2distributing   = example_controller.a_x2distributing;
-alg bool a_x2testing        = example_controller.a_x2testing;
-alg bool a_zdown            = example_controller.a_zdown;
-alg bool a_gripperclose     = example_controller.a_gripperclose;
+alg bool a_x2distributing   = Distributing.a_x2distributing;
+alg bool a_x2testing        = Distributing.a_x2testing;
+alg bool a_zdown            = Distributing.a_zdown;
+alg bool a_gripperclose     = Distributing.a_gripperclose;
 
 alg bool a_transfer2pickpos = vacuum.a_transfer2pickpos;
 alg bool a_transfer2droppos = vacuum.a_transfer2droppos;

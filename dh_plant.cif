@@ -30,7 +30,7 @@ end
 
 
 
-
+//Moving the arm left to right and back with sensing the position of the arm
 automaton Rails:
 //    Sense the position of the crane
     alg bool s_xpos_at1 =       if Rails.x >= -136.745 - 1 and Rails.x <= -136.745 + 1: true
@@ -47,7 +47,9 @@ automaton Rails:
                                 or (s_xpos_at3 and s_zpos_atdown and s_product3)
                                 or a_gripperclose;
 
+// velocity of movement of the arm
     const real v = -25;
+// x position of arm with starting position as 0
     cont x = 0;
 
     location Moving:
@@ -61,6 +63,8 @@ automaton Rails:
         edge when a_x2distributing = not a_x2distributing goto Moving;
 end
 
+
+// up and down movement from the gripper and sensing the position
 automaton crane:
     alg bool s_zpos_atup =      if crane.y <= 1: true
                                 else false end;
@@ -69,8 +73,11 @@ automaton crane:
 
     event down, at_maxz, at_minz, up;
 
+// velocity of moving up and down
     alg real v_set = 35;
+// position
     cont y = 0;
+// make time variable to add delays
     cont t = 0;
 
     location Retracted:
@@ -97,16 +104,20 @@ automaton crane:
         edge up when not a_zdown do t := 0 goto Up;
 end
 
+
+// operating the gripper
 automaton gripper:
 
     event release_no, released, grab;
     const real v_set = 1;
+// find the gripped product color
     disc list[3] string colorpick = ["grey", "red", "RED"];
     alg string color = if s_gripper and s_xpos_at1 and s_zpos_atdown: colorpick[0]
                        elif s_gripper and s_xpos_at2 and s_zpos_atdown: colorpick[1]
                        elif s_gripper and s_xpos_at3 and s_zpos_atdown: colorpick[2]
                        else "non" end;
     disc string colorhold = "none";
+
 
     location Idle:
         initial;
@@ -120,6 +131,8 @@ automaton gripper:
         edge released when not a_gripperclose goto Idle;
 end
 
+
+// operating pusher 1 in inventory 1
 automaton pusher1:
     event toleft, toright, extended, retracted;
 
@@ -129,7 +142,9 @@ automaton pusher1:
     alg bool s_pusher1_out = pusher1.x<=-14.387+1;
 
     disc real pusherspeed = 22;
+// amount of products pushed
     disc int i = 0;
+// maximum amount in stack
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -164,6 +179,7 @@ automaton pusher1:
 
 end
 
+// operating pusher 2 in inventory 2
 automaton pusher2:
     alg bool s_stack2filled = i<prodmax+1;
     alg bool s_product2 = i>0 and (pusher2.Extended or pusher2.right) and i<prodmax+1;
@@ -171,7 +187,9 @@ automaton pusher2:
     alg bool s_pusher2_out = pusher2.x<=-14.387+1;
 
     disc real pusherspeed = 22;
+// amount of products pushed
     disc int i = 0;
+// maximum amount in stack
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -206,6 +224,7 @@ automaton pusher2:
 
 end
 
+// operating pusher 3 in inventory 3
 automaton pusher3:
     alg bool s_stack3filled = i<prodmax+1;
     alg bool s_product3 = i>0 and (pusher3.Extended or pusher3.right) and i<prodmax+1;
@@ -213,7 +232,9 @@ automaton pusher3:
     alg bool s_pusher3_out = pusher3.x<=-14.387+1;
 
     disc real pusherspeed = 22;
+// amount of products pushed
     disc int i = 0;
+// maximum amount in stack
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -248,6 +269,8 @@ automaton pusher3:
 
 end
 
+
+// plant of the vacuum
 automaton vacuumplant:
 
 alg bool s_transfer_atpickup = r<2;
