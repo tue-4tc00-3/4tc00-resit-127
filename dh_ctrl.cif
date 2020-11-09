@@ -3,14 +3,17 @@ import "dh_ctrl_io.cif";
 
 
 automaton Distributing: // This
+// all the control button active?
     alg bool  a_Dstopled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
     alg bool  a_Dstartled = not wait_start and not init2 and not stop;
     alg bool  a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback and not stop;
+// make actuators
     disc bool a_x2distributing;
     disc bool a_zdown;
     disc bool a_gripperclose;
     disc bool a_x2testing;
 
+// pickup sequence, position 1, 2, 1, 3, in that order
     alg list[4] int pickpos = [0,1,0,2];
     disc int i = 0;
     alg list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
@@ -63,6 +66,7 @@ automaton Distributing: // This
         edge when s_Dstartbutton do a_x2testing := true goto droppoint;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
 
+// what action to take when at drop
     location droppoint:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
@@ -70,31 +74,38 @@ automaton Distributing: // This
         edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
         edge when not s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
+// go to position to pickup product
     location movetopickup:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+        // different actions to keep track of the sequence
         edge when atpos[pickpos[i]] and i < 3 do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
         edge when atpos[pickpos[i]] and i >= 3 do i:= 0, a_x2distributing := true, a_x2testing := true goto down;
 
+// go down for pick when at the right position
         location down:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge do a_zdown := true goto gopickup;
 
+// pick up the product
     location gopickup:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true goto goup;
         edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
+// when no product found go back to starting position. Does not work in SVG does work in TwinCat
         //edge when s_zpos_atdown and not s_gripper and not s_xpos_atdrop do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
 
+// go back up and wait a moment, this to prevent collision with gripper and vacuum in certain situations
     location goup:
         equation t' = 1;
         edge when t>=0.1 do t:=0, a_zdown := false  goto goback;
 
+// go to drop point
     location goback:
         equation t' = 1;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
@@ -113,6 +124,7 @@ automaton Distributing: // This
 
 end
 
+// controller for pusher 1
 automaton inventory1:
     event a,b,c,d;
 
@@ -138,6 +150,7 @@ automaton inventory1:
         edge when not s_Dstopbutton goto stop;
 end
 
+// controller for pusher 2
 automaton inventory2:
     disc bool a_pusher2;
 
@@ -161,6 +174,7 @@ automaton inventory2:
         edge when not s_Dstopbutton goto stop;
 end
 
+// controller for pusher 3
 automaton inventory3:
     disc bool a_pusher3;
 
@@ -185,6 +199,7 @@ automaton inventory3:
 
 end
 
+// controller for vacuum arm and vacuum
 automaton vacuum:
     disc bool a_transfer2pickpos;
     disc bool a_transfer2droppos;
@@ -218,6 +233,7 @@ automaton vacuum:
         edge when s_vacuum do a_transfer2droppos := true goto pickupvac;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
+// go to picking up the product with vacuum
     location pickupvac:
         edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
         edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
@@ -225,6 +241,7 @@ automaton vacuum:
         edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse:= true  goto testingdrop;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
+// go to dropping the product
     location testingdrop:
        edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
@@ -232,6 +249,7 @@ automaton vacuum:
        edge when not s_vacuum and s_transfer_atdrop do a_transfer2pickpos := true , a_transfer2droppos := false goto rest;
        edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
+// wait for new product on halfway position
     location rest:
         edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_transfer_athalfway and s_Dautoswitch do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto key;
