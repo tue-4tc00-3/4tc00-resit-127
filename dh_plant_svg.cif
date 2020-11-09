@@ -50,7 +50,7 @@ group def OutputItem(alg string Label; alg string color; alg real x, y):
 end
 
 // Move block with crane
-svgout id "prod_gripper"            attr "fill" value      if not s_gripper and not s_product4:    "white"
+svgout id "prod_gripper"            attr "fill" value      if not s_gripper and not s_product4:    "none"
                                                            elif gripper.colorhold="grey":          "grey" else "red" end;
 svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y)
                                                            else             fmt("translate(0,65.7)") end;
@@ -143,9 +143,9 @@ svgout id "prod_RED0"                      attr "transform" value if pusher3.x' 
                                                                   else              fmt("translate(12.,0)") end;
 
 //vacuum svg
-svgout id "prod_transfer"                  attr "fill" value if a_vacuum  : "red" else "none" end;
-//svgout id "prod_transfer"                  attr "fill" value      if not s_gripper and not s_product4:    "white"
-//                                                          elif gripper.colorhold="grey":          "grey" else "red" end;
+// svgout id "prod_transfer"                  attr "fill" value if a_vacuum  : "red" else "none" end;
+svgout id "prod_transfer"                  attr "fill" value      if not a_vacuum:    "none"
+                                                                  elif vacuumplant.colorhold2="grey":          "grey" else "red" end;
 svgout id "transfer_arm"                   attr "transform" value fmt("rotate(%s,329.022,163.171)",vacuumplant.r);
 svgout id "transfer_with_vacuum"           attr "transform" value fmt("rotate(%s,329.022,163.171) rotate(%s,276.674,163.171)",vacuumplant.r,-vacuumplant.r);
 svgout id "prod_testing"                   attr "fill" value "white";

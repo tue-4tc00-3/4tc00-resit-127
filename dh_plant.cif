@@ -286,11 +286,11 @@ cont r = 0;
 cont t = 0;
 
 //  disc list[2] string colorpick = ["grey", "red"];
-//         monitor
-//     alg string color = if s_gripper and s_xpos_at1 and s_zpos_atdown: colorpick[0]
+//     alg string color = if not s_gripper : colorpick[0]
 //                        elif s_gripper and s_xpos_at2 and s_zpos_atdown: colorpick[1]
 //                        else "non" end;
-//     disc string colorhold = "none";
+    disc string colorhold2 = "none";
+
 
     location right:
         equation r'= rotationspeed;
@@ -307,7 +307,7 @@ cont t = 0;
     location sucking:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := true, t:= 0, newprod := false goto stop;
+        edge when t >= 1 do haveprod := true, t:= 0, newprod := false  goto stop;
 
     location ejecting:
         equation r'=0;
@@ -319,7 +319,8 @@ cont t = 0;
         equation r'=0;
         equation t'=0;
         edge when a_transfer2droppos and not a_transfer2pickpos and r<=180-2 goto right;
-        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 goto left;
+        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="grey" do colorhold2 := "grey" goto left;
+        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="none" do colorhold2 := "none" goto left;
         edge when a_ejectpulse and haveprod goto ejecting;
         edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
 end
