@@ -296,13 +296,15 @@ cont t = 0;
         equation r'= rotationspeed;
         equation t'= 0;
         edge when r>180-2 goto stop;
-        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)  goto stop;
+        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
+                                                                                                            goto stop;
 
     location left:
         equation r'=-rotationspeed;
         equation t'= 0;
         edge when r<2 goto stop;
-        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
+        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
+                                                                                                            goto stop;
 
     location sucking:
         equation r'=0;
@@ -319,8 +321,10 @@ cont t = 0;
         equation r'=0;
         equation t'=0;
         edge when a_transfer2droppos and not a_transfer2pickpos and r<=180-2 goto right;
-        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="grey" do colorhold2 := "grey" goto left;
-        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="none" do colorhold2 := "none" goto left;
+        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="grey"
+                                                                                    do colorhold2 := "grey" goto left;
+        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="none"
+                                                                                    do colorhold2 := "none" goto left;
         edge when a_ejectpulse and haveprod goto ejecting;
         edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
 end
