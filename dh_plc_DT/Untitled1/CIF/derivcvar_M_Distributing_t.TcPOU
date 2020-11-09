@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="derivcvar_M_Distributing_t" Id="{d9c75252-4d84-4482-b338-cdf2636f7e4d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION derivcvar_M_Distributing_t : LREAL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[derivcvar_M_Distributing_t := ifExprFunc1(state);]]></ST>
+    </Implementation>
+    <LineIds Name="derivcvar_M_Distributing_t">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

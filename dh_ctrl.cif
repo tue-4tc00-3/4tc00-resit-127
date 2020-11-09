@@ -1,9 +1,8 @@
 import "dh_ctrl_io.cif";
 
-//Example of a very simple controller that turns on the startled when the start button is pressed
 
 
-automaton Distributing:
+automaton Distributing: // This
     alg bool  a_Dstopled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback ;
     alg bool  a_Dstartled = not wait_start and not init2 and not stop;
     alg bool  a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback and not stop;
@@ -69,7 +68,7 @@ automaton Distributing:
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
-        edge when not s_gripper and s_xpos_atdrop do a_x2distributing := true, a_x2testing := false goto movetopickup;
+        edge when not s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := false goto movetopickup;
 
     location movetopickup:
         equation t' = 0;
@@ -223,14 +222,15 @@ automaton vacuum:
         edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
         edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
         edge when s_transfer_atpickup and not s_vacuum do a_transfer2pickpos := false, a_vacuum := true goto testingdrop;
-        edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse:= true , a_transfer2pickpos := true, a_transfer2droppos := false goto rest;
+        edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse:= true  goto testingdrop;
         edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
     location testingdrop:
-        edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
-        edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
-        edge when s_vacuum do a_transfer2droppos := true goto starting;
-        edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
+       edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos:= false goto clear_vacuum;
+       edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
+       edge when s_vacuum and s_transfer_atpickup do a_transfer2droppos := true goto starting;
+       edge when not s_vacuum and s_transfer_atdrop do a_transfer2pickpos := true , a_transfer2droppos := false goto rest;
+       edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
 
     location rest:
         edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;

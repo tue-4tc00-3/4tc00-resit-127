@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_Distributing_atpos" Id="{10332a8f-2b56-445a-813e-5886acda0ec8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_Distributing_atpos : ARRAY[0..2] OF BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_Distributing_atpos := makeArray1(ivar_s_xpos_at1, ivar_s_xpos_at2, ivar_s_xpos_at3);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_Distributing_atpos">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -75,6 +75,21 @@
     <Compile Include="CIF\alg_a_zdown.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CIF\alg_M_Distributing_atpos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_Distributing_a_Dresetled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_Distributing_a_Dstartled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_Distributing_a_Dstopled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\alg_M_Distributing_pickpos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\alg_M_example_controller_atpos.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -100,6 +115,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\alg_s_Hinitialized.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CIF\derivcvar_M_Distributing_t.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CIF\derivcvar_M_example_controller_t.TcPOU">

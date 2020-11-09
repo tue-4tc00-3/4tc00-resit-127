@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_Distributing_pickpos" Id="{dec388c4-ac7b-47cc-999e-22527c559381}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_Distributing_pickpos : ARRAY[0..3] OF DINT
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_Distributing_pickpos := makeArray0(0, 1, 0, 2);]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_Distributing_pickpos">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

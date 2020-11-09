@@ -2,7 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.32">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}" AutoDeleteType="true">enum_E</Name>
+			<Name GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}" AutoDeleteType="true">enum_E</Name>
 			<BitSize>16</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
 			<EnumInfo>
@@ -49,174 +49,180 @@
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init0]]>
+					<![CDATA[elit_goup]]>
 				</Text>
 				<Enum>7</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init1]]>
+					<![CDATA[elit_init0]]>
 				</Text>
 				<Enum>8</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init2]]>
+					<![CDATA[elit_init1]]>
 				</Text>
 				<Enum>9</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init3]]>
+					<![CDATA[elit_init2]]>
 				</Text>
 				<Enum>10</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init4]]>
+					<![CDATA[elit_init3]]>
 				</Text>
 				<Enum>11</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init5]]>
+					<![CDATA[elit_init4]]>
 				</Text>
 				<Enum>12</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init6]]>
+					<![CDATA[elit_init5]]>
 				</Text>
 				<Enum>13</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init7]]>
+					<![CDATA[elit_init6]]>
 				</Text>
 				<Enum>14</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init8]]>
+					<![CDATA[elit_init7]]>
 				</Text>
 				<Enum>15</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init9]]>
+					<![CDATA[elit_init8]]>
 				</Text>
 				<Enum>16</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_error]]>
+					<![CDATA[elit_init9]]>
 				</Text>
 				<Enum>17</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_ok]]>
+					<![CDATA[elit_init_error]]>
 				</Text>
 				<Enum>18</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_init_sensor_check]]>
+					<![CDATA[elit_init_ok]]>
 				</Text>
 				<Enum>19</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_initialized]]>
+					<![CDATA[elit_init_sensor_check]]>
 				</Text>
 				<Enum>20</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_key]]>
+					<![CDATA[elit_initialized]]>
 				</Text>
 				<Enum>21</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_movetopickup]]>
+					<![CDATA[elit_key]]>
 				</Text>
 				<Enum>22</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_pauze_left]]>
+					<![CDATA[elit_movetopickup]]>
 				</Text>
 				<Enum>23</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_pickupvac]]>
+					<![CDATA[elit_pauze_left]]>
 				</Text>
 				<Enum>24</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_reset]]>
+					<![CDATA[elit_pickupvac]]>
 				</Text>
 				<Enum>25</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_reset_button]]>
+					<![CDATA[elit_reset]]>
 				</Text>
 				<Enum>26</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_reset_down]]>
+					<![CDATA[elit_reset_button]]>
 				</Text>
 				<Enum>27</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_reset_place]]>
+					<![CDATA[elit_reset_down]]>
 				</Text>
 				<Enum>28</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_rest]]>
+					<![CDATA[elit_reset_place]]>
 				</Text>
 				<Enum>29</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_starting]]>
+					<![CDATA[elit_rest]]>
 				</Text>
 				<Enum>30</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_stop]]>
+					<![CDATA[elit_starting]]>
 				</Text>
 				<Enum>31</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_testingdrop]]>
+					<![CDATA[elit_stop]]>
 				</Text>
 				<Enum>32</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_wait_start]]>
+					<![CDATA[elit_testingdrop]]>
 				</Text>
 				<Enum>33</Enum>
 			</EnumInfo>
 			<EnumInfo>
 				<Text>
-					<![CDATA[elit_wait_vacuum]]>
+					<![CDATA[elit_wait_start]]>
 				</Text>
 				<Enum>34</Enum>
 			</EnumInfo>
+			<EnumInfo>
+				<Text>
+					<![CDATA[elit_wait_vacuum]]>
+				</Text>
+				<Enum>35</Enum>
+			</EnumInfo>
 			<Hides>
-				<Hide GUID="{D0D84442-3671-47F1-A20D-D07211318EB6}"/>
+				<Hide GUID="{389B1EB6-E31D-44AA-8C61-B636DB444B7D}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>
@@ -439,32 +445,32 @@
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller_a_x2distributing</Name>
+							<Name>MAIN.state0.dvar_M_Distributing_a_x2distributing</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller_a_zdown</Name>
+							<Name>MAIN.state0.dvar_M_Distributing_a_zdown</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller_a_gripperclose</Name>
+							<Name>MAIN.state0.dvar_M_Distributing_a_gripperclose</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller_a_x2testing</Name>
+							<Name>MAIN.state0.dvar_M_Distributing_a_x2testing</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller_i</Name>
+							<Name>MAIN.state0.dvar_M_Distributing_i</Name>
 							<Type>DINT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.cvar_M_example_controller_t</Name>
+							<Name>MAIN.state0.cvar_M_Distributing_t</Name>
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.state0.dvar_M_example_controller</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Name>MAIN.state0.dvar_M_Distributing</Name>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap_out_a_Dstartled</Name>
@@ -592,7 +598,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_HardwareMap</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory1_a_pusher1</Name>
@@ -600,7 +606,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory1</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory2_a_pusher2</Name>
@@ -608,7 +614,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory2</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory3_a_pusher3</Name>
@@ -616,7 +622,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_inventory3</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_vacuum_a_transfer2pickpos</Name>
@@ -636,7 +642,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.state0.dvar_M_vacuum</Name>
-							<Type GUID="{C9321FDE-518F-42D9-9AEE-A683012A644D}">enum_E</Type>
+							<Type GUID="{991F2739-4DB4-42A4-B040-EEBE8F8428F9}">enum_E</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>

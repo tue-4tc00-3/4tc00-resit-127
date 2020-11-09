@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="alg_M_Distributing_a_Dresetled" Id="{9776a480-2efe-4585-83e2-de1501e00141}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION alg_M_Distributing_a_Dresetled : BOOL
+VAR_INPUT
+	state: STATE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alg_M_Distributing_a_Dresetled := ((((((((state.dvar_M_Distributing) <> (elit_wait_start)) AND ((state.dvar_M_Distributing) <> (elit_init2))) AND ((state.dvar_M_Distributing) <> (elit_droppoint))) AND ((state.dvar_M_Distributing) <> (elit_movetopickup))) AND ((state.dvar_M_Distributing) <> (elit_down))) AND ((state.dvar_M_Distributing) <> (elit_gopickup))) AND ((state.dvar_M_Distributing) <> (elit_goback))) AND ((state.dvar_M_Distributing) <> (elit_stop));]]></ST>
+    </Implementation>
+    <LineIds Name="alg_M_Distributing_a_Dresetled">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

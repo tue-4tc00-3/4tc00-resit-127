@@ -285,6 +285,13 @@ disc real rotationspeed = 45;
 cont r = 0;
 cont t = 0;
 
+//  disc list[2] string colorpick = ["grey", "red"];
+//         monitor
+//     alg string color = if s_gripper and s_xpos_at1 and s_zpos_atdown: colorpick[0]
+//                        elif s_gripper and s_xpos_at2 and s_zpos_atdown: colorpick[1]
+//                        else "non" end;
+//     disc string colorhold = "none";
+
     location right:
         equation r'= rotationspeed;
         equation t'= 0;
