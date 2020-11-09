@@ -1,0 +1,578 @@
+alg bool s_Dstartbutton = operator.s_Dstartbutton;
+alg bool s_Dstopbutton = not operator.s_Dstopbutton;
+alg bool s_Dresetbutton = operator.s_Dresetbutton;
+alg bool s_Dautoswitch = false;
+alg bool s_pusher1_in = pusher1.s_pusher1_in;
+alg bool s_pusher1_out = pusher1.s_pusher1_out;
+alg bool s_stack1filled = pusher1.s_stack1filled;
+alg bool s_product1 = pusher1.s_product1;
+alg bool s_pusher2_in = pusher2.s_pusher2_in;
+alg bool s_pusher2_out = pusher2.s_pusher2_out;
+alg bool s_stack2filled = pusher2.s_stack2filled;
+alg bool s_product2 = pusher2.s_product2;
+alg bool s_pusher3_in = pusher3.s_pusher3_in;
+alg bool s_pusher3_out = pusher3.s_pusher3_out;
+alg bool s_stack3filled = pusher3.s_stack3filled;
+alg bool s_product3 = pusher3.s_product3;
+alg bool s_handlingbusy = false;
+alg bool s_Dinitialized = true;
+alg bool s_Hstartbutton = false;
+alg bool s_Hstopbutton = true;
+alg bool s_Hresetbutton = false;
+alg bool s_Hautoswitch = false;
+alg bool s_xpos_at1 = Rails.s_xpos_at1;
+alg bool s_xpos_at2 = Rails.s_xpos_at2;
+alg bool s_xpos_at3 = Rails.s_xpos_at3;
+alg bool s_xpos_atdrop = Rails.s_xpos_atdrop;
+alg bool s_zpos_atup = crane.s_zpos_atup;
+alg bool s_zpos_atdown = crane.s_zpos_atdown;
+alg bool s_gripper = Rails.s_gripper;
+alg bool s_transfer_atpickup = vacuumplant.s_transfer_atpickup;
+alg bool s_transfer_atdrop = vacuumplant.s_transfer_atdrop;
+alg bool s_transfer_athalfway = vacuumplant.s_transfer_athalfway;
+alg bool s_vacuum = vacuumplant.s_vacuum;
+alg bool s_product4 = vacuumplant.s_product4;
+alg bool s_testingbusy = false;
+alg bool s_Hinitialized = true;
+alg bool a_Dstartled = Distributing.a_Dstartled;
+alg bool a_Dresetled = Distributing.a_Dresetled;
+alg bool a_DledQ1 = false;
+alg bool a_DledQ2 = false;
+alg bool a_pusher1 = inventory1.a_pusher1;
+alg bool a_pusher2 = inventory2.a_pusher2;
+alg bool a_pusher3 = inventory3.a_pusher3;
+alg bool a_Hstartled = false;
+alg bool a_Hresetled = false;
+alg bool a_HledQ1 = false;
+alg bool a_HledQ2 = false;
+alg bool a_x2distributing = Distributing.a_x2distributing;
+alg bool a_x2testing = Distributing.a_x2testing;
+alg bool a_zdown = Distributing.a_zdown;
+alg bool a_gripperclose = Distributing.a_gripperclose;
+alg bool a_transfer2pickpos = vacuum.a_transfer2pickpos;
+alg bool a_transfer2droppos = vacuum.a_transfer2droppos;
+alg bool a_vacuum = vacuum.a_vacuum;
+alg bool a_ejectpulse = vacuum.a_ejectpulse;
+alg bool a_handlingready = false;
+uncontrollable u_start;
+uncontrollable u_reset;
+uncontrollable u_stop;
+automaton Distributing:
+  alg bool a_Dstopled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback;
+  alg bool a_Dstartled = not wait_start and not init2 and not stop;
+  alg bool a_Dresetled = not wait_start and not init2 and not droppoint and not movetopickup and not down and not gopickup and not goback and not stop;
+  disc bool a_x2distributing;
+  disc bool a_zdown;
+  disc bool a_gripperclose;
+  disc bool a_x2testing;
+  alg list[4] int pickpos = [0, 1, 0, 2];
+  disc int i = 0;
+  alg list[3] bool atpos = [s_xpos_at1, s_xpos_at2, s_xpos_at3];
+  cont t = 0.0;
+  location init2:
+    initial;
+    equation t' = 0.0;
+    edge when s_Dinitialized goto wait_start;
+  location wait_start:
+    equation t' = 0.0;
+    edge when s_Dstartbutton goto droppoint;
+  location reset_button:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true goto wait_vacuum;
+    edge when s_gripper and s_xpos_atdrop do a_zdown := false, a_x2distributing := true, a_x2testing := false goto pauze_left;
+    edge when not s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true goto wait_vacuum;
+    edge when not s_gripper and s_xpos_atdrop do a_zdown := false, a_x2distributing := true, a_x2testing := false goto pauze_left;
+  location pauze_left:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when not s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true, a_x2testing := true goto wait_vacuum;
+    edge when s_gripper and s_xpos_at3 do a_zdown := false, a_x2distributing := true, a_x2testing := true goto wait_vacuum;
+  location wait_vacuum:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when not s_gripper and s_transfer_athalfway do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
+    edge when s_gripper and s_transfer_athalfway do a_zdown := false, a_x2distributing := false, a_x2testing := true goto reset_down;
+  location reset_down:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_xpos_atdrop do a_zdown := true, a_x2distributing := true goto reset_place;
+  location reset_place:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_zpos_atdown do t := 0.0, a_gripperclose := false, a_zdown := false, a_x2distributing := false, a_x2testing := false goto finished;
+  location stop:
+    equation t' = 0.0;
+    edge when s_Dstartbutton do a_x2testing := true goto droppoint;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+  location droppoint:
+    equation t' = 0.0;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := true goto down;
+    edge when not s_gripper and s_xpos_atdrop and s_zpos_atup do a_x2distributing := true, a_x2testing := false goto movetopickup;
+  location movetopickup:
+    equation t' = 0.0;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when atpos[pickpos[i]] and i < 3 do i := i + 1, a_x2distributing := true, a_x2testing := true goto down;
+    edge when atpos[pickpos[i]] and i >= 3 do i := 0, a_x2distributing := true, a_x2testing := true goto down;
+  location down:
+    equation t' = 0.0;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge do a_zdown := true goto gopickup;
+  location gopickup:
+    equation t' = 0.0;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true goto goup;
+    edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
+  location goup:
+    equation t' = 1.0;
+    edge when t >= 0.1 do t := 0.0, a_zdown := false goto goback;
+  location goback:
+    equation t' = 1.0;
+    edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_zpos_atup and s_gripper and t > 1 do a_x2testing := true, a_x2distributing := false, t := 0.0 goto droppoint;
+  location finished:
+    equation t' = 0.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when s_xpos_atdrop do a_x2distributing := true, a_x2testing := true goto reset;
+  location reset:
+    equation t' = 1.0;
+    edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
+    edge when t > 1 do t := 0.0, a_x2distributing := false, a_x2testing := false goto wait_start;
+end
+automaton inventory1:
+  event a;
+  event b;
+  event c;
+  event d;
+  disc bool a_pusher1;
+  location init2:
+    initial;
+    edge when s_Dinitialized goto wait_start;
+  location wait_start:
+    edge when s_Dstartbutton goto starting;
+  location stop:
+    edge when s_Dstartbutton goto starting;
+  location starting:
+    edge a when s_pusher1_in and not s_product1 do a_pusher1 := true goto going;
+    edge b when s_pusher1_out and s_stack1filled and a_pusher1 goto going;
+    edge c when not s_Dstopbutton do a_pusher1 := false goto stop;
+  location going:
+    edge d when s_pusher1_out and s_stack1filled do a_pusher1 := false goto starting;
+    edge when not s_Dstopbutton goto stop;
+end
+automaton inventory2:
+  disc bool a_pusher2;
+  location init2:
+    initial;
+    edge when s_Dinitialized goto wait_start;
+  location wait_start:
+    edge when s_Dstartbutton goto starting;
+  location stop:
+    edge when s_Dstartbutton goto starting;
+  location starting:
+    edge when s_pusher2_in and not s_product2 do a_pusher2 := true goto going;
+    edge when s_pusher2_out and s_stack1filled and a_pusher2 goto going;
+    edge when not s_Dstopbutton do a_pusher2 := false goto stop;
+  location going:
+    edge when s_pusher2_out and s_stack2filled do a_pusher2 := false goto starting;
+    edge when not s_Dstopbutton goto stop;
+end
+automaton inventory3:
+  disc bool a_pusher3;
+  location init2:
+    initial;
+    edge when s_Dinitialized goto wait_start;
+  location wait_start:
+    edge when s_Dstartbutton goto starting;
+  location stop:
+    edge when s_Dstartbutton goto starting;
+  location starting:
+    edge when s_pusher3_in and not s_product3 do a_pusher3 := true goto going;
+    edge when s_pusher3_out and s_stack1filled and a_pusher3 goto going;
+    edge when not s_Dstopbutton do a_pusher3 := false goto stop;
+  location going:
+    edge when s_pusher3_out and s_stack3filled do a_pusher3 := false goto starting;
+    edge when not s_Dstopbutton goto stop;
+end
+automaton vacuum:
+  disc bool a_transfer2pickpos;
+  disc bool a_transfer2droppos;
+  disc bool a_vacuum;
+  disc bool a_ejectpulse;
+  location init2:
+    initial;
+    edge when s_Dinitialized goto wait_start;
+  location wait_start:
+    edge when s_Dstartbutton goto starting;
+  location clear_vacuum:
+    edge when s_transfer_atdrop and s_vacuum do a_vacuum := false, a_ejectpulse := true, a_transfer2pickpos := true, a_transfer2droppos := false goto reset_button;
+    edge when s_transfer_atdrop and not s_vacuum do a_vacuum := false, a_ejectpulse := false, a_transfer2pickpos := true, a_transfer2droppos := false goto reset_button;
+  location reset_button:
+    edge when s_transfer_athalfway do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto wait_start;
+  location stop:
+    edge when s_Dstartbutton goto starting;
+    edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos := false goto clear_vacuum;
+  location key:
+    edge when not s_Dautoswitch goto starting;
+  location starting:
+    edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos := false goto clear_vacuum;
+    edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
+    edge when s_product4 and s_zpos_atup and not s_vacuum do a_transfer2pickpos := true goto pickupvac;
+    edge when s_vacuum do a_transfer2droppos := true goto pickupvac;
+    edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
+  location pickupvac:
+    edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos := false goto clear_vacuum;
+    edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
+    edge when s_transfer_atpickup and not s_vacuum do a_transfer2pickpos := false, a_vacuum := true goto testingdrop;
+    edge when s_transfer_atdrop do a_vacuum := false, a_ejectpulse := true goto testingdrop;
+    edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
+  location testingdrop:
+    edge when s_Dresetbutton do a_transfer2droppos := true, a_transfer2pickpos := false goto clear_vacuum;
+    edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
+    edge when s_vacuum and s_transfer_atpickup do a_transfer2droppos := true goto starting;
+    edge when not s_vacuum and s_transfer_atdrop do a_transfer2pickpos := true, a_transfer2droppos := false goto rest;
+    edge when s_transfer_athalfway and s_Dautoswitch and not s_vacuum do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto key;
+  location rest:
+    edge when not s_Dstopbutton do a_transfer2pickpos := false, a_transfer2droppos := false, a_ejectpulse := false goto stop;
+    edge when s_transfer_athalfway and s_Dautoswitch do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto key;
+    edge when s_transfer_athalfway and not s_Dautoswitch do a_transfer2pickpos := false, a_transfer2droppos := false, a_vacuum := false, a_ejectpulse := false goto starting;
+end
+group operator:
+  alg bool s_Dstartbutton = start_button.on;
+  alg bool s_Dresetbutton = reset_button.on;
+  alg bool s_Dstopbutton = stop_button.on;
+  alg bool s_zpos_atdown = crane.Extended;
+  alg bool s_zpos_atup = crane.Retracted;
+  automaton start_button:
+    event release;
+    cont t der 1.0;
+    location off:
+      initial;
+      edge u_start do t := 0.0 goto on;
+    location on:
+      edge release when 0.5 <= t goto off;
+      edge u_start;
+  end
+  automaton reset_button:
+    event release;
+    cont t der 1.0;
+    location off:
+      initial;
+      edge u_reset do t := 0.0 goto on;
+    location on:
+      edge release when 0.5 <= t goto off;
+      edge u_reset;
+  end
+  automaton stop_button:
+    event release;
+    cont t der 1.0;
+    location off:
+      initial;
+      edge u_stop do t := 0.0 goto on;
+    location on:
+      edge release when 0.5 <= t goto off;
+      edge u_stop;
+  end
+end
+automaton Rails:
+  alg bool s_xpos_at1 = if x >= -136.745 - 1.0 and x <= -136.745 + 1.0: true else false end;
+  alg bool s_xpos_at2 = if x >= -90.044 - 1.0 and x <= -90.044 + 1.0: true else false end;
+  alg bool s_xpos_at3 = if x >= -44.382 - 1.0 and x <= -44.382 + 1.0: true else false end;
+  alg bool s_xpos_atdrop = if x >= -1 and x <= 1: true else false end;
+  alg bool s_gripper = s_xpos_at1 and s_zpos_atdown and s_product1 or s_xpos_at2 and s_zpos_atdown and s_product2 or s_xpos_at3 and s_zpos_atdown and s_product3 or a_gripperclose;
+  const real v = -25.0;
+  cont x = 0.0;
+  location Moving:
+    initial;
+    equation x' = if a_x2testing and a_x2distributing: 0.0 elif a_x2testing: -v elif a_x2distributing: v else 0.0 end;
+    edge when a_x2testing = not a_x2testing goto Moving;
+    edge when a_x2distributing = not a_x2distributing goto Moving;
+end
+automaton crane:
+  alg bool s_zpos_atup = if y <= 1: true else false end;
+  alg bool s_zpos_atdown = if y >= 66.0 - 1.0: true else false end;
+  event down;
+  event at_maxz;
+  event at_minz;
+  event up;
+  alg real v_set = 35.0;
+  cont y = 0.0;
+  cont t = 0.0;
+  location Retracted:
+    initial;
+    equation y' = 0.0,
+             t' = 0.0;
+    edge down when a_zdown goto Down;
+  location Down:
+    equation y' = v_set,
+             t' = 0.0;
+    edge at_maxz when y >= 66.0 - 1.0 goto Extended;
+    edge when not a_zdown goto Up;
+  location Up:
+    equation y' = -v_set,
+             t' = 0.0;
+    edge at_minz when not a_zdown and y <= 1 goto Retracted;
+    edge when a_zdown goto Down;
+  location Extended:
+    equation y' = 0.0,
+             t' = 1.0;
+    edge up when not a_zdown do t := 0.0 goto Up;
+end
+automaton gripper:
+  event release_no;
+  event released;
+  event grab;
+  const real v_set = 1.0;
+  disc list[3] string colorpick = ["grey", "red", "RED"];
+  alg string color = if s_gripper and s_xpos_at1 and s_zpos_atdown: colorpick[0] elif s_gripper and s_xpos_at2 and s_zpos_atdown: colorpick[1] elif s_gripper and s_xpos_at3 and s_zpos_atdown: colorpick[2] else "non" end;
+  disc string colorhold = "none";
+  location Idle:
+    initial;
+    edge grab when a_gripperclose and s_xpos_at1 do colorhold := "grey" goto Grabbed;
+    edge grab when a_gripperclose and not s_xpos_at1 do colorhold := "none" goto Grabbed;
+  location Grabbed:
+    edge release_no goto Release;
+  location Release:
+    edge released when not a_gripperclose goto Idle;
+end
+automaton pusher1:
+  event toleft;
+  event toright;
+  event extended;
+  event retracted;
+  alg bool s_stack1filled = i < prodmax + 1;
+  alg bool s_product1 = i > 0 and (Extended or right) and i < prodmax + 1;
+  alg bool s_pusher1_in = x >= -1;
+  alg bool s_pusher1_out = x <= -14.387 + 1.0;
+  disc real pusherspeed = 22.0;
+  disc int i = 0;
+  disc int prodmax = 7;
+  cont x = 0.0;
+  cont t = 0.0;
+  location Extended:
+    initial;
+    equation x' = 0.0,
+             t' = 0.0;
+    edge toleft when a_pusher1 goto left;
+    edge toleft when gripper.color = "grey" goto left;
+  location left:
+    equation x' = -pusherspeed,
+             t' = 0.0;
+    edge toright when not a_pusher1 goto right;
+    edge retracted when x <= -14.387 + 1.0 do i := i + 1 goto Retracted;
+  location right:
+    equation x' = pusherspeed,
+             t' = 0.0;
+    edge toleft when a_pusher1 goto left;
+    edge extended when x >= -1 goto Extended;
+  location Retracted:
+    equation x' = 0.0,
+             t' = 1.0;
+    edge toright when not a_pusher1 and t >= 0.1 do t := 0.0 goto right;
+end
+automaton pusher2:
+  alg bool s_stack2filled = i < prodmax + 1;
+  alg bool s_product2 = i > 0 and (Extended or right) and i < prodmax + 1;
+  alg bool s_pusher2_in = x >= -1;
+  alg bool s_pusher2_out = x <= -14.387 + 1.0;
+  disc real pusherspeed = 22.0;
+  disc int i = 0;
+  disc int prodmax = 7;
+  cont x = 0.0;
+  cont t = 0.0;
+  location Extended:
+    initial;
+    equation x' = 0.0,
+             t' = 0.0;
+    edge when a_pusher2 goto left;
+    edge when gripper.color = "red" goto left;
+  location left:
+    equation x' = -pusherspeed,
+             t' = 0.0;
+    edge when not a_pusher2 goto right;
+    edge when x <= -14.387 + 1.0 do i := i + 1 goto Retracted;
+  location right:
+    equation x' = pusherspeed,
+             t' = 0.0;
+    edge when a_pusher2 goto left;
+    edge when x >= -1 goto Extended;
+  location Retracted:
+    equation x' = 0.0,
+             t' = 1.0;
+    edge when not a_pusher2 and t >= 0.1 do t := 0.0 goto right;
+end
+automaton pusher3:
+  alg bool s_stack3filled = i < prodmax + 1;
+  alg bool s_product3 = i > 0 and (Extended or right) and i < prodmax + 1;
+  alg bool s_pusher3_in = x >= -1;
+  alg bool s_pusher3_out = x <= -14.387 + 1.0;
+  disc real pusherspeed = 22.0;
+  disc int i = 0;
+  disc int prodmax = 7;
+  cont x = 0.0;
+  cont t = 0.0;
+  location Extended:
+    initial;
+    equation x' = 0.0,
+             t' = 0.0;
+    edge when a_pusher3 goto left;
+    edge when gripper.color = "RED" goto left;
+  location left:
+    equation x' = -pusherspeed,
+             t' = 0.0;
+    edge when not a_pusher3 goto right;
+    edge when x <= -14.387 + 1.0 do i := i + 1 goto Retracted;
+  location right:
+    equation x' = pusherspeed,
+             t' = 0.0;
+    edge when a_pusher3 goto left;
+    edge when x >= -1 goto Extended;
+  location Retracted:
+    equation x' = 0.0,
+             t' = 1.0;
+    edge when not a_pusher3 and t >= 0.1 do t := 0.0 goto right;
+end
+automaton vacuumplant:
+  alg bool s_transfer_atpickup = r < 2;
+  alg bool s_transfer_athalfway = r < 90 + 2 and r > 90 - 2;
+  alg bool s_transfer_atdrop = r > 180 - 2;
+  alg bool s_vacuum = haveprod;
+  disc bool haveprod = false;
+  alg bool s_product4 = not s_gripper and newprod;
+  disc bool newprod = true;
+  disc real rotationspeed = 45.0;
+  cont r = 0.0;
+  cont t = 0.0;
+  disc string colorhold2 = "none";
+  location right:
+    equation r' = rotationspeed,
+             t' = 0.0;
+    edge when r > 180 - 2 goto stop;
+    edge when a_transfer2droppos and a_transfer2pickpos or not a_transfer2droppos and not a_transfer2pickpos goto stop;
+  location left:
+    equation r' = -rotationspeed,
+             t' = 0.0;
+    edge when r < 2 goto stop;
+    edge when a_transfer2droppos and a_transfer2pickpos or not a_transfer2droppos and not a_transfer2pickpos goto stop;
+  location sucking:
+    equation r' = 0.0,
+             t' = 1.0;
+    edge when t >= 1 do haveprod := true, t := 0.0, newprod := false goto stop;
+  location ejecting:
+    equation r' = 0.0,
+             t' = 1.0;
+    edge when t >= 1 do haveprod := false, t := 0.0, newprod := true goto stop;
+  location stop:
+    initial;
+    equation r' = 0.0,
+             t' = 0.0;
+    edge when a_transfer2droppos and not a_transfer2pickpos and r <= 180 - 2 goto right;
+    edge when a_transfer2pickpos and not a_transfer2droppos and r >= 2 and gripper.colorhold = "grey" do colorhold2 := "grey" goto left;
+    edge when a_transfer2pickpos and not a_transfer2droppos and r >= 2 and gripper.colorhold = "none" do colorhold2 := "none" goto left;
+    edge when a_ejectpulse and haveprod goto ejecting;
+    edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
+end
+svgin id "s_Dstartbutton" event u_start file "dh.svg";
+svgout id "s_Dstartbutton" attr "fill" value if s_Dstartbutton: "darkgreen" else "green" end file "dh.svg";
+svgout id "a_Dstartled" attr "fill" value if a_Dstartled: "yellow" else "lightgrey" end file "dh.svg";
+svgin id "s_Dresetbutton" event u_reset file "dh.svg";
+svgout id "s_Dstopbutton" attr "fill" value if s_Dstopbutton: "maroon" else "#500" end file "dh.svg";
+svgout id "a_Dresetled" attr "fill" value if a_Dresetled: "yellow" else "lightgrey" end file "dh.svg";
+svgin id "s_Dstopbutton" event u_stop file "dh.svg";
+svgout id "s_Dresetbutton" attr "fill" value if s_Dresetbutton: "black" else "#4d4d4d" end file "dh.svg";
+svgout id "a_Dstartled_led" attr "fill" value if a_Dstartled: "lime" else "red" end file "dh.svg";
+svgout id "a_Dresetled_led" attr "fill" value if a_Dresetled: "lime" else "red" end file "dh.svg";
+svgout id "a_DledQ1_led" attr "fill" value if a_DledQ1: "lime" else "red" end file "dh.svg";
+svgout id "a_DledQ2_led" attr "fill" value if a_DledQ2: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher1_led" attr "fill" value if a_pusher1: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher2_led" attr "fill" value if a_pusher2: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher3_led" attr "fill" value if a_pusher3: "lime" else "red" end file "dh.svg";
+svgout id "a_x2distributing_led" attr "fill" value if a_x2distributing: "lime" else "red" end file "dh.svg";
+svgout id "a_x2testing_led" attr "fill" value if a_x2testing: "lime" else "red" end file "dh.svg";
+svgout id "a_zdown_led" attr "fill" value if a_zdown: "lime" else "red" end file "dh.svg";
+svgout id "a_gripperclose_led" attr "fill" value if a_gripperclose: "lime" else "red" end file "dh.svg";
+svgout id "a_transfer2pickpos_led" attr "fill" value if a_transfer2pickpos: "lime" else "red" end file "dh.svg";
+svgout id "a_transfer2droppos_led" attr "fill" value if a_transfer2droppos: "lime" else "red" end file "dh.svg";
+svgout id "a_vacuum_led" attr "fill" value if a_vacuum: "lime" else "red" end file "dh.svg";
+svgout id "a_ejectpulse_led" attr "fill" value if a_ejectpulse: "lime" else "red" end file "dh.svg";
+svgout id "a_handlingready_led" attr "fill" value if a_handlingready: "lime" else "red" end file "dh.svg";
+svgout id "crane_arm_base" attr "transform" value fmt("translate(%s,0)", Rails.x) file "dh.svg";
+svgout id "crane_arm_glider" attr "transform" value fmt("translate(%s,0)", Rails.x) file "dh.svg";
+svgout id "a_zdown" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "crane_gripper_base" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "crane_right_claw_out" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "crane_left_claw_out" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "crane_right_claw_in" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "crane_left_claw_in" attr "transform" value fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) file "dh.svg";
+svgout id "prod_gripper" attr "fill" value if not s_gripper and not s_product4: "none" elif gripper.colorhold = "grey": "grey" else "red" end file "dh.svg";
+svgout id "prod_gripper" attr "transform" value if s_gripper: fmt("translate(%s,0) translate(0,%s)", Rails.x, crane.y) else fmt("translate(0,65.7)") end file "dh.svg";
+svgout id "s_xpos_at1" attr "fill" value if s_xpos_at1: "lime" else "red" end file "dh.svg";
+svgout id "s_xpos_at2" attr "fill" value if s_xpos_at2: "lime" else "red" end file "dh.svg";
+svgout id "s_xpos_at3" attr "fill" value if s_xpos_at3: "lime" else "red" end file "dh.svg";
+svgout id "s_xpos_atdrop" attr "fill" value if s_xpos_atdrop: "lime" else "red" end file "dh.svg";
+svgout id "s_zpos_atup" attr "fill" value if s_zpos_atup: "lime" else "red" end file "dh.svg";
+svgout id "s_zpos_atdown" attr "fill" value if s_zpos_atdown: "lime" else "red" end file "dh.svg";
+svgout id "s_gripper" attr "fill" value if s_gripper: "lime" else "red" end file "dh.svg";
+svgout id "s_handlingbusy" attr "fill" value if s_handlingbusy: "lime" else "red" end file "dh.svg";
+svgout id "s_transfer_atpickup" attr "fill" value if s_transfer_atpickup: "lime" else "red" end file "dh.svg";
+svgout id "s_transfer_athalfway" attr "fill" value if s_transfer_athalfway: "lime" else "red" end file "dh.svg";
+svgout id "s_transfer_atdrop" attr "fill" value if s_transfer_atdrop: "lime" else "red" end file "dh.svg";
+svgout id "s_vacuum" attr "fill" value if s_vacuum: "lime" else "red" end file "dh.svg";
+svgout id "s_product4" attr "fill" value if s_product4: "lime" else "red" end file "dh.svg";
+svgout id "s_testingbusy" attr "fill" value if s_testingbusy: "lime" else "red" end file "dh.svg";
+svgout id "crane_right_claw_out" attr "fill" value if not s_gripper: "black" else "white" end file "dh.svg";
+svgout id "crane_left_claw_out" attr "fill" value if not s_gripper: "black" else "white" end file "dh.svg";
+svgout id "crane_right_claw_in" attr "fill" value if s_gripper: "black" else "white" end file "dh.svg";
+svgout id "crane_left_claw_in" attr "fill" value if s_gripper: "black" else "white" end file "dh.svg";
+svgout id "s_product1" attr "fill" value if s_product1: "lime" else "red" end file "dh.svg";
+svgout id "s_stack1filled" attr "fill" value if s_stack1filled: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher1_out" attr "fill" value if s_pusher1_out: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher1_in" attr "fill" value if s_pusher1_in: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher1" attr "transform" value fmt("translate(%s,0)", pusher1.x) file "dh.svg";
+svgout id "prod_grey7" attr "fill" value if pusher1.i >= 1: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey6" attr "fill" value if pusher1.i >= 2: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey5" attr "fill" value if pusher1.i >= 3: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey4" attr "fill" value if pusher1.i >= 4: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey3" attr "fill" value if pusher1.i >= 5: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey2" attr "fill" value if pusher1.i >= 6: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey1" attr "fill" value if pusher1.i >= 7: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey0" attr "fill" value if pusher1.i = 0 or pusher1.i >= 8 or pusher1.left: "white" else "grey" end file "dh.svg";
+svgout id "prod_grey0" attr "transform" value if pusher1.x' > 0: fmt("translate(%s,0)", pusher1.x + 12.802) elif pusher1.Retracted: fmt("translate(0,0)") else fmt("translate(12.,0)") end file "dh.svg";
+svgout id "s_product2" attr "fill" value if s_product2: "lime" else "red" end file "dh.svg";
+svgout id "s_stack2filled" attr "fill" value if s_stack2filled: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher2_out" attr "fill" value if s_pusher2_out: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher2_in" attr "fill" value if s_pusher2_in: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher2" attr "transform" value fmt("translate(%s,0)", pusher2.x) file "dh.svg";
+svgout id "prod_red7" attr "fill" value if pusher2.i >= 1: "white" else "red" end file "dh.svg";
+svgout id "prod_red6" attr "fill" value if pusher2.i >= 2: "white" else "red" end file "dh.svg";
+svgout id "prod_red5" attr "fill" value if pusher2.i >= 3: "white" else "red" end file "dh.svg";
+svgout id "prod_red4" attr "fill" value if pusher2.i >= 4: "white" else "red" end file "dh.svg";
+svgout id "prod_red3" attr "fill" value if pusher2.i >= 5: "white" else "red" end file "dh.svg";
+svgout id "prod_red2" attr "fill" value if pusher2.i >= 6: "white" else "red" end file "dh.svg";
+svgout id "prod_red1" attr "fill" value if pusher2.i >= 7: "white" else "red" end file "dh.svg";
+svgout id "prod_red0" attr "fill" value if pusher2.i = 0 or pusher2.i >= 8 or pusher2.left: "white" else "red" end file "dh.svg";
+svgout id "prod_red0" attr "transform" value if pusher2.x' > 0: fmt("translate(%s,0)", pusher2.x + 12.802) elif pusher2.Retracted: fmt("translate(0,0)") else fmt("translate(12.,0)") end file "dh.svg";
+svgout id "s_product3" attr "fill" value if s_product3: "lime" else "red" end file "dh.svg";
+svgout id "s_stack3filled" attr "fill" value if s_stack3filled: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher3_out" attr "fill" value if s_pusher3_out: "lime" else "red" end file "dh.svg";
+svgout id "s_pusher3_in" attr "fill" value if s_pusher3_in: "lime" else "red" end file "dh.svg";
+svgout id "a_pusher3" attr "transform" value fmt("translate(%s,0)", pusher3.x) file "dh.svg";
+svgout id "prod_RED7" attr "fill" value if pusher3.i >= 1: "white" else "red" end file "dh.svg";
+svgout id "prod_RED6" attr "fill" value if pusher3.i >= 2: "white" else "red" end file "dh.svg";
+svgout id "prod_RED5" attr "fill" value if pusher3.i >= 3: "white" else "red" end file "dh.svg";
+svgout id "prod_RED4" attr "fill" value if pusher3.i >= 4: "white" else "red" end file "dh.svg";
+svgout id "prod_RED3" attr "fill" value if pusher3.i >= 5: "white" else "red" end file "dh.svg";
+svgout id "prod_RED2" attr "fill" value if pusher3.i >= 6: "white" else "red" end file "dh.svg";
+svgout id "prod_RED1" attr "fill" value if pusher3.i >= 7: "white" else "red" end file "dh.svg";
+svgout id "prod_RED0" attr "fill" value if pusher3.i = 0 or pusher3.i >= 8 or pusher3.left: "white" else "red" end file "dh.svg";
+svgout id "prod_RED0" attr "transform" value if pusher3.x' > 0: fmt("translate(%s,0)", pusher3.x + 12.802) elif pusher3.Retracted: fmt("translate(0,0)") else fmt("translate(12.,0)") end file "dh.svg";
+svgout id "prod_transfer" attr "fill" value if not a_vacuum: "none" elif vacuumplant.colorhold2 = "grey": "grey" else "red" end file "dh.svg";
+svgout id "transfer_arm" attr "transform" value fmt("rotate(%s,329.022,163.171)", vacuumplant.r) file "dh.svg";
+svgout id "transfer_with_vacuum" attr "transform" value fmt("rotate(%s,329.022,163.171) rotate(%s,276.674,163.171)", vacuumplant.r, -vacuumplant.r) file "dh.svg";
+svgout id "prod_testing" attr "fill" value "white" file "dh.svg";
