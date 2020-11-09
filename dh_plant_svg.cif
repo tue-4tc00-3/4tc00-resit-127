@@ -43,12 +43,6 @@ svgout id "crane_right_claw_out"    attr "transform" value fmt("translate(%s,0) 
 svgout id "crane_left_claw_out"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
 svgout id "crane_right_claw_in"     attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
 svgout id "crane_left_claw_in"      attr "transform" value fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y);
-//svg crane
-// Rails_arm_glider:   OutputItem("Rails", "grey", Rails.x, 0);
-// Crane_black_part: OutputItem("a_zdown", "black", 0, crane.y);
-// Crane_gripper: OutputItem("crane_gripper_base", "grey", 0, crane.y);
-// Crane_right_claw : OutputItem("crane_right_claw_out", "grey", 0, crane.y);
-// Crane_left_claw : OutputItem("crane_left_claw_out", "grey", 0, crane.y);
 
 group def OutputItem(alg string Label; alg string color; alg real x, y):
     svgout id Label attr "transform" value fmt("translate(%s,%s)", x, -y);
@@ -56,7 +50,8 @@ group def OutputItem(alg string Label; alg string color; alg real x, y):
 end
 
 // Move block with crane
-svgout id "prod_gripper"            attr "fill" value if gripper.colorhold="grey":          "grey" else "red" end;
+svgout id "prod_gripper"            attr "fill" value      if not s_gripper and not s_product4:    "white"
+                                                           elif gripper.colorhold="grey":          "grey" else "red" end;
 svgout id "prod_gripper"            attr "transform" value if s_gripper:    fmt("translate(%s,0) translate(0,%s)",Rails.x,crane.y)
                                                            else             fmt("translate(0,65.7)") end;
 
@@ -87,6 +82,7 @@ svgout id "crane_left_claw_in"             attr "fill" value if s_gripper:      
 
 // Sense the pusher position
 
+// Pusher 1
 svgout id "s_product1"                     attr "fill" value if s_product1:                "lime" else "red" end;
 svgout id "s_stack1filled"                 attr "fill" value if s_stack1filled:            "lime" else "red" end;
 svgout id "s_pusher1_out"                  attr "fill" value if s_pusher1_out:             "lime" else "red" end;
@@ -106,6 +102,7 @@ svgout id "prod_grey0"                      attr "transform" value if pusher1.x'
                                                                   elif pusher1.Retracted: fmt("translate(0,0)")
                                                                   else              fmt("translate(12.,0)") end;
 
+// Pusher 2
 svgout id "s_product2"                     attr "fill" value if s_product2:                "lime" else "red" end;
 svgout id "s_stack2filled"                 attr "fill" value if s_stack2filled:            "lime" else "red" end;
 svgout id "s_pusher2_out"                  attr "fill" value if s_pusher2_out:             "lime" else "red" end;
@@ -125,6 +122,7 @@ svgout id "prod_red0"                      attr "transform" value if pusher2.x' 
                                                                   elif pusher2.Retracted: fmt("translate(0,0)")
                                                                   else              fmt("translate(12.,0)") end;
 
+// Pusher 3
 svgout id "s_product3"                     attr "fill" value if s_product3:                "lime" else "red" end;
 svgout id "s_stack3filled"                 attr "fill" value if s_stack3filled:            "lime" else "red" end;
 svgout id "s_pusher3_out"                  attr "fill" value if s_pusher3_out:             "lime" else "red" end;
@@ -145,6 +143,6 @@ svgout id "prod_RED0"                      attr "transform" value if pusher3.x' 
                                                                   else              fmt("translate(12.,0)") end;
 
 //vacuum svg
-svgout id "transfer_arm"                   attr "transform" value fmt("rotate(%s,326.706,160.517)",vacuumplant.r);
-svgout id "transfer_with_vacuum"           attr "transform" value fmt("rotate(%s,326.706,160.517) rotate(%s,273.874,163.250)",vacuumplant.r,-vacuumplant.r);
-
+svgout id "transfer_arm"                   attr "transform" value fmt("rotate(%s,329.022,163.171)",vacuumplant.r);
+svgout id "transfer_with_vacuum"           attr "transform" value fmt("rotate(%s,329.022,163.171) rotate(%s,276.674,163.171)",vacuumplant.r,-vacuumplant.r);
+svgout id "prod_testing"                   attr "fill" value "white";

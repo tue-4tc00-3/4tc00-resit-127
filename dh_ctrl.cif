@@ -78,12 +78,7 @@ automaton example_controller:
         edge when atpos[pickpos[i]] and i < 3 do i:= i+1, a_x2distributing := true, a_x2testing := true goto down;
         edge when atpos[pickpos[i]] and i >= 3 do i:= 0, a_x2distributing := true, a_x2testing := true goto down;
 
-    location stop_button:
-    equation t' = 0;
-        edge when s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto reset_down;
-        edge when not s_gripper do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
-
-    location down:
+        location down:
         equation t' = 0;
         edge when s_Dresetbutton do a_x2distributing := false, a_x2testing := true goto reset_button;
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
@@ -95,7 +90,7 @@ automaton example_controller:
         edge when not s_Dstopbutton do a_x2distributing := false, a_x2testing := false, a_zdown := false goto stop;
         edge when s_zpos_atdown and s_gripper and not s_xpos_atdrop do a_gripperclose := true goto goup;
         edge when s_zpos_atdown and s_gripper and s_xpos_atdrop do a_gripperclose := false, a_zdown := false goto droppoint;
-        edge when s_zpos_atdown and not s_gripper and not s_xpos_atdrop do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
+        //edge when s_zpos_atdown and not s_gripper and not s_xpos_atdrop do a_zdown := false, a_x2distributing := false, a_x2testing := true goto finished;
 
     location goup:
         equation t' = 1;

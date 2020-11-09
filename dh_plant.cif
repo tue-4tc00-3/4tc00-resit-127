@@ -33,13 +33,13 @@ end
 
 automaton Rails:
 //    Sense the position of the crane
-    alg bool s_xpos_at1 =       if Rails.x >= -136.745 - 0.4 and Rails.x <= -136.745 + 0.4: true
+    alg bool s_xpos_at1 =       if Rails.x >= -136.745 - 1 and Rails.x <= -136.745 + 1: true
                                 else false end;
-    alg bool s_xpos_at2 =       if Rails.x >= -90.2245 - 0.4 and Rails.x <= -90.2245 + 0.4: true
+    alg bool s_xpos_at2 =       if Rails.x >= -90.044 - 1 and Rails.x <= -90.044 + 1: true
                                 else false end;
-    alg bool s_xpos_at3 =       if Rails.x >= -44.5625 - 0.4 and Rails.x <= -44.2625 + 0.4: true
+    alg bool s_xpos_at3 =       if Rails.x >= -44.382 - 1 and Rails.x <= -44.382 + 1: true
                                 else false end;
-    alg bool s_xpos_atdrop =    if Rails.x >= - 0.4 and Rails.x <= 0.4: true
+    alg bool s_xpos_atdrop =    if Rails.x >= - 1 and Rails.x <= 1: true
                                 else false end;
 
     alg bool s_gripper =        (s_xpos_at1 and s_zpos_atdown and s_product1)
@@ -62,9 +62,9 @@ automaton Rails:
 end
 
 automaton crane:
-    alg bool s_zpos_atup =      if crane.y <= 0.5: true
+    alg bool s_zpos_atup =      if crane.y <= 1: true
                                 else false end;
-    alg bool s_zpos_atdown =    if crane.y >= 66.0 - 0.5: true
+    alg bool s_zpos_atdown =    if crane.y >= 66.0 - 1: true
                                 else false end;
 
     event down, at_maxz, at_minz, up;
@@ -82,13 +82,13 @@ automaton crane:
     location Down:
         equation y' = v_set;
         equation t' = 0;
-        edge at_maxz when y >= 66.0 -0.5  goto Extended;
+        edge at_maxz when y >= 66.0 -1  goto Extended;
         edge when not a_zdown goto Up;
 
     location Up:
         equation y' = -v_set;
         equation t' = 0;
-        edge at_minz  when not a_zdown and y <= 0.5  goto Retracted;
+        edge at_minz  when not a_zdown and y <= 1  goto Retracted;
         edge when a_zdown goto Down;
 
     location Extended:
@@ -107,8 +107,6 @@ automaton gripper:
                        elif s_gripper and s_xpos_at3 and s_zpos_atdown: colorpick[2]
                        else "non" end;
     disc string colorhold = "none";
-    disc bool newprod = false;
-
 
     location Idle:
         initial;
@@ -127,8 +125,8 @@ automaton pusher1:
 
     alg bool s_stack1filled = i<prodmax +1;
     alg bool s_product1 = i>0 and (pusher1.Extended or pusher1.right) and i<prodmax+1;
-    alg bool s_pusher1_in = pusher1.x >=-0.5;
-    alg bool s_pusher1_out = pusher1.x<=-14.387+0.5;
+    alg bool s_pusher1_in = pusher1.x >=-1;
+    alg bool s_pusher1_out = pusher1.x<=-14.387+1;
 
     disc real pusherspeed = 22;
     disc int i = 0;
@@ -149,14 +147,14 @@ automaton pusher1:
         equation t'=0;
 
         edge toright when not a_pusher1 goto right;
-        edge retracted when pusher1.x<=-14.387+0.5 do i := i + 1 goto Retracted;
+        edge retracted when pusher1.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
 
         edge toleft when a_pusher1 goto left;
-        edge extended when pusher1.x >=-0.5 goto Extended;
+        edge extended when pusher1.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
@@ -169,11 +167,11 @@ end
 automaton pusher2:
     alg bool s_stack2filled = i<prodmax+1;
     alg bool s_product2 = i>0 and (pusher2.Extended or pusher2.right) and i<prodmax+1;
-    alg bool s_pusher2_in = pusher2.x >=-0.5;
-    alg bool s_pusher2_out = pusher2.x<=-14.387+0.5;
+    alg bool s_pusher2_in = pusher2.x >=-1;
+    alg bool s_pusher2_out = pusher2.x<=-14.387+1;
 
     disc real pusherspeed = 22;
-    disc int i = 4;
+    disc int i = 0;
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -191,14 +189,14 @@ automaton pusher2:
         equation t'=0;
 
         edge when not a_pusher2 goto right;
-        edge when s_pusher2_out do i := i + 1 goto Retracted;
+        edge when pusher2.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
 
         edge when a_pusher2 goto left;
-        edge when s_pusher2_in goto Extended;
+        edge when pusher2.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
@@ -211,11 +209,11 @@ end
 automaton pusher3:
     alg bool s_stack3filled = i<prodmax+1;
     alg bool s_product3 = i>0 and (pusher3.Extended or pusher3.right) and i<prodmax+1;
-    alg bool s_pusher3_in = pusher3.x >=-0.5;
-    alg bool s_pusher3_out = pusher3.x<=-14.387+0.5;
+    alg bool s_pusher3_in = pusher3.x >=-1;
+    alg bool s_pusher3_out = pusher3.x<=-14.387+1;
 
     disc real pusherspeed = 22;
-    disc int i = 4;
+    disc int i = 0;
     disc int prodmax = 7;
     cont x = 0;
     cont t = 0;
@@ -233,14 +231,14 @@ automaton pusher3:
         equation t'=0;
 
         edge when not a_pusher3 goto right;
-        edge when pusher3.x<=-14.387+0.5 do i := i + 1 goto Retracted;
+        edge when pusher3.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
 
         edge when a_pusher3 goto left;
-        edge when s_pusher3_in goto Extended;
+        edge when pusher3.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
@@ -252,28 +250,28 @@ end
 
 automaton vacuumplant:
 
-alg bool s_transfer_atpickup = r<0.5;
-alg bool s_transfer_athalfway = r<90.5 and r>89.5;
-alg bool s_transfer_atdrop = r >179.5;
+alg bool s_transfer_atpickup = r<2;
+alg bool s_transfer_athalfway = r<90+2 and r>90-2;
+alg bool s_transfer_atdrop = r >180-2;
 alg bool s_vacuum = haveprod;
 disc bool haveprod = false;
 alg bool s_product4 = not s_gripper and newprod;
 disc bool newprod = true;
 
-disc real rotationspeed = 40;
+disc real rotationspeed = 45;
 cont r = 0;
 cont t = 0;
 
     location right:
         equation r'= rotationspeed;
         equation t'= 0;
-        edge when r>179.5 goto stop;
+        edge when r>180-2 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)  goto stop;
 
     location left:
         equation r'=-rotationspeed;
         equation t'= 0;
-        edge when r<0.5 goto stop;
+        edge when r<2 goto stop;
         edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos) goto stop;
 
     location sucking:
@@ -290,8 +288,8 @@ cont t = 0;
         initial;
         equation r'=0;
         equation t'=0;
-        edge when a_transfer2droppos and not a_transfer2pickpos goto right;
-        edge when a_transfer2pickpos and not a_transfer2droppos goto left;
+        edge when a_transfer2droppos and not a_transfer2pickpos and r<=180-2 goto right;
+        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 goto left;
         edge when a_ejectpulse and haveprod goto ejecting;
         edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
 end

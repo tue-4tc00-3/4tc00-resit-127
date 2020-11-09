@@ -84,6 +84,9 @@
     <Compile Include="CIF\alg_M_example_controller_a_Dstartled.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CIF\alg_M_example_controller_a_Dstopled.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CIF\alg_M_example_controller_pickpos.TcPOU">
       <SubType>Code</SubType>
     </Compile>
