@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_a_pusher1" Id="{09bfc1b5-1a96-488a-97f2-1fb7ce604a45}" SpecialFunc="None">
+  <POU Name="alg_a_pusher1" Id="{178aaadb-80e5-4b6b-9922-30c54b7bfd5c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_pusher1 : BOOL
 VAR_INPUT
 	state: STATE;

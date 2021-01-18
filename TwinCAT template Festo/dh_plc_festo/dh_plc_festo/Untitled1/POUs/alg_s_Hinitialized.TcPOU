@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_s_Hinitialized" Id="{a81ff052-a053-4fb5-ba30-11a8b3e3d6af}" SpecialFunc="None">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TcPlcObject ProductVersion="3.1.0.18" Version="1.1.0.1">
+  <POU Name="alg_s_Hinitialized">
     <Declaration><![CDATA[FUNCTION alg_s_Hinitialized: BOOL
 VAR_INPUT
     state: STATE;
@@ -8,8 +8,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[alg_s_Hinitialized := (state.dvar_M_HardwareMap) = (elit_initialized);]]></ST>
     </Implementation>
-    <LineIds Name="alg_s_Hinitialized">
-      <LineId Id="2" Count="0" />
-    </LineIds>
+    <ObjectProperties/>
   </POU>
 </TcPlcObject>

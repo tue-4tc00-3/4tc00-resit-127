@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TcSmVersion="1.0" TcVersion="3.1.4022.32" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TcSmVersion="1.0" TcVersion="3.1.4022.32" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject">
 	<DataTypes>
 		<DataType>
 			<Name AutoDeleteType="true" GUID="{9C02207A-24CA-49C1-B099-1C3695A83AF9}">enum_E</Name>

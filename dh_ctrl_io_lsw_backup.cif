@@ -1,0 +1,71 @@
+import "dh_ctrl_lsw_backup.cif";
+
+// INPUTS
+input bool s_Dstartbutton;
+input bool s_Dstopbutton;
+input bool s_Dresetbutton;
+input bool s_Dautoswitch;
+
+input bool s_pusher1_in;
+input bool s_pusher1_out;
+input bool s_stack1filled;
+input bool s_product1;
+input bool s_pusher2_in;
+input bool s_pusher2_out;
+input bool s_stack2filled;
+input bool s_product2;
+input bool s_pusher3_in;
+input bool s_pusher3_out;
+input bool s_stack3filled;
+input bool s_product3;
+input bool s_handlingbusy;
+
+input bool s_Dinitialized;
+
+input bool s_Hstartbutton;
+input bool s_Hstopbutton;
+input bool s_Hresetbutton;
+input bool s_Hautoswitch;
+
+input bool s_xpos_at1;
+input bool s_xpos_at2;
+input bool s_xpos_at3;
+input bool s_xpos_atdrop;
+input bool s_zpos_atup;
+input bool s_zpos_atdown;
+input bool s_gripper;
+input bool s_transfer_atpickup;
+input bool s_transfer_atdrop;
+input bool s_transfer_athalfway;
+input bool s_vacuum;
+input bool s_product4;
+input bool s_testingbusy;
+
+input bool s_Hinitialized;
+
+// OUTPUTS
+alg bool a_Dstartled        = Distributing.a_Dstartled;
+alg bool a_Dresetled        = Distributing.a_Dresetled;
+alg bool a_DledQ1           = false;
+alg bool a_DledQ2           = false;
+
+alg bool a_pusher1          = inventory1.a_pusher1;
+alg bool a_pusher2          = inventory2.a_pusher2;
+alg bool a_pusher3          = inventory3.a_pusher3;
+
+alg bool a_Hstartled        = false;
+alg bool a_Hresetled        = false;
+alg bool a_HledQ1           = false;
+alg bool a_HledQ2           = false;
+
+alg bool a_x2distributing   = Distributing.a_x2distributing;
+alg bool a_x2testing        = Distributing.a_x2testing;
+alg bool a_zdown            = Distributing.a_zdown;
+alg bool a_gripperclose     = Distributing.a_gripperclose;
+
+alg bool a_transfer2pickpos = vacuum.a_transfer2pickpos;
+alg bool a_transfer2droppos = vacuum.a_transfer2droppos;
+alg bool a_vacuum           = vacuum.a_vacuum;
+alg bool a_ejectpulse       = vacuum.a_ejectpulse;
+alg bool a_handlingready    = false;
+

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="makeArray1" Id="{2e7076b2-a11a-4dbc-858b-77e4306f4e4a}" SpecialFunc="None">
+  <POU Name="makeArray1" Id="{b49946b5-ef30-4114-92ad-775730a3f6da}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION makeArray1 : ARRAY[0..2] OF BOOL
 VAR_INPUT
 	elem0: BOOL;

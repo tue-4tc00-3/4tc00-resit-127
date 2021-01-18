@@ -54,6 +54,7 @@ location start_usecase2:
     initial;
     edge u_usecase_2 do t:=0.5 goto start_use2;
     edge u_delete_product do t:=4  goto start_usecase2;
+    edge u_reset  do t:=8  goto start_usecase2;
 //
 // location wait:
 //     edge u_usecase_2 do t:=0.5 goto start_use2;

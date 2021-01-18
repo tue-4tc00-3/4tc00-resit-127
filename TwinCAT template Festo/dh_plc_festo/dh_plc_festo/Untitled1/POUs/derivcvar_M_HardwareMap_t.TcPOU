@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="derivcvar_M_HardwareMap_t" Id="{65c73318-e044-4b06-aed0-7f695df5f7d3}" SpecialFunc="None">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TcPlcObject ProductVersion="3.1.0.18" Version="1.1.0.1">
+  <POU Name="derivcvar_M_HardwareMap_t">
     <Declaration><![CDATA[FUNCTION derivcvar_M_HardwareMap_t: LREAL
 VAR_INPUT
     state: STATE;
@@ -8,8 +8,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[derivcvar_M_HardwareMap_t := 1.0;]]></ST>
     </Implementation>
-    <LineIds Name="derivcvar_M_HardwareMap_t">
-      <LineId Id="2" Count="0" />
-    </LineIds>
+    <ObjectProperties/>
   </POU>
 </TcPlcObject>

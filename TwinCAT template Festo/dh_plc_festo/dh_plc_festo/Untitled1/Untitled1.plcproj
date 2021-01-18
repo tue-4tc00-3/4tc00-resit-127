@@ -58,6 +58,46 @@
     
     
     
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   <Compile Include="POUs\alg_s_Dinitialized.TcPOU">
       <SubType>Code</SubType>
     </Compile>

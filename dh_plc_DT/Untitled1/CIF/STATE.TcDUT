@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{79020c97-d393-40d5-886f-8d797ea534d4}">
+  <DUT Name="STATE" Id="{8e3fa346-0df1-4cff-b2ef-58d8c82fff59}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
