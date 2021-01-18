@@ -1,17 +1,30 @@
-import "dh_plant_io.cif";
+import "dh_plant_io_lsw.cif";
+import "dh_usecases_lsw.cif";
 
 // Definition of the events that can be triggered by the user
 uncontrollable u_start, u_reset, u_stop;
+uncontrollable u_new_prod1, u_new_prod2, u_new_prod3;
+uncontrollable u_delete_product;
+uncontrollable u_usecase_1, u_usecase_2, u_usecase_3;
+
 // Buttons that can be pressed by the operator
 group operator:
-    alg bool s_Dstartbutton = start_button.on;
-    alg bool s_Dresetbutton = reset_button.on;
-    alg bool s_Dstopbutton  = stop_button.on;
-alg bool s_zpos_atdown          = crane.Extended;
-alg bool s_zpos_atup            = crane.Retracted;
+    alg bool s_Dstartbutton = start_button.on or usecase1.start or usecase2.start or usecase3.start;
+//     or usecase2.start or usecase3.start ;
+    alg bool s_Dresetbutton = reset_button.on or usecase1.reset or usecase2.reset or usecase3.reset;
+    alg bool s_Dstopbutton  = stop_button.on or usecase1.stop;
+    alg bool s_zpos_atdown          = crane.Extended;
+    alg bool s_zpos_atup            = crane.Retracted;
     start_button: UI_button(u_start);
     reset_button: UI_button(u_reset);
     stop_button:  UI_button(u_stop);
+
+    alg bool usecase_1 = use1_button.on;
+    alg bool usecase_2 = use2_button.on;
+    alg bool usecase_3 = use3_button.on;
+    use1_button: UI_button(u_usecase_1);
+    use2_button: UI_button(u_usecase_2);
+    use3_button: UI_button(u_usecase_3);
 end
 
 // Model of a User pressing a button
@@ -123,12 +136,18 @@ automaton gripper:
         initial;
         edge grab when a_gripperclose and s_xpos_at1 do colorhold := "grey" goto Grabbed;
         edge grab when a_gripperclose and not s_xpos_at1 do colorhold := "none" goto Grabbed;
+        edge u_delete_product goto Idle;
+  //      edge usecase2.delete_prod1 goto Idle;
 
     location Grabbed:
+        edge u_delete_product goto Idle;
         edge release_no goto Release;
+//        edge usecase2.delete_prod1 goto Idle;
 
     location Release:
         edge released when not a_gripperclose goto Idle;
+        edge u_delete_product goto Idle;
+ //        edge usecase2.delete_prod1 goto Idle;
 end
 
 
@@ -153,34 +172,42 @@ automaton pusher1:
         equation x'=0;
         equation t'=0;
 
+
+
         initial;
         edge toleft when a_pusher1 goto left;
         edge toleft when gripper.color = "grey" goto left;
-
+edge u_new_prod1 when i<=7 do i:=i-1;
+edge usecase3.spawnprod1 when i<=7 do i:=i-1;
     location left:
         equation x'= -pusherspeed;
         equation t'=0;
-
+edge u_new_prod1 when i<=7 do i:=i-1;
+edge usecase3.spawnprod1 when i<=7 do i:=i-1;
         edge toright when not a_pusher1 goto right;
         edge retracted when pusher1.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
-
+edge u_new_prod1 when i<=7 do i:=i-1;
+edge usecase3.spawnprod1 when i<=7 do i:=i-1;
         edge toleft when a_pusher1 goto left;
         edge extended when pusher1.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
         equation t'=1;
-
+edge u_new_prod1 when i<=7 do i:=i-1;
+edge usecase3.spawnprod1 when i<=7 do i:=i-1;
         edge toright when not a_pusher1 and t>=0.1 do t:=0 goto right;
 
 end
 
 // operating pusher 2 in inventory 2
 automaton pusher2:
+    event toleft, toright, extended, retracted;
+
     alg bool s_stack2filled = i<prodmax+1;
     alg bool s_product2 = i>0 and (pusher2.Extended or pusher2.right) and i<prodmax+1;
     alg bool s_pusher2_in = pusher2.x >=-1;
@@ -199,33 +226,39 @@ automaton pusher2:
         equation t'=0;
 
         initial;
-        edge when a_pusher2 goto left;
-        edge when gripper.color = "red" goto left;
-
+        edge toleft when a_pusher2 goto left;
+        edge toleft when gripper.color = "red" goto left;
+edge u_new_prod2 when i<=7 do i:=i-1;
+edge usecase3.spawnprod2 when i<=7 do i:=i-1;
     location left:
         equation x'= -pusherspeed;
         equation t'=0;
-
-        edge when not a_pusher2 goto right;
-        edge when pusher2.x<=-14.387+1 do i := i + 1 goto Retracted;
+edge u_new_prod2 when i<=7 do i:=i-1;
+edge usecase3.spawnprod2 when i<=7 do i:=i-1;
+        edge toright when not a_pusher2 goto right;
+        edge retracted when pusher2.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
-
-        edge when a_pusher2 goto left;
-        edge when pusher2.x >=-1 goto Extended;
+edge u_new_prod2 when i<=7 do i:=i-1;
+edge usecase3.spawnprod2 when i<=7 do i:=i-1;
+        edge toleft when a_pusher2 goto left;
+        edge extended when pusher2.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
         equation t'=1;
-
-        edge when not a_pusher2 and t >=0.1 do t:=0 goto right;
+edge u_new_prod2 when i<=7 do i:=i-1;
+edge usecase3.spawnprod2 when i<=7 do i:=i-1;
+        edge toright when not a_pusher2 and t >=0.1 do t:=0 goto right;
 
 end
 
 // operating pusher 3 in inventory 3
 automaton pusher3:
+    event toleft, toright, extended, retracted;
+
     alg bool s_stack3filled = i<prodmax+1;
     alg bool s_product3 = i>0 and (pusher3.Extended or pusher3.right) and i<prodmax+1;
     alg bool s_pusher3_in = pusher3.x >=-1;
@@ -244,45 +277,55 @@ automaton pusher3:
         equation t'=0;
 
         initial;
-        edge when a_pusher3 goto left;
-        edge when gripper.color = "RED" goto left;
-
+        edge toleft when a_pusher3 goto left;
+        edge toleft when gripper.color = "RED" goto left;
+edge u_new_prod3 when i<=7 do i:=i-1;
+edge usecase3.spawnprod3 when i<=7 do i:=i-1;
     location left:
         equation x'= -pusherspeed;
         equation t'=0;
-
-        edge when not a_pusher3 goto right;
-        edge when pusher3.x<=-14.387+1 do i := i + 1 goto Retracted;
+edge u_new_prod3 when i<=7 do i:=i-1;
+edge usecase3.spawnprod3 when i<=7 do i:=i-1;
+        edge toright when not a_pusher3 goto right;
+        edge retracted when pusher3.x<=-14.387+1 do i := i + 1 goto Retracted;
 
     location right:
         equation x' = pusherspeed;
         equation t'=0;
-
-        edge when a_pusher3 goto left;
-        edge when pusher3.x >=-1 goto Extended;
+edge u_new_prod3 when i<=7 do i:=i-1;
+edge usecase3.spawnprod3 when i<=7 do i:=i-1;
+        edge toleft when a_pusher3 goto left;
+        edge extended when pusher3.x >=-1 goto Extended;
 
     location Retracted:
         equation x' = 0;
         equation t'=1;
-
-        edge when not a_pusher3 and t>=0.1 do t :=0goto right;
+edge u_new_prod3 when i<=7 do i:=i-1;
+edge usecase3.spawnprod3 when i<=7 do i:=i-1;
+        edge toright when not a_pusher3 and t>=0.1 do t :=0goto right;
 
 end
 
 
 // plant of the vacuum
 automaton vacuumplant:
+event wait;
+event gripping;
+event releasing;
+event toleft;
+event toright;
 
 alg bool s_transfer_atpickup = r<2;
 alg bool s_transfer_athalfway = r<90+2 and r>90-2;
 alg bool s_transfer_atdrop = r >180-2;
 alg bool s_vacuum = haveprod;
 disc bool haveprod = false;
-alg bool s_product4 = not s_gripper and newprod;
+alg bool s_product4 = not s_gripper and (s_xpos_atdrop or s_zpos_atup or s_xpos_at3) and newprod;
 disc bool newprod = true;
 
+
 disc real rotationspeed = 45;
-cont r = 0;
+cont r = 90;
 cont t = 0;
 
 //  disc list[2] string colorpick = ["grey", "red"];
@@ -295,38 +338,63 @@ cont t = 0;
     location right:
         equation r'= rotationspeed;
         equation t'= 0;
-        edge when r>180-2 goto stop;
-        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
+        edge wait when r>180-2 goto stop;
+        edge wait when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
                                                                                                             goto stop;
+       edge u_delete_product do newprod := false;
+ //     edge usecase2.delete_prod1 do newprod := false;
+       edge u_reset do newprod := true;
+//       edge when usecase2.reset do newprod := true;
+
+
 
     location left:
         equation r'=-rotationspeed;
         equation t'= 0;
-        edge when r<2 goto stop;
-        edge when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
+        edge wait when r<2 goto stop;
+        edge wait when (a_transfer2droppos and a_transfer2pickpos) or (not a_transfer2droppos and not a_transfer2pickpos)
                                                                                                             goto stop;
+edge u_delete_product do newprod := false;
+//  edge usecase2.delete_prod1 do newprod := false;
+edge u_reset do newprod := true;
+//edge when usecase2.reset do newprod := true;
+
 
     location sucking:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := true, t:= 0, newprod := false  goto stop;
+        edge wait when t >= 1 do haveprod := true, t:= 0, newprod := false  goto stop;
+edge u_delete_product do newprod := false;
+ // edge usecase2.delete_prod1 do newprod := false;
+edge u_reset do newprod := true;
+//edge when usecase2.reset do newprod := true;
+
 
     location ejecting:
         equation r'=0;
         equation t'=1;
-        edge when t >= 1 do haveprod := false, t := 0, newprod := true goto stop;
+        edge wait when t >= 1 do haveprod := false, t := 0, newprod := true goto stop;
+edge u_delete_product do newprod := false;
+//  edge usecase2.delete_prod1 do newprod := false;
+edge u_reset do newprod := true;
+// edge when usecase2.reset do newprod := true;
 
     location stop:
         initial;
         equation r'=0;
         equation t'=0;
-        edge when a_transfer2droppos and not a_transfer2pickpos and r<=180-2 goto right;
-        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="grey"
+        edge toright when a_transfer2droppos and not a_transfer2pickpos and r<=180-2 goto right;
+        edge toleft when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="grey"
                                                                                     do colorhold2 := "grey" goto left;
-        edge when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="none"
+        edge toleft when a_transfer2pickpos and not a_transfer2droppos and r>=2 and gripper.colorhold="none"
                                                                                     do colorhold2 := "none" goto left;
-        edge when a_ejectpulse and haveprod goto ejecting;
-        edge when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
+        edge releasing when a_ejectpulse and haveprod goto ejecting;
+        edge gripping when a_vacuum and not a_ejectpulse and not haveprod and newprod goto sucking;
+       edge u_delete_product do newprod := false;
+ //      edge usecase2.delete_prod1 do newprod := false;
+       edge u_reset do newprod := true;
+//      edge when usecase2.reset do newprod := true;
+
 end
 
 

@@ -1,23 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="alg_a_gripperclose" Id="{952a944d-e46a-435f-b150-d00f8aa31d8e}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_gripperclose" Id="{45445b8e-5e34-46bf-823b-15ace928c4ca}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_gripperclose" Id="{45445b8e-5e34-46bf-823b-15ace928c4ca}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_gripperclose" Id="{952a944d-e46a-435f-b150-d00f8aa31d8e}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="alg_a_gripperclose" Id="{16c92b00-48df-44db-9de6-3736a4aa32eb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_gripperclose : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_gripperclose := state.dvar_M_example_controller_a_gripperclose;]]></ST>
+      <ST><![CDATA[alg_a_gripperclose := state.dvar_M_Distributing_a_gripperclose;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_gripperclose">
       <LineId Id="2" Count="0" />

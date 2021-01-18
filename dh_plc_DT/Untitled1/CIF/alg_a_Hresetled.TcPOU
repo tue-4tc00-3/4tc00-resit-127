@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="alg_a_Hresetled" Id="{433da20d-b7b2-43f5-8a9f-9d99af5f47a4}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Hresetled" Id="{b47c6853-3475-4c5a-b5fe-b1ac8e9bdde7}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Hresetled" Id="{b47c6853-3475-4c5a-b5fe-b1ac8e9bdde7}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Hresetled" Id="{433da20d-b7b2-43f5-8a9f-9d99af5f47a4}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="alg_a_Hresetled" Id="{73d192b2-0aa6-4168-a347-ddd372c07818}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_Hresetled : BOOL
 VAR_INPUT
 	state: STATE;

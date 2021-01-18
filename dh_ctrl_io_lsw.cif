@@ -1,4 +1,4 @@
-import "dh_ctrl.cif";
+import "dh_ctrl_lsw.cif";
 
 // INPUTS
 input bool s_Dstartbutton;

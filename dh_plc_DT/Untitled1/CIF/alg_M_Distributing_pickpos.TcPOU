@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_M_Distributing_pickpos" Id="{dec388c4-ac7b-47cc-999e-22527c559381}" SpecialFunc="None">
+  <POU Name="alg_M_Distributing_pickpos" Id="{a4a658ff-196c-494a-9af6-c9f0e7b93851}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_M_Distributing_pickpos : ARRAY[0..3] OF DINT
 VAR_INPUT
 	state: STATE;

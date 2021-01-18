@@ -1,23 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="alg_a_Dstartled" Id="{1f8581b4-e24b-4047-bcf0-8fa92656cef6}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dstartled" Id="{b7193cb9-9d84-494d-8e2a-19da4d8600b8}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dstartled" Id="{b7193cb9-9d84-494d-8e2a-19da4d8600b8}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dstartled" Id="{1f8581b4-e24b-4047-bcf0-8fa92656cef6}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="alg_a_Dstartled" Id="{afa99e98-a7ee-447f-9464-1590121456a9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_Dstartled : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_Dstartled := alg_M_example_controller_a_Dstartled(state);]]></ST>
+      <ST><![CDATA[alg_a_Dstartled := alg_M_Distributing_a_Dstartled(state);]]></ST>
     </Implementation>
     <LineIds Name="alg_a_Dstartled">
       <LineId Id="2" Count="0" />

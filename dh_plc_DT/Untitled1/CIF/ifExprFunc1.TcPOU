@@ -1,56 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="ifExprFunc1" Id="{bcbe7fc2-df75-4960-a5d6-a317b400af89}" SpecialFunc="None">
-=======
-  <POU Name="ifExprFunc1" Id="{34d0acb7-8de3-41a4-a4d8-5299e538b73f}" SpecialFunc="None">
-=======
-  <POU Name="ifExprFunc1" Id="{34d0acb7-8de3-41a4-a4d8-5299e538b73f}" SpecialFunc="None">
-=======
-  <POU Name="ifExprFunc1" Id="{bcbe7fc2-df75-4960-a5d6-a317b400af89}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="ifExprFunc1" Id="{a99a4dfa-a325-483c-aa9f-5cd91673ee17}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION ifExprFunc1 : LREAL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF ((state.dvar_M_example_controller) = (elit_init2)) THEN
+      <ST><![CDATA[IF ((state.dvar_M_Distributing) = (elit_init2)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_wait_start)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_wait_start)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_reset_button)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_reset_button)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_pauze_left)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_pauze_left)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_wait_vacuum)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_wait_vacuum)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_reset_down)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_reset_down)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_reset_place)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_reset_place)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_stop)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_stop)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_droppoint)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_droppoint)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_movetopickup)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_movetopickup)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_down)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_down)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_gopickup)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_gopickup)) THEN
     ifExprFunc1 := 0.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_goback)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_goup)) THEN
     ifExprFunc1 := 1.0;
-ELSIF ((state.dvar_M_example_controller) = (elit_finished)) THEN
+ELSIF ((state.dvar_M_Distributing) = (elit_goback)) THEN
+    ifExprFunc1 := 1.0;
+ELSIF ((state.dvar_M_Distributing) = (elit_finished)) THEN
     ifExprFunc1 := 0.0;
 ELSE
     ifExprFunc1 := 1.0;
 END_IF;]]></ST>
     </Implementation>
     <LineIds Name="ifExprFunc1">
-      <LineId Id="3" Count="29" />
+      <LineId Id="3" Count="31" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

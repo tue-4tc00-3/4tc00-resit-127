@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <GVL Name="INPUTS" Id="{05c8aca2-49b4-4ab1-9404-3956963f15a2}">
+  <GVL Name="INPUTS" Id="{e1999d3e-6e55-47c4-bca7-38d3d64f4d15}">
     <Declaration><![CDATA[VAR_GLOBAL // INPUTS
     ivar_s_Dstartbutton AT %I*: BOOL;
     ivar_s_Dstopbutton AT %I*: BOOL;
-    ivar_s_Dautoswitch AT %I*: BOOL;
     ivar_s_Dresetbutton AT %I*: BOOL;
-    ivar_s_Din4 AT %I*: BOOL;
-    ivar_s_Din5 AT %I*: BOOL;
-    ivar_s_Din6 AT %I*: BOOL;
-    ivar_s_Din7 AT %I*: BOOL;
+    ivar_s_Dautoswitch AT %I*: BOOL;
     ivar_s_pusher1_in AT %I*: BOOL;
     ivar_s_pusher1_out AT %I*: BOOL;
     ivar_s_stack1filled AT %I*: BOOL;
@@ -25,12 +21,8 @@
     ivar_s_handlingbusy AT %I*: BOOL;
     ivar_s_Hstartbutton AT %I*: BOOL;
     ivar_s_Hstopbutton AT %I*: BOOL;
-    ivar_s_Hautoswitch AT %I*: BOOL;
     ivar_s_Hresetbutton AT %I*: BOOL;
-    ivar_s_Hin4 AT %I*: BOOL;
-    ivar_s_Hin5 AT %I*: BOOL;
-    ivar_s_Hin6 AT %I*: BOOL;
-    ivar_s_Hin7 AT %I*: BOOL;
+    ivar_s_Hautoswitch AT %I*: BOOL;
     ivar_s_xpos_at1 AT %I*: BOOL;
     ivar_s_xpos_at2 AT %I*: BOOL;
     ivar_s_xpos_at3 AT %I*: BOOL;
@@ -44,34 +36,22 @@
     ivar_s_vacuum AT %I*: BOOL;
     ivar_s_product4 AT %I*: BOOL;
     ivar_s_testingbusy AT %I*: BOOL;
-    ivar_a_Dstartled AT %I*: BOOL;
-    ivar_a_Dresetled AT %I*: BOOL;
-    ivar_a_DledQ1 AT %I*: BOOL;
-    ivar_a_DledQ2 AT %I*: BOOL;
+    ivar_s_Din4 AT %I*: BOOL;
+    ivar_s_Din5 AT %I*: BOOL;
+    ivar_s_Din6 AT %I*: BOOL;
+    ivar_s_Din7 AT %I*: BOOL;
+    ivar_s_Hin4 AT %I*: BOOL;
+    ivar_s_Hin5 AT %I*: BOOL;
+    ivar_s_Hin6 AT %I*: BOOL;
+    ivar_s_Hin7 AT %I*: BOOL;
     ivar_a_Dout4 AT %I*: BOOL;
     ivar_a_Dout5 AT %I*: BOOL;
     ivar_a_Dout6 AT %I*: BOOL;
     ivar_a_Dout7 AT %I*: BOOL;
-    ivar_a_pusher1 AT %I*: BOOL;
-    ivar_a_pusher2 AT %I*: BOOL;
-    ivar_a_pusher3 AT %I*: BOOL;
-    ivar_a_Hstartled AT %I*: BOOL;
-    ivar_a_Hresetled AT %I*: BOOL;
-    ivar_a_HledQ1 AT %I*: BOOL;
-    ivar_a_HledQ2 AT %I*: BOOL;
     ivar_a_Hout4 AT %I*: BOOL;
     ivar_a_Hout5 AT %I*: BOOL;
     ivar_a_Hout6 AT %I*: BOOL;
     ivar_a_Hout7 AT %I*: BOOL;
-    ivar_a_x2distributing AT %I*: BOOL;
-    ivar_a_x2testing AT %I*: BOOL;
-    ivar_a_zdown AT %I*: BOOL;
-    ivar_a_gripperclose AT %I*: BOOL;
-    ivar_a_transfer2pickpos AT %I*: BOOL;
-    ivar_a_transfer2droppos AT %I*: BOOL;
-    ivar_a_vacuum AT %I*: BOOL;
-    ivar_a_ejectpulse AT %I*: BOOL;
-    ivar_a_handlingready AT %I*: BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

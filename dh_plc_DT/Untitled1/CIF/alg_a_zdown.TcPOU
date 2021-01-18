@@ -1,23 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="alg_a_zdown" Id="{73c2774d-8a42-4408-9b09-982e6fd28a86}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_zdown" Id="{3b732896-524e-4f57-8238-fe4577818d0f}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_zdown" Id="{3b732896-524e-4f57-8238-fe4577818d0f}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_zdown" Id="{73c2774d-8a42-4408-9b09-982e6fd28a86}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="alg_a_zdown" Id="{55f70248-aa40-4542-a378-605662723b76}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_zdown : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_zdown := state.dvar_M_example_controller_a_zdown;]]></ST>
+      <ST><![CDATA[alg_a_zdown := state.dvar_M_Distributing_a_zdown;]]></ST>
     </Implementation>
     <LineIds Name="alg_a_zdown">
       <LineId Id="2" Count="0" />

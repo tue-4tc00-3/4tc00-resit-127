@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <DUT Name="STATE" Id="{5f8f4ab9-42bd-40a7-a032-319140fb5737}">
+  <DUT Name="STATE" Id="{7c59a200-ded9-4d79-ba16-1a89c7d94c07}">
     <Declaration><![CDATA[TYPE STATE:
     STRUCT
         curTime: LREAL;
+        dvar_M_Distributing_a_x2distributing AT %Q*: BOOL;
+        dvar_M_Distributing_a_zdown AT %Q*: BOOL;
+        dvar_M_Distributing_a_gripperclose AT %Q*: BOOL;
+        dvar_M_Distributing_a_x2testing AT %Q*: BOOL;
+        dvar_M_Distributing_i AT %Q*: DINT;
+        cvar_M_Distributing_t AT %Q*: LREAL;
+        dvar_M_Distributing AT %Q*: enum_E;
         dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
         dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
         dvar_M_HardwareMap_out_a_DledQ1 AT %Q*: BOOL;
@@ -36,6 +43,17 @@
         dvar_M_HardwareMap_init_err_led_idx AT %Q*: DINT;
         cvar_M_HardwareMap_t AT %Q*: LREAL;
         dvar_M_HardwareMap AT %Q*: enum_E;
+        dvar_M_inventory1_a_pusher1 AT %Q*: BOOL;
+        dvar_M_inventory1 AT %Q*: enum_E;
+        dvar_M_inventory2_a_pusher2 AT %Q*: BOOL;
+        dvar_M_inventory2 AT %Q*: enum_E;
+        dvar_M_inventory3_a_pusher3 AT %Q*: BOOL;
+        dvar_M_inventory3 AT %Q*: enum_E;
+        dvar_M_vacuum_a_transfer2pickpos AT %Q*: BOOL;
+        dvar_M_vacuum_a_transfer2droppos AT %Q*: BOOL;
+        dvar_M_vacuum_a_vacuum AT %Q*: BOOL;
+        dvar_M_vacuum_a_ejectpulse AT %Q*: BOOL;
+        dvar_M_vacuum AT %Q*: enum_E;
     END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

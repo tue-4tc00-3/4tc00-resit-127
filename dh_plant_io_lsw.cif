@@ -1,4 +1,4 @@
-import "dh_plant.cif";
+import "dh_plant_lsw.cif";
 
 // INPUTS
 input bool a_Dstartled;
@@ -31,6 +31,10 @@ alg bool s_Dstartbutton = operator.s_Dstartbutton;
 alg bool s_Dstopbutton  = not(operator.s_Dstopbutton); // inverted
 alg bool s_Dautoswitch  = false;
 alg bool s_Dresetbutton = operator.s_Dresetbutton;
+
+alg bool usecase_1 = operator.usecase_1;
+alg bool usecase_2 = operator.usecase_2;
+alg bool usecase_3 = operator.usecase_3;
 
 alg bool s_pusher1_in   = pusher1.s_pusher1_in;
 alg bool s_pusher1_out  = pusher1.s_pusher1_out;

@@ -1,26 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <DUT Name="STATE" Id="{6ec6b20c-e585-4052-8d81-21a3d14d43d2}">
-=======
-  <DUT Name="STATE" Id="{31d7e7ac-0313-48fb-b192-d6eca8e3c372}">
-=======
-  <DUT Name="STATE" Id="{31d7e7ac-0313-48fb-b192-d6eca8e3c372}">
-=======
-  <DUT Name="STATE" Id="{6ec6b20c-e585-4052-8d81-21a3d14d43d2}">
->>>>>>> master
->>>>>>> master
+  <DUT Name="STATE" Id="{79020c97-d393-40d5-886f-8d797ea534d4}">
     <Declaration><![CDATA[TYPE STATE :
 STRUCT
 	curTime: LREAL;
-	dvar_M_example_controller_a_x2distributing AT %Q*: BOOL;
-	dvar_M_example_controller_a_zdown AT %Q*: BOOL;
-	dvar_M_example_controller_a_gripperclose AT %Q*: BOOL;
-	dvar_M_example_controller_a_x2testing AT %Q*: BOOL;
-	dvar_M_example_controller_i AT %Q*: DINT;
-	cvar_M_example_controller_t AT %Q*: LREAL;
-	dvar_M_example_controller AT %Q*: enum_E;
+	dvar_M_Distributing_a_x2distributing AT %Q*: BOOL;
+	dvar_M_Distributing_a_zdown AT %Q*: BOOL;
+	dvar_M_Distributing_a_gripperclose AT %Q*: BOOL;
+	dvar_M_Distributing_a_x2testing AT %Q*: BOOL;
+	dvar_M_Distributing_i AT %Q*: DINT;
+	cvar_M_Distributing_t AT %Q*: LREAL;
+	dvar_M_Distributing AT %Q*: enum_E;
 	dvar_M_HardwareMap_out_a_Dstartled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_Dresetled AT %Q*: BOOL;
 	dvar_M_HardwareMap_out_a_DledQ1 AT %Q*: BOOL;

@@ -1,0 +1,125 @@
+import "dh_plant_svg_lsw.cif";
+import "dh_plant_lsw.cif";
+
+
+automaton usecase1: // stop reset and start button
+event start1, start2, reset1, stop1, stop2;
+cont t der-1;
+disc bool start = false;
+disc bool reset = false;
+disc bool stop = false;
+
+
+location start_usecase1:
+    initial;
+    edge u_usecase_1 do t:=0.5 goto start_use1;
+
+
+
+location start_use1:
+    edge start1 when t<=0 do t:=0.5, start:=true goto system_started;
+
+location system_started:
+    edge start1 when t<=0   do t:=10, start:=false goto stop_use1;
+
+location stop_use1:
+   edge stop1 when t<=0  do  t:=4,  stop:= true goto start_use1_2;
+
+location start_use1_2:
+    edge start2 when t<=0 do t:=0.5, stop :=false, start:=true goto system_started_again;
+
+location system_started_again:
+    edge  when t<=0   do t:=25, start:=false  goto stop_use1_2;
+
+location stop_use1_2:
+   edge stop2 when t<=0  do  t:=4, stop:= true goto reset_use1;
+
+location reset_use1:
+    edge reset1 when t<=0 do t:=7, reset:= true, stop:= false goto  waiting_new_usecase;
+
+location waiting_new_usecase:
+    edge when t<=0 do reset:= false  goto start_usecase1;
+
+
+end
+
+automaton usecase2: // removing product
+event start1 ;
+cont t der-1;
+disc bool start = false;
+disc bool reset = false;
+
+
+location start_usecase2:
+    initial;
+    edge u_usecase_2 do t:=0.5 goto start_use2;
+    edge u_delete_product do t:=4  goto start_usecase2;
+//
+// location wait:
+//     edge u_usecase_2 do t:=0.5 goto start_use2;
+
+location start_use2:
+    edge start1 when t<=0 do t:=0.5, start:=true goto system_started;
+
+location system_started:
+    edge start1 when t<=0   do start:=false goto remove_prod1;
+
+location remove_prod1:
+   edge u_delete_product do t:=4  goto reset_use2;
+
+location reset_use2:
+    edge u_reset  do t:=8  goto waiting_new_usecase;
+
+location waiting_new_usecase:
+    edge when t<=0 do reset:= false  goto start_usecase2;
+
+
+end
+
+
+
+
+
+automaton usecase3: // stop reset and start button
+event start1, reset1, spawnprod1, spawnprod2, spawnprod3;
+cont t der-1;
+disc bool start = false;
+disc bool reset = false;
+disc bool stop = false;
+
+
+location start_usecase3:
+    initial;
+    edge u_usecase_3 do t:=0.5 goto start_use3;
+
+
+location start_use3:
+    edge start1 when t<=0 do t:=0.5, start:=true goto system_started;
+
+location system_started:
+    edge start1 when t<=0   do t:=4, start:=false goto spawn_product1;
+
+location spawn_product1:
+   edge spawnprod1 when t<=0  do  t:=3,  stop:= true goto spawn_product2;
+
+location spawn_product2:
+   edge spawnprod2 when t<=0  do  t:=3,  stop:= true goto spawn_product3;
+
+location spawn_product3:
+   edge spawnprod3 when t<=0  do  t:=3,  stop:= true goto spawn_product4;
+
+location spawn_product4:
+   edge spawnprod1 when t<=0  do  t:=3,  stop:= true goto spawn_product5;
+
+location spawn_product5:
+   edge spawnprod2 when t<=0  do  t:=3,  stop:= true goto spawn_product6;
+
+location spawn_product6:
+   edge spawnprod3 when t<=0  do  t:=7,  stop:= true goto reset_use3;
+
+location reset_use3:
+    edge reset1 when t<=0 do t:=7, reset:= true, stop:= false goto  waiting_new_usecase;
+
+location waiting_new_usecase:
+    edge when t<=0 do reset:= false  goto start_usecase3;
+end

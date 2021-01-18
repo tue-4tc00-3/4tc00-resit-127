@@ -1128,6 +1128,16 @@ END_IF;</xhtml>
                 <BOOL/>
               </type>
             </variable>
+            <variable name="b3">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="b4">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
           </tempVars>
         </interface>
         <body>
@@ -1228,70 +1238,25 @@ END_IF;
 WHILE TRUE DO
     progress := FALSE;
 
-    // Event "M.inventory1_a".
+    // Event "M.Distributing_crane_dropof".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher1_in);
-        b1 := b1 AND (NOT(ivar_s_product1));
+        b1 := (state0.dvar_M_Distributing) = (elit_gopickup);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
-            state1.dvar_M_inventory1_a_pusher1 := TRUE;
-            state1.dvar_M_inventory1 := elit_going;
+            state1.dvar_M_Distributing_a_gripperclose := FALSE;
+            state1.dvar_M_Distributing_a_zdown := FALSE;
+            state1.dvar_M_Distributing := elit_droppoint;
 
             state0 := state1;
         END_IF;
     END_IF;
 
-    // Event "M.inventory1_b".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher1_out);
-        b1 := b1 AND (ivar_s_stack1filled);
-        b1 := b1 AND (state0.dvar_M_inventory1_a_pusher1);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory1 := elit_going;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.inventory1_c".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_starting);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory1_a_pusher1 := FALSE;
-            state1.dvar_M_inventory1 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "M.inventory1_d".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_going);
-        b1 := b1 AND (ivar_s_pusher1_out);
-        b1 := b1 AND (ivar_s_stack1filled);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory1_a_pusher1 := FALSE;
-            state1.dvar_M_inventory1 := elit_starting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
+    // Event "M.Distributing_crane_initialize".
     IF NOT progress THEN
         b1 := (state0.dvar_M_Distributing) = (elit_init2);
         b1 := b1 AND (alg_s_Dinitialized(state0));
@@ -1305,7 +1270,134 @@ WHILE TRUE DO
         END_IF;
     END_IF;
 
-    // Event "tau".
+    // Event "M.Distributing_crane_movetodropof".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_Distributing) = (elit_goback);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND ((state0.cvar_M_Distributing_t) &gt; (1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_Distributing_a_x2testing := TRUE;
+            state1.dvar_M_Distributing_a_x2distributing := FALSE;
+            state1.cvar_M_Distributing_t := 0.0;
+            state1.dvar_M_Distributing := elit_droppoint;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_movingtopickup".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_Distributing) = (elit_droppoint);
+        b1 := b1 AND (NOT(ivar_s_gripper));
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_Distributing_a_x2distributing := TRUE;
+            state1.dvar_M_Distributing_a_x2testing := FALSE;
+            state1.dvar_M_Distributing := elit_movetopickup;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_pickup".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_Distributing) = (elit_gopickup);
+        b1 := b1 AND (ivar_s_zpos_atdown);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND (NOT(ivar_s_xpos_atdrop));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_Distributing_a_gripperclose := TRUE;
+            state1.dvar_M_Distributing := elit_goup;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_pickupprod".
+    IF NOT progress THEN
+        b2 := (state0.dvar_M_Distributing) = (elit_movetopickup);
+        IF b2 THEN
+            b4 := projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i));
+            b4 := b4 AND ((state0.dvar_M_Distributing_i) &lt; (3));
+            b3 := b4;
+            IF NOT(b3) THEN
+                b4 := projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i));
+                b4 := b4 AND ((state0.dvar_M_Distributing_i) &gt;= (3));
+                b3 := b3 OR (b4);
+            END_IF;
+            b2 := b2 AND (b3);
+        END_IF;
+        b1 := b2;
+        b1 := b1 OR ((state0.dvar_M_Distributing) = (elit_down));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_Distributing) = (elit_movetopickup)) AND ((projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i))) AND ((state0.dvar_M_Distributing_i) &lt; (3)))) THEN
+                state1.dvar_M_Distributing_i := (state0.dvar_M_Distributing_i) + (1);
+                state1.dvar_M_Distributing_a_x2distributing := TRUE;
+                state1.dvar_M_Distributing_a_x2testing := TRUE;
+                state1.dvar_M_Distributing := elit_down;
+            ELSIF (((state0.dvar_M_Distributing) = (elit_movetopickup)) AND ((projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i))) AND ((state0.dvar_M_Distributing_i) &gt;= (3)))) THEN
+                state1.dvar_M_Distributing_i := 0;
+                state1.dvar_M_Distributing_a_x2distributing := TRUE;
+                state1.dvar_M_Distributing_a_x2testing := TRUE;
+                state1.dvar_M_Distributing := elit_down;
+            ELSIF ((state0.dvar_M_Distributing) = (elit_down)) THEN
+                state1.dvar_M_Distributing_a_zdown := TRUE;
+                state1.dvar_M_Distributing := elit_gopickup;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_placing".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_Distributing) = (elit_droppoint);
+        b1 := b1 AND (ivar_s_gripper);
+        b1 := b1 AND (ivar_s_xpos_atdrop);
+        b1 := b1 AND (ivar_s_zpos_atup);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_Distributing_a_x2distributing := TRUE;
+            state1.dvar_M_Distributing_a_x2testing := TRUE;
+            state1.dvar_M_Distributing := elit_down;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_up".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_Distributing) = (elit_goup);
+        b1 := b1 AND ((state0.cvar_M_Distributing_t) &gt;= (0.1));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.cvar_M_Distributing_t := 0.0;
+            state1.dvar_M_Distributing_a_zdown := FALSE;
+            state1.dvar_M_Distributing := elit_goback;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.Distributing_crane_waitstart".
     IF NOT progress THEN
         b1 := (state0.dvar_M_Distributing) = (elit_wait_start);
         b1 := b1 AND (ivar_s_Dstartbutton);
@@ -1314,6 +1406,449 @@ WHILE TRUE DO
             state1 := state0;
 
             state1.dvar_M_Distributing := elit_droppoint;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory1_initializing_p1".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory1) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory1 := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory1_pushing_p1".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory1) = (elit_starting);
+        IF b1 THEN
+            b3 := ivar_s_pusher1_in;
+            b3 := b3 AND (NOT(ivar_s_product1));
+            b2 := b3;
+            IF NOT(b2) THEN
+                b3 := ivar_s_pusher1_out;
+                b3 := b3 AND (ivar_s_stack1filled);
+                b3 := b3 AND (state0.dvar_M_inventory1_a_pusher1);
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory1) = (elit_starting)) AND ((ivar_s_pusher1_in) AND (NOT(ivar_s_product1)))) THEN
+                state1.dvar_M_inventory1_a_pusher1 := TRUE;
+                state1.dvar_M_inventory1 := elit_going;
+            ELSIF ((((state0.dvar_M_inventory1) = (elit_starting)) AND (ivar_s_pusher1_out)) AND ((ivar_s_stack1filled) AND (state0.dvar_M_inventory1_a_pusher1))) THEN
+                state1.dvar_M_inventory1 := elit_going;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory1_wait_start_p1".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory1) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory1 := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory1_waiting_p1".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory1) = (elit_going);
+        IF b1 THEN
+            b3 := ivar_s_pusher1_out;
+            b3 := b3 AND (ivar_s_stack1filled);
+            b2 := b3;
+            b2 := b2 OR (NOT(ivar_s_Dstopbutton));
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory1) = (elit_going)) AND ((ivar_s_pusher1_out) AND (ivar_s_stack1filled))) THEN
+                state1.dvar_M_inventory1_a_pusher1 := FALSE;
+                state1.dvar_M_inventory1 := elit_starting;
+            ELSIF (((state0.dvar_M_inventory1) = (elit_going)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_inventory1 := elit_stop;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory2_initializing_p2".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory2) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory2 := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory2_pushing_p2".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory2) = (elit_starting);
+        IF b1 THEN
+            b3 := ivar_s_pusher2_in;
+            b3 := b3 AND (NOT(ivar_s_product2));
+            b2 := b3;
+            IF NOT(b2) THEN
+                b3 := ivar_s_pusher2_out;
+                b3 := b3 AND (ivar_s_stack1filled);
+                b3 := b3 AND (state0.dvar_M_inventory2_a_pusher2);
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory2) = (elit_starting)) AND ((ivar_s_pusher2_in) AND (NOT(ivar_s_product2)))) THEN
+                state1.dvar_M_inventory2_a_pusher2 := TRUE;
+                state1.dvar_M_inventory2 := elit_going;
+            ELSIF ((((state0.dvar_M_inventory2) = (elit_starting)) AND (ivar_s_pusher2_out)) AND ((ivar_s_stack1filled) AND (state0.dvar_M_inventory2_a_pusher2))) THEN
+                state1.dvar_M_inventory2 := elit_going;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory2_wait_start_p2".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory2) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory2 := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory2_waiting_p2".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory2) = (elit_going);
+        IF b1 THEN
+            b3 := ivar_s_pusher2_out;
+            b3 := b3 AND (ivar_s_stack2filled);
+            b2 := b3;
+            b2 := b2 OR (NOT(ivar_s_Dstopbutton));
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory2) = (elit_going)) AND ((ivar_s_pusher2_out) AND (ivar_s_stack2filled))) THEN
+                state1.dvar_M_inventory2_a_pusher2 := FALSE;
+                state1.dvar_M_inventory2 := elit_starting;
+            ELSIF (((state0.dvar_M_inventory2) = (elit_going)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_inventory2 := elit_stop;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory3_initializing_p3".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory3) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory3 := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory3_pushing_p3".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory3) = (elit_starting);
+        IF b1 THEN
+            b3 := ivar_s_pusher3_in;
+            b3 := b3 AND (NOT(ivar_s_product3));
+            b2 := b3;
+            IF NOT(b2) THEN
+                b3 := ivar_s_pusher3_out;
+                b3 := b3 AND (ivar_s_stack1filled);
+                b3 := b3 AND (state0.dvar_M_inventory3_a_pusher3);
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory3) = (elit_starting)) AND ((ivar_s_pusher3_in) AND (NOT(ivar_s_product3)))) THEN
+                state1.dvar_M_inventory3_a_pusher3 := TRUE;
+                state1.dvar_M_inventory3 := elit_going;
+            ELSIF ((((state0.dvar_M_inventory3) = (elit_starting)) AND (ivar_s_pusher3_out)) AND ((ivar_s_stack1filled) AND (state0.dvar_M_inventory3_a_pusher3))) THEN
+                state1.dvar_M_inventory3 := elit_going;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory3_wait_start_p3".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory3) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_inventory3 := elit_starting;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.inventory3_waiting_p3".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_inventory3) = (elit_going);
+        IF b1 THEN
+            b3 := ivar_s_pusher3_out;
+            b3 := b3 AND (ivar_s_stack3filled);
+            b2 := b3;
+            b2 := b2 OR (NOT(ivar_s_Dstopbutton));
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_inventory3) = (elit_going)) AND ((ivar_s_pusher3_out) AND (ivar_s_stack3filled))) THEN
+                state1.dvar_M_inventory3_a_pusher3 := FALSE;
+                state1.dvar_M_inventory3 := elit_starting;
+            ELSIF (((state0.dvar_M_inventory3) = (elit_going)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_inventory3 := elit_stop;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "u_delete_product".
+    IF NOT progress THEN
+        IF (state0.dvar_M_Distributing) = (elit_droppoint) THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_Distributing_a_gripperclose := FALSE;
+            state1.dvar_M_Distributing_a_x2distributing := FALSE;
+            state1.dvar_M_Distributing_a_x2testing := FALSE;
+            state1.dvar_M_Distributing := elit_stop;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.vacuum_vacuum_dropof".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
+        IF b1 THEN
+            b2 := ivar_s_Dresetbutton;
+            b2 := b2 OR (NOT(ivar_s_Dstopbutton));
+            IF NOT(b2) THEN
+                b3 := ivar_s_vacuum;
+                b3 := b3 AND (ivar_s_transfer_atpickup);
+                b2 := b2 OR (b3);
+            END_IF;
+            IF NOT(b2) THEN
+                b3 := NOT(ivar_s_vacuum);
+                b3 := b3 AND (ivar_s_transfer_atdrop);
+                b2 := b2 OR (b3);
+            END_IF;
+            IF NOT(b2) THEN
+                b3 := ivar_s_transfer_athalfway;
+                b3 := b3 AND (ivar_s_Dautoswitch);
+                b3 := b3 AND (NOT(ivar_s_vacuum));
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_vacuum) = (elit_testingdrop)) AND (ivar_s_Dresetbutton)) THEN
+                state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum := elit_clear_vacuum;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_testingdrop)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_stop;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_testingdrop)) AND ((ivar_s_vacuum) AND (ivar_s_transfer_atpickup))) THEN
+                state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+                state1.dvar_M_vacuum := elit_starting;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_testingdrop)) AND ((NOT(ivar_s_vacuum)) AND (ivar_s_transfer_atdrop))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum := elit_rest;
+            ELSIF ((((state0.dvar_M_vacuum) = (elit_testingdrop)) AND (ivar_s_transfer_athalfway)) AND ((ivar_s_Dautoswitch) AND (NOT(ivar_s_vacuum)))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_key;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.vacuum_vacuum_initialized".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_init2);
+        b1 := b1 AND (alg_s_Dinitialized(state0));
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_wait_start;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.vacuum_vacuum_pickup".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
+        IF b1 THEN
+            b2 := ivar_s_Dresetbutton;
+            b2 := b2 OR (NOT(ivar_s_Dstopbutton));
+            IF NOT(b2) THEN
+                b3 := ivar_s_transfer_atpickup;
+                b3 := b3 AND (NOT(ivar_s_vacuum));
+                b2 := b2 OR (b3);
+            END_IF;
+            b2 := b2 OR (ivar_s_transfer_atdrop);
+            IF NOT(b2) THEN
+                b3 := ivar_s_transfer_athalfway;
+                b3 := b3 AND (ivar_s_Dautoswitch);
+                b3 := b3 AND (NOT(ivar_s_vacuum));
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_vacuum) = (elit_pickupvac)) AND (ivar_s_Dresetbutton)) THEN
+                state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum := elit_clear_vacuum;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_pickupvac)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_stop;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_pickupvac)) AND ((ivar_s_transfer_atpickup) AND (NOT(ivar_s_vacuum)))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_vacuum := TRUE;
+                state1.dvar_M_vacuum := elit_testingdrop;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_pickupvac)) AND (ivar_s_transfer_atdrop)) THEN
+                state1.dvar_M_vacuum_a_vacuum := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := TRUE;
+                state1.dvar_M_vacuum := elit_testingdrop;
+            ELSIF ((((state0.dvar_M_vacuum) = (elit_pickupvac)) AND (ivar_s_transfer_athalfway)) AND ((ivar_s_Dautoswitch) AND (NOT(ivar_s_vacuum)))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_key;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.vacuum_vacuum_wait".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_rest);
+        IF b1 THEN
+            b2 := NOT(ivar_s_Dstopbutton);
+            IF NOT(b2) THEN
+                b3 := ivar_s_transfer_athalfway;
+                b3 := b3 AND (ivar_s_Dautoswitch);
+                b2 := b2 OR (b3);
+            END_IF;
+            IF NOT(b2) THEN
+                b3 := ivar_s_transfer_athalfway;
+                b3 := b3 AND (NOT(ivar_s_Dautoswitch));
+                b2 := b2 OR (b3);
+            END_IF;
+            b1 := b1 AND (b2);
+        END_IF;
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            IF (((state0.dvar_M_vacuum) = (elit_rest)) AND (NOT(ivar_s_Dstopbutton))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_stop;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_rest)) AND ((ivar_s_transfer_athalfway) AND (ivar_s_Dautoswitch))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_vacuum := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_key;
+            ELSIF (((state0.dvar_M_vacuum) = (elit_rest)) AND ((ivar_s_transfer_athalfway) AND (NOT(ivar_s_Dautoswitch)))) THEN
+                state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
+                state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
+                state1.dvar_M_vacuum_a_vacuum := FALSE;
+                state1.dvar_M_vacuum_a_ejectpulse := FALSE;
+                state1.dvar_M_vacuum := elit_starting;
+            END_IF;
+
+            state0 := state1;
+        END_IF;
+    END_IF;
+
+    // Event "M.vacuum_vacuum_wait_start".
+    IF NOT progress THEN
+        b1 := (state0.dvar_M_vacuum) = (elit_wait_start);
+        b1 := b1 AND (ivar_s_Dstartbutton);
+        IF b1 THEN
+            progress := TRUE;
+            state1 := state0;
+
+            state1.dvar_M_vacuum := elit_starting;
 
             state0 := state1;
         END_IF;
@@ -1647,42 +2182,6 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_droppoint);
-        b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_x2distributing := TRUE;
-            state1.dvar_M_Distributing_a_x2testing := TRUE;
-            state1.dvar_M_Distributing := elit_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_droppoint);
-        b1 := b1 AND (NOT(ivar_s_gripper));
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_x2distributing := TRUE;
-            state1.dvar_M_Distributing_a_x2testing := FALSE;
-            state1.dvar_M_Distributing := elit_movetopickup;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
         b1 := (state0.dvar_M_Distributing) = (elit_movetopickup);
         b1 := b1 AND (ivar_s_Dresetbutton);
         IF b1 THEN
@@ -1709,42 +2208,6 @@ WHILE TRUE DO
             state1.dvar_M_Distributing_a_x2testing := FALSE;
             state1.dvar_M_Distributing_a_zdown := FALSE;
             state1.dvar_M_Distributing := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_movetopickup);
-        b1 := b1 AND (projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i)));
-        b1 := b1 AND ((state0.dvar_M_Distributing_i) &lt; (3));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_i := (state0.dvar_M_Distributing_i) + (1);
-            state1.dvar_M_Distributing_a_x2distributing := TRUE;
-            state1.dvar_M_Distributing_a_x2testing := TRUE;
-            state1.dvar_M_Distributing := elit_down;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_movetopickup);
-        b1 := b1 AND (projArray1(alg_M_Distributing_atpos(state0), projArray0(makeArray0(0, 1, 0, 2), state0.dvar_M_Distributing_i)));
-        b1 := b1 AND ((state0.dvar_M_Distributing_i) &gt;= (3));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_i := 0;
-            state1.dvar_M_Distributing_a_x2distributing := TRUE;
-            state1.dvar_M_Distributing_a_x2testing := TRUE;
-            state1.dvar_M_Distributing := elit_down;
 
             state0 := state1;
         END_IF;
@@ -1785,19 +2248,6 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        IF (state0.dvar_M_Distributing) = (elit_down) THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_zdown := TRUE;
-            state1.dvar_M_Distributing := elit_gopickup;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
         b1 := (state0.dvar_M_Distributing) = (elit_gopickup);
         b1 := b1 AND (ivar_s_Dresetbutton);
         IF b1 THEN
@@ -1831,57 +2281,6 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_gopickup);
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND (NOT(ivar_s_xpos_atdrop));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_gripperclose := TRUE;
-            state1.dvar_M_Distributing := elit_goup;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_gopickup);
-        b1 := b1 AND (ivar_s_zpos_atdown);
-        b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND (ivar_s_xpos_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_gripperclose := FALSE;
-            state1.dvar_M_Distributing_a_zdown := FALSE;
-            state1.dvar_M_Distributing := elit_droppoint;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_goup);
-        b1 := b1 AND ((state0.cvar_M_Distributing_t) &gt;= (0.1));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.cvar_M_Distributing_t := 0.0;
-            state1.dvar_M_Distributing_a_zdown := FALSE;
-            state1.dvar_M_Distributing := elit_goback;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
         b1 := (state0.dvar_M_Distributing) = (elit_goback);
         b1 := b1 AND (ivar_s_Dresetbutton);
         IF b1 THEN
@@ -1908,25 +2307,6 @@ WHILE TRUE DO
             state1.dvar_M_Distributing_a_x2testing := FALSE;
             state1.dvar_M_Distributing_a_zdown := FALSE;
             state1.dvar_M_Distributing := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_Distributing) = (elit_goback);
-        b1 := b1 AND (ivar_s_zpos_atup);
-        b1 := b1 AND (ivar_s_gripper);
-        b1 := b1 AND ((state0.cvar_M_Distributing_t) &gt; (1));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_Distributing_a_x2testing := TRUE;
-            state1.dvar_M_Distributing_a_x2distributing := FALSE;
-            state1.cvar_M_Distributing_t := 0.0;
-            state1.dvar_M_Distributing := elit_droppoint;
 
             state0 := state1;
         END_IF;
@@ -3247,34 +3627,6 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_init2);
-        b1 := b1 AND (alg_s_Dinitialized(state0));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory1 := elit_wait_start;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_wait_start);
-        b1 := b1 AND (ivar_s_Dstartbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory1 := elit_starting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
         b1 := (state0.dvar_M_inventory1) = (elit_stop);
         b1 := b1 AND (ivar_s_Dstartbutton);
         IF b1 THEN
@@ -3289,41 +3641,14 @@ WHILE TRUE DO
 
     // Event "tau".
     IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory1) = (elit_going);
+        b1 := (state0.dvar_M_inventory1) = (elit_starting);
         b1 := b1 AND (NOT(ivar_s_Dstopbutton));
         IF b1 THEN
             progress := TRUE;
             state1 := state0;
 
+            state1.dvar_M_inventory1_a_pusher1 := FALSE;
             state1.dvar_M_inventory1 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_init2);
-        b1 := b1 AND (alg_s_Dinitialized(state0));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2 := elit_wait_start;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_wait_start);
-        b1 := b1 AND (ivar_s_Dstartbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2 := elit_starting;
 
             state0 := state1;
         END_IF;
@@ -3346,38 +3671,6 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory2) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher2_in);
-        b1 := b1 AND (NOT(ivar_s_product2));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2_a_pusher2 := TRUE;
-            state1.dvar_M_inventory2 := elit_going;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher2_out);
-        b1 := b1 AND (ivar_s_stack1filled);
-        b1 := b1 AND (state0.dvar_M_inventory2_a_pusher2);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2 := elit_going;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_starting);
         b1 := b1 AND (NOT(ivar_s_Dstopbutton));
         IF b1 THEN
             progress := TRUE;
@@ -3385,64 +3678,6 @@ WHILE TRUE DO
 
             state1.dvar_M_inventory2_a_pusher2 := FALSE;
             state1.dvar_M_inventory2 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_going);
-        b1 := b1 AND (ivar_s_pusher2_out);
-        b1 := b1 AND (ivar_s_stack2filled);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2_a_pusher2 := FALSE;
-            state1.dvar_M_inventory2 := elit_starting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory2) = (elit_going);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory2 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_init2);
-        b1 := b1 AND (alg_s_Dinitialized(state0));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3 := elit_wait_start;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_wait_start);
-        b1 := b1 AND (ivar_s_Dstartbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3 := elit_starting;
 
             state0 := state1;
         END_IF;
@@ -3465,38 +3700,6 @@ WHILE TRUE DO
     // Event "tau".
     IF NOT progress THEN
         b1 := (state0.dvar_M_inventory3) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher3_in);
-        b1 := b1 AND (NOT(ivar_s_product3));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3_a_pusher3 := TRUE;
-            state1.dvar_M_inventory3 := elit_going;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_starting);
-        b1 := b1 AND (ivar_s_pusher3_out);
-        b1 := b1 AND (ivar_s_stack1filled);
-        b1 := b1 AND (state0.dvar_M_inventory3_a_pusher3);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3 := elit_going;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_starting);
         b1 := b1 AND (NOT(ivar_s_Dstopbutton));
         IF b1 THEN
             progress := TRUE;
@@ -3504,64 +3707,6 @@ WHILE TRUE DO
 
             state1.dvar_M_inventory3_a_pusher3 := FALSE;
             state1.dvar_M_inventory3 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_going);
-        b1 := b1 AND (ivar_s_pusher3_out);
-        b1 := b1 AND (ivar_s_stack3filled);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3_a_pusher3 := FALSE;
-            state1.dvar_M_inventory3 := elit_starting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_inventory3) = (elit_going);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_inventory3 := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_init2);
-        b1 := b1 AND (alg_s_Dinitialized(state0));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum := elit_wait_start;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_wait_start);
-        b1 := b1 AND (ivar_s_Dstartbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum := elit_starting;
 
             state0 := state1;
         END_IF;
@@ -3745,215 +3890,6 @@ WHILE TRUE DO
             state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
             state1.dvar_M_vacuum_a_ejectpulse := FALSE;
             state1.dvar_M_vacuum := elit_key;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
-        b1 := b1 AND (ivar_s_Dresetbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum := elit_clear_vacuum;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
-        b1 := b1 AND (ivar_s_transfer_atpickup);
-        b1 := b1 AND (NOT(ivar_s_vacuum));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_vacuum := TRUE;
-            state1.dvar_M_vacuum := elit_testingdrop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
-        b1 := b1 AND (ivar_s_transfer_atdrop);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_vacuum := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := TRUE;
-            state1.dvar_M_vacuum_a_transfer2pickpos := TRUE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum := elit_rest;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_pickupvac);
-        b1 := b1 AND (ivar_s_transfer_athalfway);
-        b1 := b1 AND (ivar_s_Dautoswitch);
-        b1 := b1 AND (NOT(ivar_s_vacuum));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_key;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
-        b1 := b1 AND (ivar_s_Dresetbutton);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum := elit_clear_vacuum;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
-        b1 := b1 AND (ivar_s_vacuum);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2droppos := TRUE;
-            state1.dvar_M_vacuum := elit_starting;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_testingdrop);
-        b1 := b1 AND (ivar_s_transfer_athalfway);
-        b1 := b1 AND (ivar_s_Dautoswitch);
-        b1 := b1 AND (NOT(ivar_s_vacuum));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_key;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_rest);
-        b1 := b1 AND (NOT(ivar_s_Dstopbutton));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_stop;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_rest);
-        b1 := b1 AND (ivar_s_transfer_athalfway);
-        b1 := b1 AND (ivar_s_Dautoswitch);
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_vacuum := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_key;
-
-            state0 := state1;
-        END_IF;
-    END_IF;
-
-    // Event "tau".
-    IF NOT progress THEN
-        b1 := (state0.dvar_M_vacuum) = (elit_rest);
-        b1 := b1 AND (ivar_s_transfer_athalfway);
-        b1 := b1 AND (NOT(ivar_s_Dautoswitch));
-        IF b1 THEN
-            progress := TRUE;
-            state1 := state0;
-
-            state1.dvar_M_vacuum_a_transfer2pickpos := FALSE;
-            state1.dvar_M_vacuum_a_transfer2droppos := FALSE;
-            state1.dvar_M_vacuum_a_vacuum := FALSE;
-            state1.dvar_M_vacuum_a_ejectpulse := FALSE;
-            state1.dvar_M_vacuum := elit_starting;
 
             state0 := state1;
         END_IF;

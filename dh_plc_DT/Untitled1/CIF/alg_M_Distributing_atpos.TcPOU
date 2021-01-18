@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <POU Name="alg_M_Distributing_atpos" Id="{10332a8f-2b56-445a-813e-5886acda0ec8}" SpecialFunc="None">
+  <POU Name="alg_M_Distributing_atpos" Id="{3c0c0c6a-d9eb-431b-8f1a-8c7dd2a2de8d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_M_Distributing_atpos : ARRAY[0..2] OF BOOL
 VAR_INPUT
 	state: STATE;

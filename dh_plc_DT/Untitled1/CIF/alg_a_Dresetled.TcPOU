@@ -1,23 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <POU Name="alg_a_Dresetled" Id="{b0775635-a242-4a1a-a054-ce292931f3e1}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dresetled" Id="{a6fa8f4b-597a-4b34-adc4-f882e49969c7}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dresetled" Id="{a6fa8f4b-597a-4b34-adc4-f882e49969c7}" SpecialFunc="None">
-=======
-  <POU Name="alg_a_Dresetled" Id="{b0775635-a242-4a1a-a054-ce292931f3e1}" SpecialFunc="None">
->>>>>>> master
->>>>>>> master
+  <POU Name="alg_a_Dresetled" Id="{bf33a7e5-c6ba-44dd-9c7c-98e05d2450a9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION alg_a_Dresetled : BOOL
 VAR_INPUT
 	state: STATE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[alg_a_Dresetled := alg_M_example_controller_a_Dresetled(state);]]></ST>
+      <ST><![CDATA[alg_a_Dresetled := alg_M_Distributing_a_Dresetled(state);]]></ST>
     </Implementation>
     <LineIds Name="alg_a_Dresetled">
       <LineId Id="2" Count="0" />

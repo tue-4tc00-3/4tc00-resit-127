@@ -1,4 +1,4 @@
-import  "dh_plant.cif";
+import  "dh_plant_lsw.cif";
 svgfile "dh.svg";
 
 // Start button
@@ -13,6 +13,20 @@ svgout id "a_Dresetled"          attr "fill" value if a_Dresetled:           "ye
 svgin  id "s_Dstopbutton"        event u_stop;
 svgout id "s_Dresetbutton"       attr "fill" value if s_Dresetbutton:        "black" else "#4d4d4d" end;
 
+//use cases
+
+svgin  id "usecase_1"       event u_usecase_1;
+svgin  id "usecase_2"       event u_usecase_2;
+svgin  id "usecase_3"       event u_usecase_3;
+
+//Generating new products
+svgin id "prod_grey"   event u_new_prod1;
+svgin id "prod_red"   event u_new_prod2;
+svgin id "prod_black"   event u_new_prod3;
+
+//delete product
+
+svgin id "prod_gripper"   event u_delete_product;
 
 // Actuator lights
 svgout id "a_Dstartled_led"         attr "fill" value if a_Dstartled:            "lime" else "red" end;
@@ -50,7 +64,7 @@ group def OutputItem(alg string Label; alg string color; alg real x, y):
 end
 
 // Move block with crane
-svgout id "prod_gripper"            attr "fill" value      if not s_gripper and not s_product4:    "none"
+svgout id "prod_gripper"            attr "fill" value      if not s_gripper and not s_product4 :    "none"
                                                            elif gripper.colorhold="grey":          "grey"
                                                            else "red" end;
 svgout id "prod_gripper"            attr "transform" value if s_gripper:
@@ -151,7 +165,6 @@ svgout id "prod_RED0"                      attr "transform" value if pusher3.x' 
                                                                   else              fmt("translate(12.,0)") end;
 
 //vacuum svg
-// svgout id "prod_transfer"                  attr "fill" value if a_vacuum  : "red" else "none" end;
 svgout id "prod_transfer"                  attr "fill" value      if not a_vacuum:    "none"
                                                                   elif vacuumplant.colorhold2="grey":
                                                                                               "grey" else "red" end;
@@ -161,4 +174,4 @@ svgout id "transfer_with_vacuum"        attr "transform" value
                                                          fmt("rotate(%s,329.022,163.171) rotate(%s,276.674,163.171)",
                                                          vacuumplant.r,-vacuumplant.r);
 
-svgout id "prod_testing"                   attr "fill" value "white";
+svgout id "prod_testing"                   attr "fill" value "none";
